@@ -1,10 +1,13 @@
+import React from 'react';
 import styles from './head-button.module.css';
 
-export default function HeadButton ({children, text}) {
-  return (
-    <div className={styles.head}>
-      {children}
-      <p>{text}</p>
+export default class HeadButton extends React.Component{
+  state = {active: true}
+  render() {
+    return (
+    <div className={styles.button}>
+      {this.props.children}
+      <span className={styles.text}>{this.props.text}</span>
     </div>
-  )
-};
+  )}
+}
