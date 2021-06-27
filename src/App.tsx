@@ -12,8 +12,9 @@ function App() {
     <div className="App">
       <AppHeader logo={Logo}/>
       <main>
-        <BurgerConstructor ingredients={ data } />
+        {/*TODO: propTypes */}
         <BurgerIngredients ingredients={ data }/>
+        <BurgerConstructor ingredients={ data } />
       </main>
     </div>
   );
