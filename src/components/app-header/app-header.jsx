@@ -6,7 +6,7 @@ import { Logo } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui
 import HeadButton from '../head-button/head-button';
 import styles from './app-header.module.css'
 
-export default function AppHeader ({title, logo}) {
+export default function AppHeader ({logo}) {
   return (
     <header className={styles.head}>
       <nav className={styles.menu}>
