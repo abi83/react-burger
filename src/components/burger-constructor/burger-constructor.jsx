@@ -16,7 +16,6 @@ export default class BurgerIngredients extends React.Component{
             price={el.price}
           />
         )}
-      {'Hello!'}
     </section>
   )}
 }

@@ -1,9 +1,11 @@
 .App {
   text-align: center;
+  justify-content: center;
   font-family: 'Jet Brains Mono', Arial, sans-serif;
 }
 main{
-  max-height: 978px;
+  margin: 0 auto;
+  max-width: 1200px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -11,4 +13,18 @@ main{
 .container{
   background-color: green;
   flex: 1;
+  max-height: 80vh;
+  overflow: auto;
+  scrollbar-color: blue black;
+}
+.container::-webkit-scrollbar {
+	width: 12px;
+}
+.container::-webkit-scrollbar-track {
+	background: #2F2F37;
+}
+.container::-webkit-scrollbar-thumb {
+	background: #8585AD;
+	border: 3px solid #2F2F37;
+	border-radius: 6px;
 }
