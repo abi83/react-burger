@@ -1,3 +1,15 @@
-.header{
+.h2{
   margin: 40px 0 20px 0;
+  text-align: left;
+  font-size: 36px;
+}
+.h3{
+  text-align: left;
+  margin: 24px 0 8px;
+}
+.ingredientsContainer{
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
 }
