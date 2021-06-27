@@ -1,12 +1,10 @@
 import React from 'react';
-import styles from './burger-ingredients.module.css';
 
-export default class HeadButton extends React.Component{
-  // state = {active: true}
+export default class BurgerIngredients extends React.Component{
   render() {
     return (
-    <div className={styles.container}>
+    <section className={'container'}>
       {'Hello!'}
-    </div>
+    </section>
   )}
 }
