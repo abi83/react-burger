@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './head-button.module.css';
+import styles from './header-button.module.css';
 
-export default class HeadButton extends React.Component{
+export default class HeaderButton extends React.Component{
   state = {active: true}
   render() {
     return (

@@ -21,20 +21,23 @@ export default class BurgerConstructor extends React.Component{
   }
   //TODO: category component
   render() {
-    console.log(this.translatedCategories());
+    // console.log(this.translatedCategories());
     return (
-    <section className={'column container'}
-             style={{backgroundColor: 'red'}}
-    >
+    <section className={'column container'}>
       <h2 className={style.h2}>Соберите бургер</h2>
       <Tabs />
       <h3 className={style.h3}>Булки</h3>
       <div className={style.ingredientsContainer}>
-        
-        
         <IngredientCard key={1} ingredient={this.props.ingredients[0]} />
         <IngredientCard key={2} ingredient={this.props.ingredients[1]} />
         <IngredientCard key={3} ingredient={this.props.ingredients[2]} />
+      </div>
+      <h3 className={style.h3}>Начинки</h3>
+      <div className={style.ingredientsContainer}>
+        <IngredientCard key={1} ingredient={this.props.ingredients[3]} />
+        <IngredientCard key={2} ingredient={this.props.ingredients[4]} />
+        <IngredientCard key={3} ingredient={this.props.ingredients[5]} />
+        <IngredientCard key={4} ingredient={this.props.ingredients[6]} />
       </div>
     </section>
   )}

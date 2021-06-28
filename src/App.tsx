@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo';
+import {Logo} from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo';
 import './App.css';
 
 import { data } from './utils/data'
@@ -10,7 +10,7 @@ import BurgerConstructor from "./components/burger-constructor/burger-constructo
 function App() {
   return (
     <div className="App">
-      <AppHeader logo={Logo}/>
+      <AppHeader />
       <main>
         {/*TODO: propTypes */}
         <BurgerIngredients ingredients={ data }/>

@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: chocolate;
 }
 .menu{
   flex: 5;

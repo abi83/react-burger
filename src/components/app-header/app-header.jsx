@@ -3,15 +3,15 @@ import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components/dis
 import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/logo'
 
-import HeadButton from '../head-button/head-button';
+import HeadButton from './header-button/header-button';
 import styles from './app-header.module.css'
 
-export default function AppHeader ({logo}) {
+export default function AppHeader () {
   return (
     <header className={styles.head}>
       <nav className={styles.menu} style={{justifyContent: 'flex-start'}}>
         <HeadButton text={'Конструктор'}>
-          <BurgerIcon  type={'secondary'}/>
+          <BurgerIcon  type={'primary'}/>
         </HeadButton>
         <HeadButton text={'Лента заказов'}>
           <ListIcon type={'secondary'}/>

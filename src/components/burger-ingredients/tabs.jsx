@@ -4,6 +4,7 @@ import React from 'react';
 export default class Tabs extends React.Component{
   constructor(props) {
     super(props);
+    this.myRef = React.createRef()
     this.state = {
       current: 'one',
     };
@@ -12,10 +13,11 @@ export default class Tabs extends React.Component{
   // TODO: tabs values as props
   setCurrent = (value) => {
     this.setState({current: value})
+    console.log(this.myRef);
   }
   render() {
     return (
-      <div style={{ display: 'flex'}}>
+      <div style={{ display: 'flex'}} ref={this.myRef}>
         <Tab value="one" active={this.state.current === 'one'} onClick={this.setCurrent}>
           Булки
         </Tab>
