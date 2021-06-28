@@ -12,10 +12,9 @@ export default function AppHeader ({ingredient}) {
         </span>
         <CurrencyIcon type="primary" />
       </div>
-      <p>
+      <p className={styles.name}>
         {ingredient.name}
       </p>
-      
     </div>
   )
 };

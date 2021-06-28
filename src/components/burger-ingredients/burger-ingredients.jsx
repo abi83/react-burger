@@ -19,7 +19,7 @@ export default class BurgerConstructor extends React.Component{
       }
     return this.state.ingCategoriesKeys.map(cat=>known[cat])
   }
-  
+  //TODO: category component
   render() {
     console.log(this.translatedCategories());
     return (

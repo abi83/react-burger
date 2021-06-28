@@ -10,12 +10,20 @@ main{
   flex-direction: row;
   flex-wrap: wrap;
 }
+.column{
+  flex: 1;
+  max-height: 80vh;
+}
 .container{
   background-color: green;
   flex: 1;
   max-height: 80vh;
   overflow: auto;
-  scrollbar-color: blue black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px;
+  overflow-x: hidden; /*BUG!!*/
 }
 .container::-webkit-scrollbar {
 	width: 12px;
