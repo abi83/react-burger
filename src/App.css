@@ -9,20 +9,25 @@ main{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 40px;
 }
 .column{
   flex: 1;
-  max-height: 80vh;
-}
-.container{
-  background-color: green;
-  flex: 1;
-  max-height: 80vh;
-  overflow: auto;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 16px;
+
+}
+.container{
+  background-color: green;
+  /*flex: 1;*/
+  /*max-height: 80vh;*/
+  overflow: auto;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*align-items: center;*/
+  /*padding: 0 16px;*/
   overflow-x: hidden; /*BUG!!*/
 }
 .container::-webkit-scrollbar {

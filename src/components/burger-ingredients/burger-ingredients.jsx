@@ -23,7 +23,9 @@ export default class BurgerConstructor extends React.Component{
   render() {
     console.log(this.translatedCategories());
     return (
-    <section className={'container'} style={{backgroundColor: 'red'}}>
+    <section className={'column container'}
+             style={{backgroundColor: 'red'}}
+    >
       <h2 className={style.h2}>Соберите бургер</h2>
       <Tabs />
       <h3 className={style.h3}>Булки</h3>

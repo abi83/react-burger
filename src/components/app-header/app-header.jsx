@@ -9,7 +9,7 @@ import styles from './app-header.module.css'
 export default function AppHeader ({logo}) {
   return (
     <header className={styles.head}>
-      <nav className={styles.menu}>
+      <nav className={styles.menu} style={{justifyContent: 'flex-start'}}>
         <HeadButton text={'Конструктор'}>
           <BurgerIcon  type={'secondary'}/>
         </HeadButton>
@@ -20,7 +20,7 @@ export default function AppHeader ({logo}) {
       <div className={styles.logo}>
         <Logo />
       </div>
-      <nav className={styles.menu}>
+      <nav className={styles.menu} style={{justifyContent: 'flex-end'}}>
         <HeadButton text={'Личный кабинет'}>
           <ProfileIcon type={'secondary'} />
         </HeadButton>

@@ -10,11 +10,11 @@ import styles
 export default class BurgerIngredients extends React.Component{
   render() {
     return (
-    <div className={'column'}>
-      <section className={'container'}>
+    <section className={'column'}>
+      <div className={'container'}>
         {
           this.props.ingredients.map(el=>
-            < ConstructorElement
+            <ConstructorElement
               // type={'top'}
               isLocked={false}
               // handleClose?: () => void;
@@ -24,16 +24,16 @@ export default class BurgerIngredients extends React.Component{
             />
             )
         }
-      </section>
+      </div>
       <div className={styles.price}>
         <span>
-          {999}
+          {6789}
         </span>
         <CurrencyIcon type="primary" />
         <Button type="primary" size="large">
           Оформить заказ
         </Button>
       </div>
-    </div>
+    </section>
   )}
 }

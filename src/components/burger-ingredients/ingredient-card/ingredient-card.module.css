@@ -17,7 +17,8 @@
 }
 .price>span{
   padding-right: 10px;
-  font-size: 20px;
+  font-size: 28px;
+  font-family: 'Iceland', Arial, sans-serif;
 }
 .name{
   margin: 0;
