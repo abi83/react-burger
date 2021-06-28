@@ -2,8 +2,10 @@ import React from 'react';
 import style from './burger-ingredients.module.css';
 import Tabs from './tabs';
 import IngredientCard from './ingredient-card/ingredient-card';
+import PropTypes from 'prop-types';
+import {ingredientPropTypes} from '../../utils/dataPropTypes';
 
-export default class BurgerConstructor extends React.Component{
+export default class BurgerIngredients extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -21,24 +23,25 @@ export default class BurgerConstructor extends React.Component{
   }
   //TODO: category component
   render() {
-    // console.log(this.translatedCategories());
     return (
     <section className={'column container'}>
       <h2 className={style.h2}>Соберите бургер</h2>
       <Tabs />
       <h3 className={style.h3}>Булки</h3>
-      <div className={style.ingredientsContainer}>
-        <IngredientCard key={1} ingredient={this.props.ingredients[0]} />
-        <IngredientCard key={2} ingredient={this.props.ingredients[1]} />
-        <IngredientCard key={3} ingredient={this.props.ingredients[2]} />
-      </div>
+      <ul className={style.ingredientsContainer}>
+        <IngredientCard ingredient={this.props.ingredients[0]} />
+        <IngredientCard ingredient={this.props.ingredients[1]} />
+        <IngredientCard ingredient={this.props.ingredients[2]} />
+      </ul>
       <h3 className={style.h3}>Начинки</h3>
-      <div className={style.ingredientsContainer}>
-        <IngredientCard key={1} ingredient={this.props.ingredients[3]} />
-        <IngredientCard key={2} ingredient={this.props.ingredients[4]} />
-        <IngredientCard key={3} ingredient={this.props.ingredients[5]} />
-        <IngredientCard key={4} ingredient={this.props.ingredients[6]} />
-      </div>
+      <ul className={style.ingredientsContainer}>
+        <IngredientCard ingredient={this.props.ingredients[3]} />
+        <IngredientCard ingredient={this.props.ingredients[4]} />
+        <IngredientCard ingredient={this.props.ingredients[5]} />
+        <IngredientCard ingredient={this.props.ingredients[6]} />
+      </ul>
     </section>
   )}
 }
+
+BurgerIngredients.propTypes = PropTypes.arrayOf(ingredientPropTypes).isRequired;

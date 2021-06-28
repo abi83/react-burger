@@ -16,3 +16,7 @@
 .price>*{
   margin-right: 28px;
 }
+.row{
+  display: inline-flex;
+  align-items: center;
+}

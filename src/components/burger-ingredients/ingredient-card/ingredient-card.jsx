@@ -6,9 +6,9 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 
-export default function AppHeader ({ingredient}) {
+export default function IngredientCard ({ingredient}) {
   return (
-    <div className={styles.card}>
+    <li key={ingredient._id} className={styles.card}>
       <Counter count={1} size="default" />
       <img className={styles.mainImage} src={ingredient.image_large} alt={ingredient.name}/>
       <div className={styles.price}>
@@ -20,6 +20,6 @@ export default function AppHeader ({ingredient}) {
       <p className={styles.name}>
         {ingredient.name}
       </p>
-    </div>
+    </li>
   )
 };

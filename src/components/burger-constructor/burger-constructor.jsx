@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types'
+import {ingredientPropTypes} from '../../utils/dataPropTypes'
+
 import {
   ConstructorElement,
   CurrencyIcon,
@@ -7,7 +10,7 @@ import {
 import styles
   from './burger-constructor.module.css';
 
-export default class BurgerIngredients extends React.Component{
+export default class BurgerConstructor extends React.Component{
   render() {
     return (
     <section className={'column'}>
@@ -26,17 +29,17 @@ export default class BurgerIngredients extends React.Component{
                 type = '';
             }
             return(
-              <>
-                <DragIcon type={'primary'} />
+              <div key={el._id} className={styles.row}>
+                {type === '' && <DragIcon type={'primary'} />}
                 <ConstructorElement
                   type={type}
-                  isLocked={false}
+                  isLocked={type!==''}
                   // handleClose?: () => void;
                   text ={el.name}
                   thumbnail={el.image}
                   price={el.price}
                 />
-              </>
+              </div>
             )})
         }
       </div>
@@ -52,3 +55,5 @@ export default class BurgerIngredients extends React.Component{
     </section>
   )}
 }
+
+BurgerConstructor.propTypes = PropTypes.arrayOf(ingredientPropTypes).isRequired;
