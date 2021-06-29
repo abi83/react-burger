@@ -5,7 +5,9 @@
   margin-bottom: 16px;
   border-radius: 30px;
   max-height: 22px;
+  cursor: pointer;
 }
+
 .text{
   padding-left: 8px;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './burger-ingredients.module.css';
-import Tabs from './tabs';
+import Tabs from './tabs/tabs';
 import IngredientCard from './ingredient-card/ingredient-card';
 import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../utils/dataPropTypes';
@@ -24,7 +24,7 @@ export default class BurgerIngredients extends React.Component{
   //TODO: category component
   render() {
     return (
-    <section className={'column container'}>
+    <section className='column container'>
       <h2 className={style.h2}>Соберите бургер</h2>
       <Tabs />
       <h3 className={style.h3}>Булки</h3>

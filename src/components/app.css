@@ -3,6 +3,7 @@
   justify-content: center;
   font-family: 'Jet Brains Mono', Arial, sans-serif;
 }
+
 main{
   margin: 0 auto;
   max-width: 1200px;
@@ -11,6 +12,7 @@ main{
   flex-wrap: wrap;
   gap: 40px;
 }
+
 .column{
   flex: 1;
   max-height: 90vh;
@@ -18,16 +20,20 @@ main{
   flex-direction: column;
   align-items: center;
 }
+
 .container{
   overflow: auto;
   overflow-x: hidden; /*BUG!!*/
 }
+
 .container::-webkit-scrollbar {
 	width: 12px;
 }
+
 .container::-webkit-scrollbar-track {
 	background: #2F2F37;
 }
+
 .container::-webkit-scrollbar-thumb {
 	background: #8585AD;
 	border: 3px solid #2F2F37;

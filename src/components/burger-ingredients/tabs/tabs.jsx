@@ -13,18 +13,17 @@ export default class Tabs extends React.Component{
   // TODO: tabs values as props
   setCurrent = (value) => {
     this.setState({current: value})
-    console.log(this.myRef);
   }
   render() {
     return (
       <div style={{ display: 'flex'}} ref={this.myRef}>
-        <Tab value="one" active={this.state.current === 'one'} onClick={this.setCurrent}>
+        <Tab value='one' active={this.state.current === 'one'} onClick={this.setCurrent}>
           Булки
         </Tab>
-        <Tab value="two" active={this.state.current === 'two'} onClick={this.setCurrent}>
+        <Tab value='two' active={this.state.current === 'two'} onClick={this.setCurrent}>
           Соусы
         </Tab>
-        <Tab value="three" active={this.state.current === 'three'} onClick={this.setCurrent}>
+        <Tab value='three' active={this.state.current === 'three'} onClick={this.setCurrent}>
           Начинки
         </Tab>
       </div>
