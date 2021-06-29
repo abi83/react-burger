@@ -1,0 +1,10 @@
+.header{
+  margin-right: auto;
+}
+
+.ingredientsContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+}

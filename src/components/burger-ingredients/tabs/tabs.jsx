@@ -5,28 +5,24 @@ import style from './tabs.module.css'
 export default class Tabs extends React.Component{
   constructor(props) {
     super(props);
-    this.myRef = React.createRef()
     this.state = {
-      current: 'one',
+      current: 'bun',
     };
     this.setCurrent = this.setCurrent.bind(this)
   }
-  // TODO: tabs values as props
   setCurrent = (value) => {
     this.setState({current: value})
   }
   render() {
     return (
-      <div className={style.tabs} ref={this.myRef}>
-        <Tab value='one' active={this.state.current === 'one'} onClick={this.setCurrent}>
-          Булки
-        </Tab>
-        <Tab value='two' active={this.state.current === 'two'} onClick={this.setCurrent}>
-          Соусы
-        </Tab>
-        <Tab value='three' active={this.state.current === 'three'} onClick={this.setCurrent}>
-          Начинки
-        </Tab>
+      <div className={style.tabs}>
+        {this.props.tabs.map(tab=>{
+          const [tabID, tabName] = [Object.keys(tab)[0], Object.values(tab)[0]];
+          return(
+                <Tab value={tabID} active={this.state.current === tabID} onClick={this.setCurrent}>
+                  {tabName}
+                </Tab>
+                )})}
       </div>
   )}
 }
