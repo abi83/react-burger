@@ -14,6 +14,14 @@
   justify-content: center;
 }
 
+.menu-left{
+  justify-content: flex-start;
+}
+
+.menu-right{
+  justify-content: flex-end;
+}
+
 .logo{
   margin: auto;
   flex: 3;

@@ -13,8 +13,8 @@ import styles
 export default class BurgerConstructor extends React.Component{
   render() {
     return (
-    <section className={'column'}>
-      <div className={'container'}>
+    <section className='column'>
+      <div className='container'>
         {
           this.props.ingredients.map((el,index, arr) => {
             let type;
@@ -30,7 +30,7 @@ export default class BurgerConstructor extends React.Component{
             }
             return(
               <div key={el._id} className={styles.row}>
-                {type === '' && <DragIcon type={'primary'} />}
+                {type === '' && <DragIcon type='primary' />}
                 <ConstructorElement
                   type={type}
                   isLocked={type!==''}
@@ -43,8 +43,8 @@ export default class BurgerConstructor extends React.Component{
             )})
         }
       </div>
-      <div className={styles.price}>
-        <span>
+      <div className={`${styles.price} pt-4 pb-4`}>
+        <span className='text text_type_digits-medium'>
           {6789}
         </span>
         <CurrencyIcon type="primary" />

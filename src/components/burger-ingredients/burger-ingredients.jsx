@@ -25,16 +25,16 @@ export default class BurgerIngredients extends React.Component{
   render() {
     return (
     <section className='column container'>
-      <h2 className={style.h2}>Соберите бургер</h2>
+      <h2 className={`${style.header} text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
       <Tabs />
-      <h3 className={style.h3}>Булки</h3>
-      <ul className={style.ingredientsContainer}>
+      <h3 className={`${style.header} text text_type_main-medium mt-6 mb-2`}>Булки</h3>
+      <ul className={`${style.ingredientsContainer} pl-4 pr-4`}>
         <IngredientCard ingredient={this.props.ingredients[0]} />
         <IngredientCard ingredient={this.props.ingredients[1]} />
         <IngredientCard ingredient={this.props.ingredients[2]} />
       </ul>
-      <h3 className={style.h3}>Начинки</h3>
-      <ul className={style.ingredientsContainer}>
+      <h3 className={`${style.header} text text_type_main-medium mt-6 mb-2`}>Начинки</h3>
+      <ul className={`${style.ingredientsContainer} pl-4 pr-4`}>
         <IngredientCard ingredient={this.props.ingredients[3]} />
         <IngredientCard ingredient={this.props.ingredients[4]} />
         <IngredientCard ingredient={this.props.ingredients[5]} />

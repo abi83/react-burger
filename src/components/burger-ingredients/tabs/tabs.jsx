@@ -1,5 +1,6 @@
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab';
 import React from 'react';
+import style from './tabs.module.css'
 
 export default class Tabs extends React.Component{
   constructor(props) {
@@ -16,7 +17,7 @@ export default class Tabs extends React.Component{
   }
   render() {
     return (
-      <div style={{ display: 'flex'}} ref={this.myRef}>
+      <div className={style.tabs} ref={this.myRef}>
         <Tab value='one' active={this.state.current === 'one'} onClick={this.setCurrent}>
           Булки
         </Tab>

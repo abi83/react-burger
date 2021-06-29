@@ -1,11 +1,5 @@
-.h2{
-  margin: 40px auto 20px 0;
-  font-size: 36px;
-}
-
-.h3{
-  margin: 24px auto 8px 0;
-  font-size: 24px;
+.header{
+  margin-right: auto;
 }
 
 .ingredientsContainer{
@@ -13,5 +7,4 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 24px;
-  padding: 0 16px;
 }

@@ -11,7 +11,7 @@ import styles from './app-header.module.css'
 export default function AppHeader () {
   return (
     <header className={styles.head}>
-      <nav className={styles.menu} style={{justifyContent: 'flex-start'}}>
+      <nav className={`${styles.menu} ${styles.menuLeft}`}>
         <HeadButton text='Конструктор'>
           <BurgerIcon  type='primary'/>
         </HeadButton>
@@ -22,7 +22,7 @@ export default function AppHeader () {
       <div className={styles.logo}>
         <Logo />
       </div>
-      <nav className={styles.menu} style={{justifyContent: 'flex-end'}}>
+      <nav className={`${styles.menu} ${styles.menuRight}`}>
         <HeadButton text='Личный кабинет'>
           <ProfileIcon type='secondary' />
         </HeadButton>
