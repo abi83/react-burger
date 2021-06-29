@@ -1,0 +1,27 @@
+.card{
+  flex: auto;
+  min-width: 250px;
+  max-width: calc(50% - 12px);
+  margin: 0 auto;
+  position: relative;
+}
+.mainImage{
+  max-width: calc(100% - 32px);
+  margin: 0 16px;
+}
+.price{
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 4px 0;
+}
+.price>span{
+  padding-right: 10px;
+  font-size: 28px;
+  font-family: 'Iceland', Arial, sans-serif;
+}
+.name{
+  margin: 0;
+  padding: 12px 16px 24px;
+  font-size: 18px;
+}
