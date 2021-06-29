@@ -39,3 +39,9 @@ main{
 	border: 3px solid #2F2F37;
 	border-radius: 6px;
 }
+
+.constructor-element__text{
+  /* cards with small text BUG fix */
+  /* original bug is provided via @ya ui library*/
+  flex-grow: 1;
+}

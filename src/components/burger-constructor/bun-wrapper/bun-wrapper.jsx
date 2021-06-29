@@ -3,7 +3,10 @@ import {
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import styles from './bun-wrapper.module.css';
+import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 
 export default function BunWrapper(props){
   return(
@@ -28,4 +31,9 @@ export default function BunWrapper(props){
         <ConstructorElement type={'bottom'} isLocked={true} text = {props.bun.name} thumbnail={props.bun.image} price={props.bun.price} />
       </>
   )
+}
+
+BunWrapper.propTypes = {
+  items: PropTypes.arrayOf(ingredientPropTypes),
+  bun: ingredientPropTypes
 }

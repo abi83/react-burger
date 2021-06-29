@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './header-button.module.css';
+import PropTypes from 'prop-types';
 
 export default class HeaderButton extends React.Component{
   render() {
@@ -9,4 +10,8 @@ export default class HeaderButton extends React.Component{
       <span className='pl-2'>{this.props.text}</span>
     </div>
   )}
+}
+
+HeaderButton.propTypes = {
+  text: PropTypes.string.isRequired
 }

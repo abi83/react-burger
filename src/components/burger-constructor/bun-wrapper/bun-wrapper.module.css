@@ -1,4 +1,8 @@
 .row{
   display: inline-flex;
   align-items: center;
+  width: 100%;
+}
+.row > div {
+  width: 100%;
 }

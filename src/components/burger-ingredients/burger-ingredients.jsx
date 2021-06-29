@@ -23,9 +23,11 @@ export default class BurgerIngredients extends React.Component{
       <Tabs tabs={this.state.tabs}/>
       <div className="container">
         {this.state.tabs
-        .map(tab =>  <Section title={Object.values(tab)[0]}
-                        items={this.props.ingredients.filter(ing=>ing.type===Object.keys(tab)[0])}
-                        />)}
+        .map((tab, index) =>
+            <Section title={Object.values(tab)[0]}
+                     items={this.props.ingredients.filter(ing=>ing.type===Object.keys(tab)[0])}
+                     key={index}
+            />)}
         
       </div>
     </section>

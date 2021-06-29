@@ -1,9 +1,10 @@
-import styles from './ingredient-card.module.css'
+import styles from './ingredient-card.module.css';
 import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
+import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 
 export default function IngredientCard ({ingredient}) {
   return (
@@ -22,3 +23,7 @@ export default function IngredientCard ({ingredient}) {
     </li>
   )
 };
+
+IngredientCard.propTypes = {
+  ingredient: ingredientPropTypes.isRequired
+}
