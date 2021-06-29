@@ -18,14 +18,16 @@ export default class BurgerIngredients extends React.Component{
   };
   render() {
     return (
-    <section className='column container'>
+    <section className='column'>
       <h2 className={`${style.header} text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
       <Tabs tabs={this.state.tabs}/>
-      {this.state.tabs.map(
-        (tab) =>  <Section
-                  title={Object.values(tab)[0]}
-                  items={this.props.ingredients.filter(ing=>ing.type===Object.keys(tab)[0])}
-                  />)}
+      <div className="container">
+        {this.state.tabs
+        .map(tab =>  <Section title={Object.values(tab)[0]}
+                        items={this.props.ingredients.filter(ing=>ing.type===Object.keys(tab)[0])}
+                        />)}
+        
+      </div>
     </section>
   )}
 }

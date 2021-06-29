@@ -17,7 +17,7 @@ export default class Tabs extends React.Component{
     return (
       <div className={style.tabs}>
         {this.props.tabs.map(tab=>{
-          const [tabID, tabName] = [Object.keys(tab)[0], Object.values(tab)[0]];
+          const [tabID, tabName] = Object.values(tab);
           return(
                 <Tab value={tabID} active={this.state.current === tabID} onClick={this.setCurrent}>
                   {tabName}

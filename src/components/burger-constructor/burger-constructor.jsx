@@ -3,55 +3,26 @@ import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../utils/dataPropTypes';
 
 import {
-  ConstructorElement,
+  Button,
   CurrencyIcon,
-  Button, DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles
-  from './burger-constructor.module.css';
+import BunWrapper from './bun-wrapper/bun-wrapper';
+import styles from './burger-constructor.module.css';
 
 export default class BurgerConstructor extends React.Component{
   render() {
     return (
-    <section className='column'>
-      <div className='container'>
-        {
-          this.props.ingredients.map((el,index, arr) => {
-            let type;
-            switch (index) {
-              case 0:
-                type = 'top'
-                break;
-              case arr.length-1:
-                type = 'bottom'
-                break;
-              default:
-                type = '';
-            }
-            return(
-              <div key={el._id} className={styles.row}>
-                {type === '' && <DragIcon type='primary' />}
-                <ConstructorElement
-                  type={type}
-                  isLocked={type!==''}
-                  // handleClose?: () => void;
-                  text ={el.name}
-                  thumbnail={el.image}
-                  price={el.price}
-                />
-              </div>
-            )})
-        }
-      </div>
-      <div className={`${styles.price} pt-4 pb-4`}>
-        <span className='text text_type_digits-medium'>
-          {6789}
-        </span>
-        <CurrencyIcon type="primary" />
-        <Button type="primary" size="large">
-          Оформить заказ
-        </Button>
-      </div>
+    <section className='column pt-25'>
+        <BunWrapper bun={this.props.ingredients[0]} items={this.props.ingredients} />
+        <div className={`${styles.price} pt-4 pb-4`}>
+          <span className='text text_type_digits-medium'>
+            {6789}
+          </span>
+          <CurrencyIcon type="primary" />
+          <Button type="primary" size="large">
+            Оформить заказ
+          </Button>
+        </div>
     </section>
   )}
 }
