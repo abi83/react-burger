@@ -45,3 +45,7 @@ main{
   /* original bug is provided via @ya ui library*/
   flex-grow: 1;
 }
+.message{
+  padding: 200px;
+  margin: auto;
+}
