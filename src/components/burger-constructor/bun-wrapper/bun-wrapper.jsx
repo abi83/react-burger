@@ -8,17 +8,17 @@ import PropTypes from 'prop-types';
 import styles from './bun-wrapper.module.css';
 import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 
-export default function BunWrapper(props){
+export default function BunWrapper({bun, items}){
+  
   return(
       <>
-        <ConstructorElement type={'top'} isLocked={true} text = {props.bun.name} thumbnail={props.bun.image} price={props.bun.price} />
+        <ConstructorElement type='top' isLocked={true} text = {bun.name} thumbnail={bun.image} price={bun.price} />
         <div className='container'>
-          {props.items
+          {items
           .map(el =>
             <div key={el._id} className={styles.row}>
               <DragIcon type='primary' />
               <ConstructorElement
-                className={'xxx'}
                 isLocked={false}
                 text ={el.name}
                 thumbnail={el.image}
@@ -28,7 +28,7 @@ export default function BunWrapper(props){
           )
           }
         </div>
-        <ConstructorElement type={'bottom'} isLocked={true} text = {props.bun.name} thumbnail={props.bun.image} price={props.bun.price} />
+        <ConstructorElement type='bottom' isLocked={true} text = {bun.name} thumbnail={bun.image} price={bun.price} />
       </>
   )
 }

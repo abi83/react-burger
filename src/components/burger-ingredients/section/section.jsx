@@ -10,7 +10,7 @@ export default function Section(props) {
       <>
         <h3 className={`${style.header} text text_type_main-medium mt-6 mb-2`}>{props.title}</h3>
         <ul className={`${style.ingredientsContainer} pl-4 pr-4`}>
-          {props.items.map((ingredient, index)=><IngredientCard key={index} ingredient={ingredient} />)}
+          {props.items.map((ingredient, index)=><IngredientCard key={ingredient._id} ingredient={ingredient} />)}
         </ul>
       </>)}
 

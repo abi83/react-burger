@@ -8,7 +8,7 @@ import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 
 export default function IngredientCard ({ingredient}) {
   return (
-    <li key={ingredient._id} className={styles.card}>
+    <li className={styles.card}>
       <Counter count={1} size='default' />
       <img className={`${styles.mainImage} ml-4 mr-4`} src={ingredient.image_large} alt={ingredient.name}/>
       <div className={`${styles.price} mt-1 mb-1`}>

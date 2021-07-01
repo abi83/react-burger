@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 
 import './app.css';
 
-import AppHeader from './app-header/app-header';
-import BurgerIngredients from './burger-ingredients/burger-ingredients';
-import BurgerConstructor from "./burger-constructor/burger-constructor";
-import Modal from "./modal/modal";
-import ModalOverlay from "./modal-overlay/modal-overlay";
+import AppHeader from '../app-header/app-header';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import BurgerConstructor from "../burger-constructor/burger-constructor";
+import Modal from "../modal/modal";
+import ModalOverlay from "../modal-overlay/modal-overlay";
 
 const APIUrl = 'https://norma.nomoreparties.space/api/ingredients'
 
@@ -16,7 +16,7 @@ export default function App() {
     serverErrors: false,
     loading: true
   })
-  const[modal, manageModal] = React.useState(true)
+  const[modal, manageModal] = React.useState(false)
 
 
   const getIngredients = () => {

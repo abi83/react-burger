@@ -11,11 +11,11 @@ export default class BurgerIngredients extends React.Component{
     this.state = {
       activeTab: 'bun',
       tabs: [
-        {bun: 'Булки'},
-        {main: 'Начинки'},
-        {sauce: 'Соусы'},
-      ]}
-  };
+        {id: 'bun', name: 'Булки'},
+        {id: 'main', name: 'Начинки'},
+        {id: 'sauce', name: 'Соусы'},
+      ]
+    }};
   render() {
     return (
     <section className='column'>
@@ -23,12 +23,10 @@ export default class BurgerIngredients extends React.Component{
       <Tabs tabs={this.state.tabs}/>
       <div className="container">
         {this.state.tabs
-        .map((tab, index) =>
-            <Section title={Object.values(tab)[0]}
-                     items={this.props.ingredients.filter(ing=>ing.type===Object.keys(tab)[0])}
-                     key={index}
-            />)}
-        
+          .map( (tab) => {
+            return <Section title={tab.name}
+                   items={this.props.ingredients.filter(ing=>ing.type===tab.id)}
+                   key={tab.id}/>})}
       </div>
     </section>
   )}

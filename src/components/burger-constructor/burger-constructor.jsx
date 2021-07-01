@@ -14,7 +14,7 @@ export default class BurgerConstructor extends React.Component{
     return (
     <section className='column pt-25'>
         <BunWrapper
-            bun={this.props.ingredients.filter(el=>el.type==='bun')[0]}
+            bun={this.props.ingredients.find(el=>el.type==='bun')}
             items={this.props.ingredients.filter(el=>el.type!=='bun')}
         />
         <div className={`${styles.price} pt-4 pb-4`}>
