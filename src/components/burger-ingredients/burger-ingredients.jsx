@@ -17,7 +17,6 @@ export default class BurgerIngredients extends React.Component{
       ]}
   };
   render() {
-    console.log(this.props.ingredients);
     return (
     <section className='column'>
       <h2 className={`${style.header} text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
