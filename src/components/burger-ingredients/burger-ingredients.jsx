@@ -9,18 +9,21 @@ export default class BurgerIngredients extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 'bun',
+      // activeTab: 'bun',
       tabs: [
-        {id: 'bun', name: 'Булки'},
-        {id: 'main', name: 'Начинки'},
-        {id: 'sauce', name: 'Соусы'},
+        {id: 'bun', name: 'Булки', active: true},
+        {id: 'main', name: 'Начинки', active: false},
+        {id: 'sauce', name: 'Соусы', active: false},
       ]
     }};
+  onTabClick = (item)=>{
+    console.log('I am here', item);
+  }
   render() {
     return (
     <section className='column'>
       <h2 className={`${style.header} text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
-      <Tabs tabs={this.state.tabs}/>
+      <Tabs tabs={this.state.tabs} onClick={this.onTabClick} />
       <div className="container">
         {this.state.tabs
           .map( (tab) => {

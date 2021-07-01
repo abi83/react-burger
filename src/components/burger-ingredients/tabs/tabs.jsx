@@ -5,25 +5,15 @@ import PropTypes from 'prop-types';
 import style from './tabs.module.css'
 
 export default class Tabs extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      current: 'bun',
-    };
-    this.setCurrent = this.setCurrent.bind(this)
-  }
-  setCurrent = (value) => {
-    this.setState({current: value})
-  }
   render() {
     return (
       <div className={style.tabs}>
         {this.props.tabs.map((tab,index)=>{
           return(
-                <Tab key={tab.id} value={tab.id} active={this.state.current === tab.id} onClick={this.setCurrent}>
-                  {tab.name}
-                </Tab>
-                )})}
+            <Tab key={tab.id} value={tab.id} active={tab.active} onClick={onclick}>
+              {tab.name}
+            </Tab>
+            )})}
       </div>
   )}
 }
