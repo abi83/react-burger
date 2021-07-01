@@ -1,0 +1,8 @@
+.modal{
+  background-color: green;
+  margin: auto;
+  width: 600px;
+  height: 600px;
+  max-width: 90%;
+  max-height: 90%;
+}

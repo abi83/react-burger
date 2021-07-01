@@ -1,11 +1,6 @@
 .button{
-  padding: 16px 20px;
   display: flex;
-  margin-top: 16px;
-  margin-bottom: 16px;
   border-radius: 30px;
   max-height: 22px;
-}
-.text{
-  padding-left: 8px;
+  cursor: pointer;
 }

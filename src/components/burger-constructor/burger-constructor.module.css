@@ -1,22 +1,15 @@
 :root{
  --background-element: #1C1C21; /* @ya component overwritten*/
 }
+
 .price{
   width: 100%;
-  padding: 16px 0;
   display: inline-flex;
   align-items: center;
   flex-wrap: nowrap;
   justify-content: flex-end;
 }
-.price>span{
-  font-size: 48px;
-  font-family: 'Iceland', Arial, sans-serif;
-}
+
 .price>*{
   margin-right: 28px;
-}
-.row{
-  display: inline-flex;
-  align-items: center;
 }
