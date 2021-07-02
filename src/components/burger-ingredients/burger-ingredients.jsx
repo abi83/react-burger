@@ -1,38 +1,40 @@
-import React from 'react';
+import {useState, useRef} from 'react';
 import style from './burger-ingredients.module.css';
 import Tabs from './tabs/tabs';
 import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../utils/dataPropTypes';
 import Section from './section/section';
 
-export default class BurgerIngredients extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      // activeTab: 'bun',
+export default function BurgerIngredients ({ingredients}) {
+  const [state, setState] = useState({
+      activeTab: 'bun',
       tabs: [
-        {id: 'bun', name: 'Булки', active: true},
-        {id: 'main', name: 'Начинки', active: false},
-        {id: 'sauce', name: 'Соусы', active: false},
+        {id: 'bun', name: 'Булки', sectionRef: useRef(null)},
+        {id: 'main', name: 'Начинки', sectionRef: useRef(null)},
+        {id: 'sauce', name: 'Соусы', sectionRef: useRef(null)},
       ]
-    }};
-  onTabClick = (item)=>{
-    console.log('I am here', item);
+    })
+  const onTabClick = (tabName) => {
+    state.tabs
+      .find(tab => tab.id === tabName)
+      .sectionRef.current
+      .scrollIntoView({ behavior: 'smooth' })
+    setState({...state, activeTab: tabName})
   }
-  render() {
-    return (
+  return (
     <section className='column'>
       <h2 className={`${style.header} text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
-      <Tabs tabs={this.state.tabs} onClick={this.onTabClick} />
+      <Tabs tabs={state.tabs} activeTabId = {state.activeTab} onClick={onTabClick} />
       <div className="container">
-        {this.state.tabs
+        {state.tabs
           .map( (tab) => {
             return <Section title={tab.name}
-                   items={this.props.ingredients.filter(ing=>ing.type===tab.id)}
-                   key={tab.id}/>})}
+                   items={ingredients.filter(ing=>ing.type===tab.id)}
+                   key={tab.id}
+                   ref={tab.sectionRef}/>})}
       </div>
     </section>
-  )}
+  )
 }
 
 BurgerIngredients.propTypes = PropTypes.arrayOf(ingredientPropTypes).isRequired;

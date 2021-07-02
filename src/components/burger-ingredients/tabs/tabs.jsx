@@ -4,18 +4,17 @@ import PropTypes from 'prop-types';
 
 import style from './tabs.module.css'
 
-export default class Tabs extends React.Component{
-  render() {
-    return (
-      <div className={style.tabs}>
-        {this.props.tabs.map((tab,index)=>{
-          return(
-            <Tab key={tab.id} value={tab.id} active={tab.active} onClick={onclick}>
-              {tab.name}
-            </Tab>
-            )})}
-      </div>
-  )}
+export default function Tabs({tabs, activeTabId, onClick}) {
+  return (
+    <div className={style.tabs}>
+      {tabs.map(tab=>{
+        return(
+          <Tab key={tab.id} value={tab.id} active={tab.id === activeTabId} onClick={onClick}>
+            {tab.name}
+          </Tab>
+          )})}
+    </div>
+  )
 }
 
 Tabs.propTypes = {
