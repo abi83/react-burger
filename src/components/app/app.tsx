@@ -16,8 +16,11 @@ export default function App() {
     serverErrors: false,
     loading: true
   })
-  const[modal, manageModal] = React.useState(false)
+  const[modal, manageModal] = React.useState(true)
 
+  const handleModalClose = () => {
+    manageModal(false)
+  }
 
   const getIngredients = () => {
     fetch(APIUrl)
@@ -47,11 +50,11 @@ export default function App() {
       </div>
       {
         modal &&
-            <ModalOverlay>
-              <Modal>Привет</Modal>
+            <ModalOverlay close={handleModalClose}>
+              <Modal close={handleModalClose} header={'Заголовочек'}>Привет</Modal>
             </ModalOverlay>
       }
 
     </>
   )
-};
+}

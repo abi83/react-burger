@@ -1,10 +1,11 @@
 import styles from './modal.module.css'
+import React from 'react';
+import closeIcon from '../../images/close-icon.png'
 
-export default function Modal(props) {
-  const { children, header, onClose } = props;
-  
+export default function Modal({ close, children, header}) {
   return (
-    <div className={styles.modal}>
+    <div onClick={e=>e.stopPropagation()} className={styles.modal}>
+      <img src={closeIcon} className={styles.close} onClick={close}/>
       <h3>{header}</h3>
       {children}
     </div>

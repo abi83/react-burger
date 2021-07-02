@@ -5,4 +5,11 @@
   height: 600px;
   max-width: 90%;
   max-height: 90%;
+  position: relative;
+  border-radius: 40px;
+}
+.close{
+  position: absolute;
+  top: 60px;
+  right: 40px;
 }
