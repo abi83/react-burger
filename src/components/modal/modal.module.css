@@ -1,8 +1,8 @@
 .modal{
-  background-color: green;
+  background-color: #1C1C21;
   margin: auto;
-  width: 600px;
-  height: 600px;
+  width: 660px;
+  height: 505px;
   max-width: 90%;
   max-height: 90%;
   position: relative;
