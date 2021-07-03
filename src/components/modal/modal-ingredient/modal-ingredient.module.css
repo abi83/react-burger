@@ -1,0 +1,17 @@
+.card{
+  background-color: green
+}
+
+.mainImage{
+  max-width: calc(100% - 32px);
+}
+
+.price{
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+/* import ?*/
+.name{
+  margin: 0;
+}
