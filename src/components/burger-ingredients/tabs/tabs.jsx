@@ -18,5 +18,7 @@ export default function Tabs({tabs, activeTabId, onClick}) {
 }
 
 Tabs.propTypes = {
-  tabs: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string))
+  tabs: PropTypes.arrayOf(PropTypes.object),
+  activeTabId: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 }

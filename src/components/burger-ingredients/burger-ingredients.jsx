@@ -24,7 +24,7 @@ export default function BurgerIngredients ({ingredients, onClick}) {
   return (
     <section className='column'>
       <h2 className={`${style.header} text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
-      <Tabs tabs={state.tabs} activeTabId = {state.activeTab} onClick={onTabClick} />
+      <Tabs tabs={state.tabs} activeTabId={state.activeTab} onClick={onTabClick} />
       <div className="container">
         {state.tabs
           .map( (tab) => {

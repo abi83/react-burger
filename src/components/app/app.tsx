@@ -4,9 +4,9 @@ import './app.css';
 
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from "../burger-constructor/burger-constructor";
-import Modal from "../modal/modal";
-import ModalOverlay from "../modal-overlay/modal-overlay";
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import Modal from '../modal/modal';
+import ModalOverlay from '../modal-overlay/modal-overlay';
 
 const APIUrl = 'https://norma.nomoreparties.space/api/ingredients'
 
@@ -16,14 +16,15 @@ export default function App() {
     serverErrors: false,
     loading: true
   })
-  const[modal, manageModal] = React.useState(true)
+  const[modal, manageModal] = React.useState({isOpened:false, content: 'Привет!'})
 
   const handleModalClose = () => {
-    manageModal(false)
+    manageModal({...modal, isOpened: false})
   }
 
-  const handleCardClick = (e: React.SyntheticEvent) => {
+  const handleCardClick = (e: {name: string }) => {
     console.log('card is clicked', e)
+    manageModal({isOpened: true, content: e.name})
   }
 
   const getIngredients = () => {
@@ -53,9 +54,9 @@ export default function App() {
         </main>
       </div>
       {
-        modal &&
+        modal.isOpened &&
             <ModalOverlay close={handleModalClose}>
-              <Modal close={handleModalClose} header={'Заголовок'}>Привет</Modal>
+              <Modal close={handleModalClose}>{modal.content}</Modal>
             </ModalOverlay>
       }
 
