@@ -1,5 +1,4 @@
 .card{
-  /*background-color: red;*/
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -9,17 +8,10 @@
   margin: 0 60px;
 }
 
-/*.price{*/
-/*  display: inline-flex;*/
-/*  align-items: center;*/
-/*  flex-wrap: nowrap;*/
-/*}*/
-
-
-/* import ?*/
 .name{
   margin: 0 auto;
 }
+
 .info{
   margin: 0 60px;
   display: inline-flex;
@@ -28,12 +20,13 @@
   padding: 0;
   gap: 20px;
 }
+
 ul.info>li{
-  /*background-color: hotpink;*/
   flex: 1;
   display: flex;
   flex-direction: column;
 }
+
 ul.info>li>span:last-child{
   margin: auto auto 0 auto;
 }

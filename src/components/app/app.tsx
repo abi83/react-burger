@@ -9,6 +9,7 @@ import Modal from '../modal/modal';
 import ModalOverlay from '../modal/modal-overlay/modal-overlay';
 import ModalIngredient from "../modal/modal-ingredient/modal-ingredient";
 import {ingredientType} from '../../utils/dataPropTypes'
+import ModalOrderInfo from "../modal/modal-order-info/modal-order-info";
 
 const APIUrl = 'https://norma.nomoreparties.space/api/ingredients'
 
@@ -28,6 +29,11 @@ export default function App() {
     // @ts-ignore
     manageModal({isOpened: true, content: <ModalIngredient ingredient={ingredient} />})
   }
+  const handleOrderClick = () => {
+    const order = {number: '0345376'}
+    // @ts-ignore
+    manageModal({isOpened: true, content: <ModalOrderInfo order={order} />})
+  }
 
   const getIngredients = () => {
     fetch(APIUrl)
@@ -44,14 +50,14 @@ export default function App() {
     <>
       <div className="App">
         <AppHeader />
-        <main>
+        <main onKeyDown={()=>{console.log('KEY')}}>
           {data.loading || data.serverErrors
             ? data.loading
               ? <div className='message'>Данные загружаются</div>
               : <div className='message'>Ошибка сервера</div>
             : <>
                 <BurgerIngredients ingredients={ data.ingredients } onClick={handleCardClick}/>
-                <BurgerConstructor ingredients={ data.ingredients } />
+                <BurgerConstructor ingredients={ data.ingredients } onClick={handleOrderClick}/>
               </>}
         </main>
       </div>

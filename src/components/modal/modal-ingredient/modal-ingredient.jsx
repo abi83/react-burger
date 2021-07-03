@@ -1,7 +1,4 @@
 import styles from './modal-ingredient.module.css';
-import {
-  CurrencyIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 
