@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../utils/dataPropTypes';
 import Section from './section/section';
 
-export default function BurgerIngredients ({ingredients}) {
+export default function BurgerIngredients ({ingredients, onClick}) {
   const [state, setState] = useState({
       activeTab: 'bun',
       tabs: [
@@ -31,7 +31,8 @@ export default function BurgerIngredients ({ingredients}) {
             return <Section title={tab.name}
                    items={ingredients.filter(ing=>ing.type===tab.id)}
                    key={tab.id}
-                   ref={tab.sectionRef}/>})}
+                   ref={tab.sectionRef}
+                   onClick={onClick} />})}
       </div>
     </section>
   )

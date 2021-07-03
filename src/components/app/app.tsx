@@ -22,6 +22,10 @@ export default function App() {
     manageModal(false)
   }
 
+  const handleCardClick = (e: React.SyntheticEvent) => {
+    console.log('card is clicked', e)
+  }
+
   const getIngredients = () => {
     fetch(APIUrl)
       .then(response => response.json())
@@ -43,7 +47,7 @@ export default function App() {
               ? <div className='message'>Данные загружаются</div>
               : <div className='message'>Ошибка сервера</div>
             : <>
-                <BurgerIngredients ingredients={ data.ingredients } />
+                <BurgerIngredients ingredients={ data.ingredients } onClick={handleCardClick}/>
                 <BurgerConstructor ingredients={ data.ingredients } />
               </>}
         </main>
@@ -51,7 +55,7 @@ export default function App() {
       {
         modal &&
             <ModalOverlay close={handleModalClose}>
-              <Modal close={handleModalClose} header={'Заголовочек'}>Привет</Modal>
+              <Modal close={handleModalClose} header={'Заголовок'}>Привет</Modal>
             </ModalOverlay>
       }
 
