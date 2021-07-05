@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom'
 
-export default function ModalOverlay({children, close}) {
-  //TODO: close modal on Esc button!
+export default function ModalOverlay({close, children}) {
   return ReactDOM.createPortal(
   (
       <div className='modal-overlay'

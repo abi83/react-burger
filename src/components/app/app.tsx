@@ -50,7 +50,7 @@ export default function App() {
     <>
       <div className="App">
         <AppHeader />
-        <main onKeyDown={()=>{console.log('KEY')}}>
+        <main>
           {data.loading || data.serverErrors
             ? data.loading
               ? <div className='message'>Данные загружаются</div>
