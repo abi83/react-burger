@@ -8,10 +8,79 @@ body {
   box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/*code {*/
+/*  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',*/
+/*    monospace;*/
+/*}*/
+
+
+
+
+
+
+main{
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 40px;
 }
+
+.column{
+  flex: 1;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container{
+  overflow: auto;
+  overflow-x: hidden; /*BUG!!*/
+}
+
+.container::-webkit-scrollbar {
+	width: 12px;
+}
+
+.container::-webkit-scrollbar-track {
+	background: #2F2F37;
+}
+
+.container::-webkit-scrollbar-thumb {
+	background: #8585AD;
+	border: 3px solid #2F2F37;
+	border-radius: 6px;
+}
+
+.constructor-element__text{
+  /* cards with small text BUG fix */
+  /* original bug is provided via @ya ui library*/
+  flex-grow: 1;
+}
+/*.message{*/
+/*  padding: 200px;*/
+/*  margin: auto;*/
+/*}*/
+
+.modal-overlay{
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+}
+
+
+
+
+
+
 @font-face {
   src: url(./fonts/JetBrainsMono/JetBrainsMono-Regular.woff2) format('woff2');
   font-family: 'Jet Brains Mono';

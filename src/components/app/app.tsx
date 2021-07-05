@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-import './app.css';
+import styles from './app.module.css';
 
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
@@ -48,7 +48,7 @@ export default function App() {
 
   return (
     <>
-      <div className="App">
+      <div className={styles.app}>
         <AppHeader />
         <main>
           {data.loading || data.serverErrors
