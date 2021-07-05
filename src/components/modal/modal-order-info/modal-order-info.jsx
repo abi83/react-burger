@@ -5,12 +5,12 @@ import orderAcceptedIcon from '../../../images/order_accepted.svg'
 export default function ModalOrderInfo ({order}) {
  
   return (
-    <div className={styles.card}>
-      <h3 className='text text_type_main-large pt-3'>{order.number}</h3>
-      <p>идентификатор заказа</p>
-      <img src={orderAcceptedIcon} alt='Заказ принят!' width='120px'/>
-      <p>Ваш заказ начали готовить</p>
-      <p>Дождитесь готовности на орбитальной станции</p>
+    <div className={`${styles.card} pt-10 pb-10`}>
+      <h3 className='pt-3 text text_type_digits-large'>{order.number}</h3>
+      <p className='text text_type_main-medium pt-1'>идентификатор заказа</p>
+      <img className='pt-15 pb-15' src={orderAcceptedIcon} alt='Заказ принят!' width='120px'/>
+      <p className='text text_type_main-default'>Ваш заказ начали готовить</p>
+      <p className='text text_type_main-default text_color_inactive pb-10 pt-2'>Дождитесь готовности на орбитальной станции</p>
     </div>
   )
 };

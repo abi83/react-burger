@@ -6,9 +6,9 @@ export default function ModalIngredient ({ingredient}) {
  
   return (
     <div className={styles.card}>
-      <h3 className='text text_type_main-large pt-3'>Детали ингредиента</h3>
+      <h3 className='text text_type_main-large'>Детали ингредиента</h3>
       <img className={`${styles.mainImage} ml-4 mr-4`} src={ingredient.image_large} alt={ingredient.name}/>
-      <p className={`${styles.name} pt-4 pb-8 text text_type_main-medium`}>
+      <p className={`${styles.name} pt-4 pb-6 text text_type_main-medium`}>
         {ingredient.name}
       </p>
       <ul className={styles.info}>

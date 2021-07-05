@@ -11,7 +11,8 @@ export default function Modal({ close, children}) {
   useEffect(()=>{
     document.body.addEventListener('keydown', closeOnEscape);
     
-    return ()=>document.body.removeEventListener('keydown', closeOnEscape)
+  return ()=>document.body.removeEventListener('keydown', closeOnEscape)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   
