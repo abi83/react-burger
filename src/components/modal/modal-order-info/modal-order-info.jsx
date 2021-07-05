@@ -1,6 +1,6 @@
 import styles from './modal-order.module.css';
 import React from 'react';
-import orderAcceptedIcon from '../../../images/order_accepted.svg'
+import orderAcceptedIcon from '../../../images/order_accepted.svg';
 
 export default function ModalOrderInfo ({order}) {
  

@@ -2,7 +2,7 @@ import {Tab} from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/ta
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import style from './tabs.module.css'
+import style from './tabs.module.css';
 
 export default function Tabs({tabs, activeTabId, onClick}) {
   return (
