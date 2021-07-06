@@ -5,10 +5,16 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import {ingredientPropTypes} from '../../../utils/dataPropTypes';
+import PropTypes from 'prop-types';
 
-export default function IngredientCard ({ingredient}) {
+export default function IngredientCard ({ingredient, onClick}) {
+  const onCartClick = (e) =>{
+    onClick(ingredient);
+    e.stopPropagation()
+  }
+  
   return (
-    <li className={styles.card}>
+    <li className={styles.card} onClick={onCartClick}>
       <Counter count={1} size='default' />
       <img className={`${styles.mainImage} ml-4 mr-4`} src={ingredient.image_large} alt={ingredient.name}/>
       <div className={`${styles.price} mt-1 mb-1`}>
@@ -25,5 +31,6 @@ export default function IngredientCard ({ingredient}) {
 };
 
 IngredientCard.propTypes = {
-  ingredient: ingredientPropTypes.isRequired
+  ingredient: ingredientPropTypes.isRequired,
+  onClick: PropTypes.func.isRequired
 }

@@ -1,8 +1,16 @@
 .modal{
-  background-color: green;
+  background-color: #1C1C21;
   margin: auto;
-  width: 600px;
-  height: 600px;
+  width: 640px;
+  /*height: 470px;*/
   max-width: 90%;
   max-height: 90%;
+  position: relative;
+  border-radius: 40px;
+}
+.close{
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  cursor: pointer;
 }

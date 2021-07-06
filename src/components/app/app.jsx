@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
 
-import './app.css';
+import styles from './app.module.css';
 
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from "../burger-constructor/burger-constructor";
-import Modal from "../modal/modal";
-import ModalOverlay from "../modal-overlay/modal-overlay";
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import Modal from '../modal/modal';
+import ModalIngredient from "../modal/modal-ingredient/modal-ingredient";
+import ModalOrderInfo from "../modal/modal-order-info/modal-order-info";
 
 const APIUrl = 'https://norma.nomoreparties.space/api/ingredients'
 
@@ -16,8 +17,21 @@ export default function App() {
     serverErrors: false,
     loading: true
   })
-  const[modal, manageModal] = React.useState(false)
+  const[modal, manageModal] = React.useState({isOpened:false, content: ''})
 
+  const handleModalClose = () => {
+    manageModal({...modal, isOpened: false})
+  }
+
+  const handleCardClick = (ingredient) => {
+    // @ts-ignore
+    manageModal({isOpened: true, content: <ModalIngredient ingredient={ingredient} />})
+  }
+  const handleOrderClick = () => {
+    const order = {number: '0345376'}
+    // @ts-ignore
+    manageModal({isOpened: true, content: <ModalOrderInfo order={order} />})
+  }
 
   const getIngredients = () => {
     fetch(APIUrl)
@@ -32,7 +46,7 @@ export default function App() {
 
   return (
     <>
-      <div className="App">
+      <div className={styles.app}>
         <AppHeader />
         <main>
           {data.loading || data.serverErrors
@@ -40,18 +54,16 @@ export default function App() {
               ? <div className='message'>Данные загружаются</div>
               : <div className='message'>Ошибка сервера</div>
             : <>
-                <BurgerIngredients ingredients={ data.ingredients } />
-                <BurgerConstructor ingredients={ data.ingredients } />
+                <BurgerIngredients ingredients={ data.ingredients } onClick={handleCardClick}/>
+                <BurgerConstructor ingredients={ data.ingredients } onClick={handleOrderClick}/>
               </>}
         </main>
       </div>
       {
-        modal &&
-            <ModalOverlay>
-              <Modal>Привет</Modal>
-            </ModalOverlay>
+        modal.isOpened &&
+          <Modal close={handleModalClose}>{modal.content}</Modal>
       }
 
     </>
   )
-};
+}
