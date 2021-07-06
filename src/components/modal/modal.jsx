@@ -1,6 +1,7 @@
-import styles from './modal.module.css'
+import styles from './modal.module.css';
 import React, {useEffect} from 'react';
-import closeIcon from '../../images/close-icon.png'
+import closeIcon from '../../images/close-icon.png';
+import ModalOverlay from './modal-overlay/modal-overlay';
 
 export default function Modal({ close, children}) {
   const closeOnEscape = (e) => {
@@ -17,9 +18,11 @@ export default function Modal({ close, children}) {
   
   
   return (
-    <div onClick={e=>e.stopPropagation()} className={`${styles.modal} p-10`}>
-      <img src={closeIcon} className={styles.close} onClick={close} alt='Закрыть'/>
-      {children}
-    </div>
+    <ModalOverlay close={close}>
+      <div onClick={e=>e.stopPropagation()} className={`${styles.modal} p-10`}>
+        <img src={closeIcon} className={styles.close} onClick={close} alt='Закрыть'/>
+        {children}
+      </div>
+    </ModalOverlay>
   )
 }

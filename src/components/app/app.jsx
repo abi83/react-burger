@@ -6,9 +6,7 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
-import ModalOverlay from '../modal/modal-overlay/modal-overlay';
 import ModalIngredient from "../modal/modal-ingredient/modal-ingredient";
-import {ingredientType} from '../../utils/dataPropTypes'
 import ModalOrderInfo from "../modal/modal-order-info/modal-order-info";
 
 const APIUrl = 'https://norma.nomoreparties.space/api/ingredients'
@@ -19,13 +17,13 @@ export default function App() {
     serverErrors: false,
     loading: true
   })
-  const[modal, manageModal] = React.useState({isOpened:false, content: typeof React.Component})
+  const[modal, manageModal] = React.useState({isOpened:false, content: ''})
 
   const handleModalClose = () => {
     manageModal({...modal, isOpened: false})
   }
 
-  const handleCardClick = (ingredient: typeof ingredientType) => {
+  const handleCardClick = (ingredient) => {
     // @ts-ignore
     manageModal({isOpened: true, content: <ModalIngredient ingredient={ingredient} />})
   }
@@ -63,9 +61,7 @@ export default function App() {
       </div>
       {
         modal.isOpened &&
-            <ModalOverlay close={handleModalClose}>
-              <Modal close={handleModalClose}>{modal.content}</Modal>
-            </ModalOverlay>
+          <Modal close={handleModalClose}>{modal.content}</Modal>
       }
 
     </>

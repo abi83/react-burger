@@ -5,6 +5,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import {ingredientPropTypes} from '../../../utils/dataPropTypes';
+import PropTypes from 'prop-types';
 
 export default function IngredientCard ({ingredient, onClick}) {
   const onCartClick = (e) =>{
@@ -30,5 +31,6 @@ export default function IngredientCard ({ingredient, onClick}) {
 };
 
 IngredientCard.propTypes = {
-  ingredient: ingredientPropTypes.isRequired
+  ingredient: ingredientPropTypes.isRequired,
+  onClick: PropTypes.func.isRequired
 }

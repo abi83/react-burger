@@ -29,4 +29,7 @@ export default function BurgerConstructor ({ingredients, onClick}){
   )
 }
 
-BurgerConstructor.propTypes = PropTypes.arrayOf(ingredientPropTypes).isRequired;
+BurgerConstructor.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+  onClick: PropTypes.func.isRequired
+}

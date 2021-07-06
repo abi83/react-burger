@@ -4,6 +4,7 @@ import Tabs from './tabs/tabs';
 import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../utils/dataPropTypes';
 import Section from './section/section';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
 
 export default function BurgerIngredients ({ingredients, onClick}) {
   const [state, setState] = useState({
@@ -38,4 +39,7 @@ export default function BurgerIngredients ({ingredients, onClick}) {
   )
 }
 
-BurgerIngredients.propTypes = PropTypes.arrayOf(ingredientPropTypes).isRequired;
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+  onClick: PropTypes.func.isRequired
+}

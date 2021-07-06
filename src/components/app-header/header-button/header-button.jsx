@@ -12,5 +12,6 @@ export default function HeaderButton({text, children}) {
 }
 
 HeaderButton.propTypes = {
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  children: PropTypes.element
 }

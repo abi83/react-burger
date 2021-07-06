@@ -20,11 +20,15 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .container{
   overflow: auto;
   overflow-x: hidden; /*BUG!!*/
+  display: flex;
+  flex-direction: column;
 }
 
 .container::-webkit-scrollbar {
