@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useReducer} from 'react';
 
 import styles from './app.module.css';
 
@@ -6,8 +6,9 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
-import ModalIngredient from "../modal/modal-ingredient/modal-ingredient";
-import ModalOrderInfo from "../modal/modal-order-info/modal-order-info";
+import ModalIngredient from '../modal/modal-ingredient/modal-ingredient';
+import ModalOrderInfo from '../modal/modal-order-info/modal-order-info';
+import {ConstructorContext} from '../../context/constructor-context'
 
 const APIUrl = 'https://norma.nomoreparties.space/api/ingredients'
 
@@ -32,17 +33,40 @@ export default function App() {
     // @ts-ignore
     manageModal({isOpened: true, content: <ModalOrderInfo order={order} />})
   }
+  
+  function selectedIngredientsReducer(state, action){
+    // blank function to add or remove item from selectedIngredients.
+    // bun validation is here!
+    switch (action.type) {
+      case 'set':
+        return action.value
+      case 'add':
+        return {state};
+      case 'delete':
+        return {state};
+      default:
+        throw new Error();
+    }
+  }
+  
+  const [selectedIngredients, selectedIngredientsDispatcher] = useReducer(selectedIngredientsReducer, data.ingredients, undefined);
+
 
   const getIngredients = () => {
     fetch(APIUrl)
       .then(response => response.json())
       .then(result => {
+      console.log('result');
         setData({...data, ingredients: result.data, loading: false})
       })
       .catch(() => setData({...data, loading: false, serverErrors: true}))
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(getIngredients,[])
+  useEffect(()=>{
+    selectedIngredientsDispatcher({type: 'set', value: data.ingredients})
+    console.log('effect',data);
+  }, [data])
 
   return (
     <>
@@ -55,7 +79,9 @@ export default function App() {
               : <div className='message'>Ошибка сервера</div>
             : <>
                 <BurgerIngredients ingredients={ data.ingredients } onClick={handleCardClick}/>
-                <BurgerConstructor ingredients={ data.ingredients } onClick={handleOrderClick}/>
+                <ConstructorContext.Provider value={{selectedIngredients, selectedIngredientsDispatcher}}>
+                  <BurgerConstructor onClick={handleOrderClick}/>
+                </ConstructorContext.Provider>
               </>}
         </main>
       </div>
