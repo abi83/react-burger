@@ -62,7 +62,7 @@ export default function App() {
       .catch(() => setData({...data, loading: false, serverErrors: true}))
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(getIngredients,[])
+  useEffect(getIngredients,[] )
   useEffect(()=>{
     selectedIngredientsDispatcher({type: 'set', value: data.ingredients})
     console.log('effect',data);
