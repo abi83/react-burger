@@ -50,7 +50,7 @@ export default function App() {
   }
   
   function selectedIngredientsReducer(state, action){
-    // blank function to add or remove items from selectedIngredients.
+    // blank function for adding or removing items from selectedIngredients
     switch (action.type) {
       case 'set':
         return action.value
