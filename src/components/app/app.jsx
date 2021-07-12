@@ -44,7 +44,7 @@ export default function App() {
             }
             return res})
         .then(res=>res.json())
-        .catch(error => console.log('error', error))
+        .catch(error => console.error('Fetch error: ', error))
     
     manageModal({isOpened: true, content: <ModalOrderInfo order={response.order} />})
   }
