@@ -13,7 +13,6 @@ import styles from './burger-constructor.module.css';
 
 export default function BurgerConstructor ({onClick}){
   const { selectedIngredients, selectedIngredientsDispatcher } = useContext(ConstructorContext);
-  console.log('input data',selectedIngredients);
   return (
     <section className='column pt-25'>
         <BunWrapper bun={selectedIngredients.find(el=>el.type==='bun')}>

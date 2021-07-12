@@ -13,11 +13,12 @@ import {ConstructorContext} from '../../context/constructor-context'
 const APIUrl = 'https://norma.nomoreparties.space/api/ingredients'
 
 export default function App() {
-  const[data, setData] = React.useState({
-    ingredients: [],
+  const[serverState, setServerState] = React.useState({
     serverErrors: false,
     loading: true
   })
+  const [ingredients, setIngredients] = React.useState([])
+  
   const[modal, manageModal] = React.useState({isOpened:false, content: ''})
 
   const handleModalClose = () => {
@@ -35,7 +36,7 @@ export default function App() {
   }
   
   function selectedIngredientsReducer(state, action){
-    // blank function to add or remove item from selectedIngredients.
+    // blank function to add or remove items from selectedIngredients.
     // bun validation is here!
     switch (action.type) {
       case 'set':
@@ -49,36 +50,35 @@ export default function App() {
     }
   }
   
-  const [selectedIngredients, selectedIngredientsDispatcher] = useReducer(selectedIngredientsReducer, data.ingredients, undefined);
+  const [selectedIngredients, selectedIngredientsDispatcher] = useReducer(selectedIngredientsReducer, ingredients, undefined);
 
 
   const getIngredients = () => {
     fetch(APIUrl)
       .then(response => response.json())
       .then(result => {
-      console.log('result');
-        setData({...data, ingredients: result.data, loading: false})
+        setIngredients(result.data);
+        setServerState({loading: false, serverErrors: false})
       })
-      .catch(() => setData({...data, loading: false, serverErrors: true}))
+      .catch(() => setServerState({loading: false, serverErrors: true}))
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(getIngredients,[] )
   useEffect(()=>{
-    selectedIngredientsDispatcher({type: 'set', value: data.ingredients})
-    console.log('effect',data);
-  }, [data])
+    selectedIngredientsDispatcher({type: 'set', value: ingredients})
+  }, [ingredients])
 
   return (
     <>
       <div className={styles.app}>
         <AppHeader />
         <main>
-          {data.loading || data.serverErrors
-            ? data.loading
+          {serverState.loading || serverState.serverErrors
+            ? serverState.loading
               ? <div className='message'>Данные загружаются</div>
               : <div className='message'>Ошибка сервера</div>
             : <>
-                <BurgerIngredients ingredients={ data.ingredients } onClick={handleCardClick}/>
+                <BurgerIngredients ingredients={ ingredients } onClick={handleCardClick}/>
                 <ConstructorContext.Provider value={{selectedIngredients, selectedIngredientsDispatcher}}>
                   <BurgerConstructor onClick={handleOrderClick}/>
                 </ConstructorContext.Provider>
