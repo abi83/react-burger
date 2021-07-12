@@ -1,9 +1,9 @@
 import styles from './modal-order.module.css';
 import React from 'react';
+import PropTypes from 'prop-types';
 import orderAcceptedIcon from '../../../images/order_accepted.svg';
 
 export default function ModalOrderInfo ({order}) {
- 
   return (
     <div className={`${styles.card} pt-10 pb-10`}>
       <h3 className='pt-3 text text_type_digits-large'>{order.number}</h3>
@@ -14,3 +14,9 @@ export default function ModalOrderInfo ({order}) {
     </div>
   )
 };
+
+ModalOrderInfo.propTypes = {
+  onClick: PropTypes.exact({
+    number: PropTypes.number
+  }),
+}

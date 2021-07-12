@@ -7,6 +7,10 @@ import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 
 export default function BunWrapper({bun, children}){
+  if (bun.type!=='bun') {
+    throw new Error('Give only bun into BunWrapper');
+  }
+  
   
   return(
     <>

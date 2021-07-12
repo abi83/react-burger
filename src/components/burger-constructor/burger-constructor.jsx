@@ -13,6 +13,7 @@ import styles from './burger-constructor.module.css';
 
 export default function BurgerConstructor ({onClick}){
   const { selectedIngredients, selectedIngredientsDispatcher } = useContext(ConstructorContext);
+  const totalPrice = selectedIngredients.reduce((acc,el)=>acc+el.price, 0);
   return (
     <section className='column pt-25'>
         <BunWrapper bun={selectedIngredients.find(el=>el.type==='bun')}>
@@ -20,7 +21,7 @@ export default function BurgerConstructor ({onClick}){
         </BunWrapper>
         <div className={`${styles.price} pt-4 pb-4`}>
           <span className='text text_type_digits-medium'>
-            {6789}
+            {totalPrice}
           </span>
           <CurrencyIcon type="primary" />
           <Button type="primary" size="large" onClick={onClick}>
@@ -32,6 +33,5 @@ export default function BurgerConstructor ({onClick}){
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
   onClick: PropTypes.func.isRequired
 }

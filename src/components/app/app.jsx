@@ -29,15 +29,28 @@ export default function App() {
     // @ts-ignore
     manageModal({isOpened: true, content: <ModalIngredient ingredient={ingredient} />})
   }
-  const handleOrderClick = () => {
-    const order = {number: '0345376'}
+  const handleOrderClick = async (e) => {
+    const apiEndpoint = 'https://norma.nomoreparties.space/api/orders';
+    const ingredients = selectedIngredients.map(ing=>ing._id)
     // @ts-ignore
-    manageModal({isOpened: true, content: <ModalOrderInfo order={order} />})
+    const response = await fetch(apiEndpoint, {
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ingredients: ingredients})})
+        .then(res => {
+            if (!res.ok) {
+              console.log('Recieved response:', res)
+              throw new Error('Something is wrong with response: ', res)
+            }
+            return res})
+        .then(res=>res.json())
+        .catch(error => console.log('error', error))
+    
+    manageModal({isOpened: true, content: <ModalOrderInfo order={response.order} />})
   }
   
   function selectedIngredientsReducer(state, action){
     // blank function to add or remove items from selectedIngredients.
-    // bun validation is here!
     switch (action.type) {
       case 'set':
         return action.value
@@ -46,7 +59,7 @@ export default function App() {
       case 'delete':
         return {state};
       default:
-        throw new Error();
+        throw new Error('Actions "set", "add" and "delete" allowed only.');
     }
   }
   
