@@ -29,7 +29,7 @@ export default function App() {
     // @ts-ignore
     manageModal({isOpened: true, content: <ModalIngredient ingredient={ingredient} />})
   }
-  const handleOrderClick = async (e) => {
+  const handleOrderClick = async () => {
     const apiEndpoint = 'https://norma.nomoreparties.space/api/orders';
     const ingredients = selectedIngredients.map(ing=>ing._id)
     // @ts-ignore
