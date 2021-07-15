@@ -7,17 +7,19 @@ import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 
 export default function BunWrapper({bun, children}){
-  if (bun.type!=='bun') {
+  if (bun && bun.type!=='bun') {
     throw new Error('Give only bun into BunWrapper');
   }
   
   
   return(
-    <>
-      <ConstructorElement type='top' isLocked={true} text = {bun.name} thumbnail={bun.image} price={bun.price} />
-        {children}
-      <ConstructorElement type='bottom' isLocked={true} text = {bun.name} thumbnail={bun.image} price={bun.price} />
-    </>
+    bun
+      ? <>
+          <ConstructorElement type='top' isLocked={true} text = {bun.name} thumbnail={bun.image} price={bun.price} />
+            {children}
+          <ConstructorElement type='bottom' isLocked={true} text = {bun.name} thumbnail={bun.image} price={bun.price} />
+        </>
+      : <div>Выберите хотя бы одну булку</div>
   )
 }
 
