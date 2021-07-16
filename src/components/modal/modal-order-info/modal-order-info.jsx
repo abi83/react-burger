@@ -1,5 +1,5 @@
 import styles from './modal-order.module.css';
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import orderAcceptedIcon from '../../../images/order_accepted.svg';
 import {useSelector} from 'react-redux';

@@ -20,10 +20,11 @@ export default function IngredientCard({ingredient, onClick}) {
     return store.selectedIngredientsReducer
   })
   const count = [...inner, bun].reduce(
-      (acc,item) => item._id === ingredient._id
+      (acc,item) => {
+        return item && item._id === ingredient._id
         ? acc+1
-        : acc,
-      0)
+        : acc
+      }, 0)
   const [{opacity}, ref] = useDrag({
     type: 'ingredient',
     item: ingredient,
