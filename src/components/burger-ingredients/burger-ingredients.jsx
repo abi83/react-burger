@@ -2,7 +2,6 @@ import {useRef, useState} from 'react';
 import style from './burger-ingredients.module.css';
 import Tabs from './tabs/tabs';
 import PropTypes from 'prop-types';
-import {ingredientPropTypes} from '../../utils/dataPropTypes';
 import Section from './section/section';
 import {useSelector} from 'react-redux';
 

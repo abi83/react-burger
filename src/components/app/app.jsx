@@ -11,12 +11,14 @@ import ModalIngredient from '../modal/modal-ingredient/modal-ingredient';
 import ModalOrderInfo from '../modal/modal-order-info/modal-order-info';
 import {ADD_INGREDIENT, REMOVE_INGREDIENT} from '../../services/actions/burger-constructor'
 import {getIngredients} from '../../services/actions/burger-ingredients'
+import {placeOrder} from '../../services/actions/order'
 
 export default function App() {
   
   const dispatch = useDispatch();
 
   const {ingredientsRequest, ingredientsFailed} = useSelector(store=>store.ingredientsReducer)
+  const {inner, bun} = useSelector(store=>{return store.selectedIngredientsReducer})
   
   const[modal, manageModal] = React.useState({isOpened:false, content: null})
 
@@ -35,29 +37,16 @@ export default function App() {
     dispatch({type: REMOVE_INGREDIENT, item: ingredient})
   }
   
-  const handleOrderClick = async () => {
-    // const apiEndpoint = 'https://norma.nomoreparties.space/api/orders';
-    // if (!selectedIngredients.bun) {
-    //   manageModal({isOpened: true, content: 'Добавьте хотя бы одну булку!'})
-    //   return
-    // }
-    //
-    // const ingredients = [...selectedIngredients.inner.map(ing=>ing._id),
-    //                         selectedIngredients.bun._id]
-    // const response = await fetch(apiEndpoint, {
-    //   method:'POST',
-    //   headers: {'Content-Type': 'application/json'},
-    //   body: JSON.stringify({ingredients: ingredients})})
-    //     .then(res => {
-    //         if (!res.ok) {
-    //           console.log('Recieved response:', res)
-    //           throw new Error(`Something is wrong with response: ${res}`)
-    //         }
-    //         return res})
-    //     .then(res=>res.json())
-    //     .catch(error => console.error('Fetch error: ', error))
+  const handleOrderClick = () => {
+    if (!bun) {
+      manageModal({isOpened: true, content: 'Добавьте хотя бы одну булку!'})
+      return
+    }
     
-    manageModal({isOpened: true, content: <ModalOrderInfo order={{number: 999}} />})
+    const ingredients = [...inner.map(ing=>ing._id),
+                            bun._id]
+    dispatch(placeOrder(ingredients));
+    manageModal({isOpened: true, content: <ModalOrderInfo />})
   }
   
   useEffect(()=>{
@@ -75,9 +64,7 @@ export default function App() {
               : <div className='message'>Ошибка сервера</div>
             : <>
                 <BurgerIngredients onClick={handleCardClick}/>
-                {/*<ConstructorContext.Provider value={{selectedIngredients, selectedIngredientsDispatcher}}>*/}
-                  <BurgerConstructor onClick={handleOrderClick} onDeleteClick={handleDeleteClick}/>
-                {/*</ConstructorContext.Provider>*/}
+                <BurgerConstructor onClick={handleOrderClick} onDeleteClick={handleDeleteClick}/>
               </>}
         </main>
       </div>
@@ -85,7 +72,6 @@ export default function App() {
         modal.isOpened &&
           <Modal close={handleModalClose}>{modal.content}</Modal>
       }
-
     </>
   )
 }

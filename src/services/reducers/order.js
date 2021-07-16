@@ -5,7 +5,7 @@ import {
 } from '../actions/order';
 
 const initialState = {
-  order: null,
+  order: {number: '???'},
   orderRequest: false,
   orderFailed: false
 };
