@@ -1,4 +1,5 @@
 import React, {useEffect, useReducer} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './app.module.css';
 
@@ -10,13 +11,18 @@ import ModalIngredient from '../modal/modal-ingredient/modal-ingredient';
 import ModalOrderInfo from '../modal/modal-order-info/modal-order-info';
 import {ConstructorContext} from '../../context/constructor-context';
 import {ADD_INGREDIENT, REMOVE_INGREDIENT} from '../../services/actions/burger-constructor'
+import {getIngredients} from '../../services/actions/burger-ingredients'
 
 export default function App() {
-  const[serverState, setServerState] = React.useState({
-    serverErrors: false,
-    loading: true
-  })
-  const [ingredients, setIngredients] = React.useState([])
+  // const[serverState, setServerState] = React.useState({
+  //   serverErrors: false,
+  //   loading: true
+  // })
+  // const [ingredients, setIngredients] = React.useState([])
+  
+  const dispatch = useDispatch();
+
+  const {ingredients, ingredientsRequest, ingredientsFailed} = useSelector(store=>store.ingredients)
   
   const[modal, manageModal] = React.useState({isOpened:false, content: null})
 
@@ -80,33 +86,17 @@ export default function App() {
 
   const [selectedIngredients, selectedIngredientsDispatcher] = useReducer(selectedIngredientsReducer, {bun: null, inner: []}, undefined);
 
-  const getIngredients = () => {
-    const apiEndpoint = 'https://norma.nomoreparties.space/api/ingredients'
-
-    fetch(apiEndpoint)
-      .then(response => {
-            if (response.ok) {
-              return response;
-            }
-            return Promise.reject(response.status);
-      })
-      .then(res=>res.json())
-      .then(result => {
-          setIngredients(result.data);
-          setServerState({loading: false, serverErrors: false})
-        })
-      .catch(() => setServerState({loading: false, serverErrors: true}))
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(getIngredients,[] )
+  useEffect(()=>{
+    dispatch(getIngredients());
+    },[dispatch] )
 
   return (
     <>
       <div className={styles.app}>
         <AppHeader />
         <main>
-          {serverState.loading || serverState.serverErrors
-            ? serverState.loading
+          {ingredientsRequest || ingredientsFailed
+            ? ingredientsRequest
               ? <div className='message'>Данные загружаются</div>
               : <div className='message'>Ошибка сервера</div>
             : <>
