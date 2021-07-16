@@ -4,8 +4,11 @@ import Tabs from './tabs/tabs';
 import PropTypes from 'prop-types';
 import {ingredientPropTypes} from '../../utils/dataPropTypes';
 import Section from './section/section';
+import {useSelector} from 'react-redux';
 
-export default function BurgerIngredients ({ingredients, onClick}) {
+export default function BurgerIngredients ({onClick}) {
+  const {ingredients} = useSelector(store=>store.ingredients)
+
   const [state, setState] = useState({
       activeTab: 'bun',
       tabs: [
@@ -39,6 +42,6 @@ export default function BurgerIngredients ({ingredients, onClick}) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+  // ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
   onClick: PropTypes.func.isRequired
 }
