@@ -8,7 +8,10 @@ import {
 import BunWrapper from './bun-wrapper/bun-wrapper';
 import InnerIngredients from './inner-ingredients/inner-ingredients';
 import styles from './burger-constructor.module.css';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {useDrop} from 'react-dnd';
+import {ADD_INGREDIENT} from '../../services/actions/burger-constructor';
+
 
 export default function BurgerConstructor ({onClick, onDeleteClick}){
   const {inner, bun} = useSelector(store=>{
@@ -17,8 +20,21 @@ export default function BurgerConstructor ({onClick, onDeleteClick}){
   let totalPrice = inner.reduce((acc,el)=>acc+el.price, 0)
   if (bun) {totalPrice += (2 * bun.price)}
 
+  const dispatch = useDispatch()
+  
+  const [{ isHover }, dropTarget] = useDrop({
+    accept: 'ingredient',
+    collect: monitor => ({
+      isHover: monitor.isOver()
+    }),
+    drop(item){
+      dispatch({type: ADD_INGREDIENT, item: item})
+    }
+  });
+  const className = `column pt-25 + ${isHover? styles.dropable: ''}`
+  
   return (
-    <section className='column pt-25'>
+    <section className={className} ref={dropTarget}>
         <BunWrapper bun={bun}>
           <InnerIngredients items={inner} onDeleteClick={onDeleteClick} />
         </BunWrapper>
