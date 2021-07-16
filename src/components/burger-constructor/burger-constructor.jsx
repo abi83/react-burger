@@ -1,24 +1,28 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
-import {ingredientPropTypes} from '../../utils/dataPropTypes';
 
 import {
   Button,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import BunWrapper from './bun-wrapper/bun-wrapper';
+import InnerIngredients from './inner-ingredients/inner-ingredients';
+import {ConstructorContext} from '../../context/constructor-context'
 import styles from './burger-constructor.module.css';
 
-export default function BurgerConstructor ({ingredients, onClick}){
+export default function BurgerConstructor ({onClick, onDeleteClick}){
+  const { selectedIngredients } = useContext(ConstructorContext);
+  let totalPrice = selectedIngredients.inner.reduce((acc,el)=>acc+el.price, 0)
+  if (selectedIngredients.bun) {totalPrice += (2 * selectedIngredients.bun.price)}
+
   return (
     <section className='column pt-25'>
-        <BunWrapper
-            bun={ingredients.find(el=>el.type==='bun')}
-            items={ingredients.filter(el=>el.type!=='bun')}
-        />
+        <BunWrapper bun={selectedIngredients.bun}>
+          <InnerIngredients items={selectedIngredients.inner} onDeleteClick={onDeleteClick} />
+        </BunWrapper>
         <div className={`${styles.price} pt-4 pb-4`}>
           <span className='text text_type_digits-medium'>
-            {6789}
+            {totalPrice}
           </span>
           <CurrencyIcon type="primary" />
           <Button type="primary" size="large" onClick={onClick}>
@@ -30,6 +34,5 @@ export default function BurgerConstructor ({ingredients, onClick}){
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
   onClick: PropTypes.func.isRequired
 }
