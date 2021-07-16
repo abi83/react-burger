@@ -10,6 +10,7 @@ import Modal from '../modal/modal';
 import ModalIngredient from '../modal/modal-ingredient/modal-ingredient';
 import ModalOrderInfo from '../modal/modal-order-info/modal-order-info';
 import {ADD_INGREDIENT, REMOVE_INGREDIENT} from '../../services/actions/burger-constructor'
+import {OPEN_DETAIL_INGREDIENT, CLOSE_DETAIL_INGREDIENT} from '../../services/actions/ingredient-detail'
 import {getIngredients} from '../../services/actions/burger-ingredients'
 import {placeOrder} from '../../services/actions/order'
 
@@ -24,12 +25,14 @@ export default function App() {
 
   const handleModalClose = () => {
     manageModal({...modal, isOpened: false})
+    dispatch({type: CLOSE_DETAIL_INGREDIENT})
   }
 
   const handleCardClick = (ingredient) => {
+    dispatch({type: OPEN_DETAIL_INGREDIENT, item: ingredient})
     manageModal({
       isOpened: true,
-      content: <ModalIngredient ingredient={ingredient} />})
+      content: <ModalIngredient />})
     dispatch({type: ADD_INGREDIENT, item: ingredient})
   }
   
@@ -42,7 +45,6 @@ export default function App() {
       manageModal({isOpened: true, content: 'Добавьте хотя бы одну булку!'})
       return
     }
-    
     const ingredients = [...inner.map(ing=>ing._id),
                             bun._id]
     dispatch(placeOrder(ingredients));
