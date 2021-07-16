@@ -9,7 +9,6 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
 import ModalIngredient from '../modal/modal-ingredient/modal-ingredient';
 import ModalOrderInfo from '../modal/modal-order-info/modal-order-info';
-// import {ConstructorContext} from '../../context/constructor-context';
 import {ADD_INGREDIENT, REMOVE_INGREDIENT} from '../../services/actions/burger-constructor'
 import {getIngredients} from '../../services/actions/burger-ingredients'
 
@@ -17,7 +16,7 @@ export default function App() {
   
   const dispatch = useDispatch();
 
-  const {ingredientsRequest, ingredientsFailed} = useSelector(store=>store.ingredients)
+  const {ingredientsRequest, ingredientsFailed} = useSelector(store=>store.ingredientsReducer)
   
   const[modal, manageModal] = React.useState({isOpened:false, content: null})
 
@@ -61,8 +60,6 @@ export default function App() {
     manageModal({isOpened: true, content: <ModalOrderInfo order={{number: 999}} />})
   }
   
-  // const [selectedIngredients, selectedIngredientsDispatcher] = useReducer(selectedIngredientsReducer, {bun: null, inner: []}, undefined);
-
   useEffect(()=>{
     dispatch(getIngredients());
     },[dispatch] )

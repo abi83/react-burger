@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -7,16 +7,13 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import BunWrapper from './bun-wrapper/bun-wrapper';
 import InnerIngredients from './inner-ingredients/inner-ingredients';
-// import {ConstructorContext} from '../../context/constructor-context'
 import styles from './burger-constructor.module.css';
 import {useSelector} from 'react-redux';
 
 export default function BurgerConstructor ({onClick, onDeleteClick}){
   const {inner, bun} = useSelector(store=>{
-    // console.log('In CONSTRUCTOR Selector!', store);
-    return store.constructor
+    return store.selectedIngredientsReducer
   })
-  // const { selectedIngredients } = useContext(ConstructorContext);
   let totalPrice = inner.reduce((acc,el)=>acc+el.price, 0)
   if (bun) {totalPrice += (2 * bun.price)}
 

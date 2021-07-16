@@ -7,7 +7,7 @@ import Section from './section/section';
 import {useSelector} from 'react-redux';
 
 export default function BurgerIngredients ({onClick}) {
-  const {ingredients} = useSelector(store=>store.ingredients)
+  const {ingredients} = useSelector(store=>store.ingredientsReducer)
 
   const [state, setState] = useState({
       activeTab: 'bun',
@@ -42,6 +42,5 @@ export default function BurgerIngredients ({onClick}) {
 }
 
 BurgerIngredients.propTypes = {
-  // ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
   onClick: PropTypes.func.isRequired
 }

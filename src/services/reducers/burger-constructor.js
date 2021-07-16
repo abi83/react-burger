@@ -7,7 +7,6 @@ const initialState = {
 
 
 export const selectedIngredientsReducer= (state=initialState, action) => {
-  console.log('In REDUCER', state, action);
   switch (action.type) {
     case ADD_INGREDIENT:{
       if (action.item.type === 'bun') {
@@ -16,10 +15,8 @@ export const selectedIngredientsReducer= (state=initialState, action) => {
       return {...state, inner: [...state.inner, action.item]};
     }
     case REMOVE_INGREDIENT:{
-      console.log('Remove!', action);
       return {...state, inner: state.inner.filter(item=>item._id !== action.item._id)};
     }
-    case '@@INIT':{return initialState} //TODO: Fix it!
     default: {
       return state;
     }
