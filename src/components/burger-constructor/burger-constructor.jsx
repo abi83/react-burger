@@ -32,7 +32,6 @@ export default function BurgerConstructor ({onClick, onDeleteClick}){
     }
   });
   const className = `column pt-25 + ${isHover? styles.dropable: ''}`
-  
   return (
     <section className={className} ref={dropTarget}>
         <BunWrapper bun={bun}>

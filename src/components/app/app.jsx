@@ -45,7 +45,7 @@ export default function App() {
       isOpened: true,
       content: <ModalIngredient/>,
     });
-    dispatch({type: ADD_INGREDIENT, item: ingredient});
+    // dispatch({type: ADD_INGREDIENT, item: ingredient});
   };
   
   const handleDeleteClick = (ingredient) => {

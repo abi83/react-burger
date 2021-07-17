@@ -1,36 +1,43 @@
-import {
-  ConstructorElement,
-  DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
-
-import styles from './inner-ingredients.module.css';
+import update from 'immutability-helper';
+import {useDrop} from 'react-dnd';
+import DropableCard from './dropable-card';
 import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 
-export default function InnerIngredients({items, onDeleteClick}){
-  items.forEach(el =>
-    {if (el.type==='bun') {throw new Error('No \'buns\' in InnerIngredients allowed!');}
-  })
+export default function InnerIngredients({items, onDeleteClick}) {
+  items.forEach(el => {
+    if (el.type === 'bun') {
+      throw new Error('No \'buns\' in InnerIngredients allowed!');
+    }
+  });
+  const [cards, setCards] = useState(items);
+  const findCard = useCallback((id) => {
+    const card = cards.filter((c) => `${c._id}` === id)[0];
+    return {
+      card,
+      index: cards.indexOf(card),
+    };
+  }, [cards]);
+  const moveCard = useCallback((id, atIndex) => {
+    const {card, index} = findCard(id);
+    setCards(update(cards, {
+      $splice: [[index, 1], [atIndex, 0, card]],
+    }));
+  }, [findCard, cards, setCards]);
+  const [, drop] = useDrop(() => ({accept: 'dropable-card'}));
   
-  return(
-    <div className='container'>
-      {items.map((el,index) =>
-        <div key={`${el._id}_${index}`} className={styles.row}>
-          <DragIcon type='primary' />
-          <ConstructorElement
-            isLocked={false}
-            text ={el.name}
-            handleClose={(e)=>{onDeleteClick(el); e.stopPropagation()}}
-            thumbnail={el.image}
-            price={el.price}
-          />
-        </div>
-      )}
-    </div>
-  )
+  return (
+      <div className='container' ref={drop}>
+        {items.map((el, index) =>
+            <DropableCard key={`${el._id}_${index}`} ingredient={el}
+                          onDeleteClick={onDeleteClick} moveCard={moveCard}
+                          findCard={findCard}/>,
+        )}
+      </div>
+  );
 }
 
 InnerIngredients.propTypes = {
   items: PropTypes.arrayOf(ingredientPropTypes),
-}
+};
