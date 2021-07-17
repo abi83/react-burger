@@ -12,10 +12,11 @@ export const selectedIngredientsReducer= (state=initialState, action) => {
       if (action.item.type === 'bun') {
         return {...state, bun: action.item};
       }
-      return {...state, inner: [...state.inner, action.item]};
+      const index = state.inner.length
+      return {...state, inner: [...state.inner, {...action.item, id: action.item._id + index}]};
     }
     case REMOVE_INGREDIENT:{
-      return {...state, inner: state.inner.filter(item=>item._id !== action.item._id)};
+      return {...state, inner: state.inner.filter(item=>item.id !== action.item.id)};
     }
     default: {
       return state;

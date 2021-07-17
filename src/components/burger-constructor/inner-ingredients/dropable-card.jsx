@@ -7,7 +7,7 @@ import {
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export default function DropableCard({moveCard, findCard, ingredient, onDeleteClick, key}) {
+export default function DropableCard({moveCard, findCard, ingredient, onDeleteClick}) {
   const originalIndex = findCard(ingredient._id).index;
   const [{ isDragging }, drag] = useDrag(() => ({
       type: 'dropable-card',
