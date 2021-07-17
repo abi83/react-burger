@@ -17,7 +17,7 @@ export const InnerIngredients = memo(
         setCards(items);
       }, [items]);
       const findCard = useCallback((id) => {
-        const card = cards.filter((c) => `${c._id}` === id)[0];
+        const card = cards.filter((c) => `${c.id}` === id)[0];
         return {
           card,
           index: cards.indexOf(card),

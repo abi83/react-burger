@@ -13,10 +13,10 @@ export default function DropableCard({
                                        ingredient,
                                        onDeleteClick,
                                      }) {
-  const originalIndex = findCard(ingredient._id).index;
+  const originalIndex = findCard(ingredient.id).index;
   const [{isDragging}, drag] = useDrag(() => ({
     type: 'dropable-card',
-    item: {id: ingredient._id, originalIndex},
+    item: {id: ingredient.id, originalIndex},
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -32,8 +32,8 @@ export default function DropableCard({
     accept: 'dropable-card',
     canDrop: () => false,
     hover({id: draggedId}) {
-      if (draggedId !== ingredient._id) {
-        const {index: overIndex} = findCard(ingredient._id);
+      if (draggedId !== ingredient.id) {
+        const {index: overIndex} = findCard(ingredient.id);
         moveCard(draggedId, overIndex);
       }
     },
