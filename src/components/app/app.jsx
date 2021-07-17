@@ -12,7 +12,6 @@ import Modal from '../modal/modal';
 import ModalIngredient from '../modal/modal-ingredient/modal-ingredient';
 import ModalOrderInfo from '../modal/modal-order-info/modal-order-info';
 import {
-  ADD_INGREDIENT,
   REMOVE_INGREDIENT,
 } from '../../services/actions/burger-constructor';
 import {
@@ -45,7 +44,6 @@ export default function App() {
       isOpened: true,
       content: <ModalIngredient/>,
     });
-    // dispatch({type: ADD_INGREDIENT, item: ingredient});
   };
   
   const handleDeleteClick = (ingredient) => {

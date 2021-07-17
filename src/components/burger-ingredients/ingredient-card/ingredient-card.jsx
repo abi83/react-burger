@@ -16,15 +16,15 @@ export default function IngredientCard({ingredient, onClick}) {
     onClick(ingredient);
     e.stopPropagation();
   };
-  const {inner, bun} = useSelector(store=>{
-    return store.selectedIngredientsReducer
-  })
+  const {inner, bun} = useSelector(store => {
+    return store.selectedIngredientsReducer;
+  });
   const count = [...inner, bun].reduce(
-      (acc,item) => {
+      (acc, item) => {
         return item && item._id === ingredient._id
-        ? acc+1
-        : acc
-      }, 0)
+            ? acc + 1
+            : acc;
+      }, 0);
   const [{opacity}, ref] = useDrag({
     type: 'ingredient',
     item: ingredient,
@@ -34,7 +34,8 @@ export default function IngredientCard({ingredient, onClick}) {
   });
   
   return (
-      <li className={styles.card} onClick={onCartClick} ref={ref} style = {{opacity}}>
+      <li className={styles.card} onClick={onCartClick} ref={ref}
+          style={{opacity}}>
         <Counter count={count} size='default'/>
         <img className={`${styles.mainImage} ml-4 mr-4`}
              src={ingredient.image_large} alt={ingredient.name}/>
