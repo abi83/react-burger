@@ -7,7 +7,7 @@ import {
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export default function DropableCard({moveCard, findCard, ingredient, onDeleteClick}) {
+export default function DropableCard({moveCard, findCard, ingredient, onDeleteClick, key}) {
   const originalIndex = findCard(ingredient._id).index;
   const [{ isDragging }, drag] = useDrag(() => ({
       type: 'dropable-card',
@@ -36,7 +36,10 @@ export default function DropableCard({moveCard, findCard, ingredient, onDeleteCl
   const opacity = isDragging ? 0 : 1;
   
   return(
-    <div className={styles.row} ref={(node) => drag(drop(node))} style={{opacity}}>
+    <div className={styles.row}
+         ref={(node) => drag(drop(node))}
+         style={{opacity}}
+        >
       <DragIcon type='primary' />
       <ConstructorElement
         isLocked={false}

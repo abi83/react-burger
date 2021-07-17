@@ -1,17 +1,20 @@
-import React, {useCallback, useState} from 'react';
-import PropTypes from 'prop-types';
+import React, {memo, useCallback, useEffect, useState} from 'react';
+import PropTypes, {func} from 'prop-types';
 import update from 'immutability-helper';
 import {useDrop} from 'react-dnd';
 import DropableCard from './dropable-card';
 import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 
-export default function InnerIngredients({items, onDeleteClick}) {
+export const InnerIngredients = memo(function InnerIngredients({items, onDeleteClick}) {
   items.forEach(el => {
     if (el.type === 'bun') {
       throw new Error('No \'buns\' in InnerIngredients allowed!');
     }
   });
   const [cards, setCards] = useState(items);
+  useEffect(()=>{
+    setCards(items)
+  }, [items])
   const findCard = useCallback((id) => {
     const card = cards.filter((c) => `${c._id}` === id)[0];
     return {
@@ -21,6 +24,7 @@ export default function InnerIngredients({items, onDeleteClick}) {
   }, [cards]);
   const moveCard = useCallback((id, atIndex) => {
     const {card, index} = findCard(id);
+    console.log(atIndex, index);
     setCards(update(cards, {
       $splice: [[index, 1], [atIndex, 0, card]],
     }));
@@ -29,14 +33,16 @@ export default function InnerIngredients({items, onDeleteClick}) {
   
   return (
       <div className='container' ref={drop}>
-        {items.map((el, index) =>
-            <DropableCard key={`${el._id}_${index}`} ingredient={el}
-                          onDeleteClick={onDeleteClick} moveCard={moveCard}
-                          findCard={findCard}/>,
+        {cards.map((el, index) =>
+          <DropableCard key={`${el._id}_${index}`} ingredient={el}
+                        onDeleteClick={onDeleteClick}
+                        moveCard={moveCard}
+                        findCard={findCard}
+          />,
         )}
       </div>
   );
-}
+})
 
 InnerIngredients.propTypes = {
   items: PropTypes.arrayOf(ingredientPropTypes),

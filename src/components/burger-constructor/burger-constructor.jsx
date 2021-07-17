@@ -6,7 +6,7 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import BunWrapper from './bun-wrapper/bun-wrapper';
-import InnerIngredients from './inner-ingredients/inner-ingredients';
+import {InnerIngredients} from './inner-ingredients/inner-ingredients';
 import styles from './burger-constructor.module.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {useDrop} from 'react-dnd';
