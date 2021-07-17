@@ -3,3 +3,48 @@
   justify-content: center;
   font-family: 'Jet Brains Mono', Arial, sans-serif;
 }
+
+@font-face {
+  /*src: url(./fonts/JetBrainsMono/JetBrainsMono-Regular.woff2) format('woff2');*/
+  src: url(/src/fonts/JetBrainsMono/JetBrainsMono-Regular.woff2) format('woff2');
+  font-family: 'Jet Brains Mono';
+  font-weight: normal;
+  font-display: swap;
+}
+
+/*@font-face {*/
+/*  src: url(./fonts/JetBrainsMono/JetBrainsMono-Regular.woff) format('woff');*/
+/*  font-family: 'Jet Brains Mono';*/
+/*  font-weight: normal;*/
+/*  font-display: swap;*/
+/*}*/
+
+@font-face {
+  /*src: url(./fonts/JetBrainsMono/JetBrainsMono-Bold.woff2) format('woff2');*/
+  src: url(/src/fonts/JetBrainsMono/JetBrainsMono-Bold.woff2) format('woff2');
+  font-family: 'Jet Brains Mono';
+  font-weight: bold;
+  font-display: swap;
+}
+
+/*@font-face {*/
+/*  src: url(./fonts/JetBrainsMono/JetBrainsMono-Bold.woff) format('woff');*/
+/*  font-family: 'Jet Brains Mono';*/
+/*  font-weight: bold;*/
+/*  font-display: swap;*/
+/*}*/
+
+@font-face {
+  /*src: url(./fonts/iceland/iceland.woff2) format('woff2');*/
+  src: url(/src/fonts/iceland/iceland.woff2) format('woff2');
+  font-family: 'Iceland';
+  font-weight: normal;
+  font-display: swap;
+}
+
+/*@font-face {*/
+/*  src: url(./fonts/iceland/iceland.woff) format('woff');*/
+/*  font-family: 'Iceland';*/
+/*  font-weight: normal;*/
+/*  font-display: swap;*/
+/*}*/
