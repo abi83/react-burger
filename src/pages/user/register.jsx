@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import styles from './login.module.css';
+import {fetchRegister} from "../../services/api";
 // import { useAuth } from '../services/auth';
 import {
   Button,
@@ -16,9 +17,12 @@ export function RegisterPage() {
   const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
-  const register = event =>{
+  const register = async event =>{
     event.preventDefault();
     console.log('Register', form)
+    const user = await fetchRegister(form)
+    console.log(user)
+    return (<Redirect to={{pathname: '/login/'}} />)
   }
 
   // if (auth.user) {

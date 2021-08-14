@@ -5,7 +5,7 @@ import {
   Button,
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {fetchPasswordReset} from "../../services/api";
+import {fetchCallPasswordReset} from "../../services/api";
 
 export function ForgotPassword() {
   // let auth = useAuth();
@@ -16,7 +16,7 @@ export function ForgotPassword() {
   };
   const reset = async event =>{
     event.preventDefault();
-    await fetchPasswordReset(form.email)
+    await fetchCallPasswordReset(form.email)
     return (<Redirect to={{pathname: '/reset-password/'}} />)
   }
 
