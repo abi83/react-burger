@@ -17,18 +17,19 @@ export function LoginPage() {
   const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
-  const register = event =>{
-    event.preventDefault();
-
-  }
-  // let login = useCallback(
-  //   e => {
-  //     e.preventDefault();
-  //     auth.signIn(form);
-  //   },
-  //   [auth, form]
-  // );
+  // const register = event =>{
+  //   event.preventDefault();
   //
+  // }
+  let login = useCallback(
+    e => {
+      e.preventDefault();
+      // auth.signIn(form);
+      console.log('Login', form)
+    },
+    // [auth, form]
+  );
+
   // if (auth.user) {
   //   return (
   //     <Redirect
@@ -58,19 +59,19 @@ export function LoginPage() {
             name="password"
             onChange={onChange}
           />
-          <Button onClick={()=>{console.log('CLICK')}} primary={true}>
+          <Button onClick={login} primary={true}>
             Войти
           </Button>
         </form>
         <p className={'text text_color_inactive mt-2'}>
           Вы - новый пользователь?
-          <Link to='/register' className={`${styles.link} pl-3`}>
+          <Link to='/register/' className={`${styles.link} pl-3`}>
             Зарегистрироваться
           </Link>
         </p>
         <p className={'text text_color_inactive mt-2'}>
           Забыли пароль
-          <Link to='forgot-password' className={`${styles.link} pl-3`}>
+          <Link to='/forgot-password/' className={`${styles.link} pl-3`}>
             Восстановить пароль
           </Link>
         </p>

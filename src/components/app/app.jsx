@@ -12,7 +12,10 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
 import ModalIngredient from '../modal/modal-ingredient/modal-ingredient';
 import ModalOrderInfo from '../modal/modal-order-info/modal-order-info';
-import {LoginPage} from "../../pages/login";
+import {LoginPage} from "../../pages/user/login";
+import {RegisterPage} from "../../pages/user/register";
+import {ResetPassword} from "../../pages/user/reset-password";
+import {ForgotPassword} from "../../pages/user/forgot-passwd";
 import {
   REMOVE_INGREDIENT,
 } from '../../services/actions/burger-constructor';
@@ -87,8 +90,17 @@ export default function App() {
                         </DndProvider>
                   }
               </Route>
-              <Route path="/login">
+              <Route path="/login/">
                 <LoginPage />
+              </Route>
+              <Route path="/register/">
+                <RegisterPage />
+              </Route>
+              <Route path="/forgot-password/">
+                <ForgotPassword />
+              </Route>
+              <Route path="/reset-password/">
+                <ResetPassword />
               </Route>
             </Switch>
           </Router>
