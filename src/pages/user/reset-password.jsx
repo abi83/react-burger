@@ -16,7 +16,7 @@ export function ResetPassword() {
   };
   const reset = event =>{
     event.preventDefault();
-    console.log('Register', form)
+    console.log('Reset', form)
   }
 
   // if (auth.user) {
@@ -48,7 +48,7 @@ export function ResetPassword() {
            className={styles.input}
            onChange={onChange} />
           <Button onClick={reset} primary={true}>
-            Зарегистрироваться
+            Восстановить
           </Button>
         </form>
         <p className={'text text_color_inactive mt-2'}>

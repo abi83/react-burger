@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styles from './login.module.css';
 import {
   Button,
   Input,
-  PasswordInput
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import {fetchPasswordReset} from "../../services/api";
 
 export function ForgotPassword() {
   // let auth = useAuth();
@@ -14,9 +14,10 @@ export function ForgotPassword() {
   const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
-  const reset = event =>{
+  const reset = async event =>{
     event.preventDefault();
-    console.log('Register', form)
+    await fetchPasswordReset(form.email)
+    return (<Redirect to={{pathname: '/reset-password/'}} />)
   }
 
   // if (auth.user) {
@@ -33,16 +34,15 @@ export function ForgotPassword() {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <h1 className={`text text_type_main mt-10 mb-5`}>Восстановление пароля</h1>
-
         <form className={styles.form}>
-          <Input placeholder="Введите код из письма"
+          <Input placeholder="Укажите email"
            type={'email'}
            value={form.email}
            name="email"
            className={styles.input}
            onChange={onChange} />
           <Button onClick={reset} primary={true}>
-            Зарегистрироваться
+            Восстановить
           </Button>
         </form>
         <p className={'text text_color_inactive mt-2'}>

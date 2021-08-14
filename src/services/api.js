@@ -32,6 +32,25 @@ export const fetchOrder = async (ingredients) => {
       console.error('Fetching ingredients Error', e)
       throw new Error(`Error while fetching order: ${e}`)
     })
-  
+}
+
+export const fetchPasswordReset = async (email) => {
+  const apiEndpoint = 'https://norma.nomoreparties.space/api/password-reset'
+  return await
+    fetch(apiEndpoint, {
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: email})})
+    .then(res => {
+        if (!res.ok) {
+          throw new Error(`Something is wrong with response: ${res}`)
+        }
+        console.log(res)
+        return res})
+    .then(res=>res.json())
+    .catch(e => {
+      console.error('Fetching ResettingPassword Error', e)
+      throw new Error(`Error while FetchingNewPassword order: ${e}`)
+    })
 
 }
