@@ -1,0 +1,17 @@
+.wrapper{
+    display: flex;
+    min-height: 80vh;
+    margin: auto;
+}
+.form div {
+    width: 100%;
+    flex: 0 10 100%;
+    margin: 12px auto;
+}
+.link{
+    color: #4c4cff;
+    text-decoration: none!important;
+}
+.container{
+    margin: auto;
+}

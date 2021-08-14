@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
@@ -11,6 +12,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
 import ModalIngredient from '../modal/modal-ingredient/modal-ingredient';
 import ModalOrderInfo from '../modal/modal-order-info/modal-order-info';
+import {LoginPage} from "../../pages/login";
 import {
   REMOVE_INGREDIENT,
 } from '../../services/actions/burger-constructor';
@@ -67,26 +69,35 @@ export default function App() {
   }, [dispatch]);
   
   return (
-      <>
-        <div className={styles.app}>
-          <AppHeader/>
+    <>
+      <div className={styles.app}>
+        <AppHeader/>
           <main>
-            {ingredientsRequest || ingredientsFailed
-                ? ingredientsRequest
-                    ? <div className='message'>Данные загружаются</div>
-                    : <div className='message'>Ошибка сервера</div>
-                : <DndProvider backend={HTML5Backend}>
-                    <BurgerIngredients onClick={handleCardClick}/>
-                    <BurgerConstructor onClick={handleOrderClick}
-                                       onDeleteClick={handleDeleteClick}/>
-                  </DndProvider>
-            }
+          <Router>
+            <Switch>
+              <Route path="/" exact={true}>
+                  {ingredientsRequest || ingredientsFailed
+                      ? ingredientsRequest
+                          ? <div className='message'>Данные загружаются</div>
+                          : <div className='message'>Ошибка сервера</div>
+                      : <DndProvider backend={HTML5Backend}>
+                          <BurgerIngredients onClick={handleCardClick}/>
+                          <BurgerConstructor onClick={handleOrderClick}
+                                             onDeleteClick={handleDeleteClick}/>
+                        </DndProvider>
+                  }
+              </Route>
+              <Route path="/login">
+                <LoginPage />
+              </Route>
+            </Switch>
+          </Router>
           </main>
-        </div>
-        {
-          modal.isOpened &&
-          <Modal close={handleModalClose}>{modal.content}</Modal>
-        }
-      </>
+      </div>
+      {
+        modal.isOpened &&
+        <Modal close={handleModalClose}>{modal.content}</Modal>
+      }
+    </>
   );
 }
