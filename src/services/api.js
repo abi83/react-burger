@@ -114,5 +114,4 @@ export const fetchLogin = async (formData) =>{
       console.error('Fetching login Error', e)
       throw new Error(`Error while fetching login: ${e}`)
     })
-
 }

@@ -13,9 +13,9 @@ export const refreshAccessToken = (refreshToken) => {
     dispatch({type: USER_CHECKOUT_REQUEST});
     fetchRefreshAccessToken(refreshToken)
     .then(res => {
-      console.log('DEBUG3', refreshToken)
+      console.log('DEBUG3', res)
       window.localStorage.setItem('refreshToken', res.refreshToken)
-      dispatch({type:UPDATE_USER, user: res.user})
+      // dispatch({type:UPDATE_USER, user: res.user})
       dispatch({type:REFRESH_ACCESS_TOKEN, accessToken: res.accessToken})})
     .catch(()=>dispatch({type: USER_REQUEST_FAILED}))
   };

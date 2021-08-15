@@ -9,10 +9,11 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
+import {authReducer} from '../../services/reducers/auth';
 
 
 export function ProfilePage() {
-  const [form, setValue] = useState({ name: '', email: '', password: '*****' });
+  const [form, setValue] = useState({ name: '', email: ''});
   const auth = useSelector(store => store.authReducer)
   const dispatch = useDispatch();
 
@@ -20,7 +21,7 @@ export function ProfilePage() {
     console.log('Auth inside effect', auth)
     if (auth.user){
       setValue(prevState => {
-        return {...prevState, name:auth.user.name, email: auth.user.email}
+        return {name:auth.user.name, email: auth.user.email}
       })
     }
   }, [auth])
