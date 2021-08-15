@@ -4,6 +4,7 @@ import {
   Logo,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import {Link} from "react-router-dom";
 
 import HeadButton from './header-button/header-button';
 import styles from './app-header.module.css';
@@ -23,11 +24,11 @@ export default function AppHeader () {
         <Logo />
       </div>
       <nav className={`${styles.menu} ${styles.menuRight}`}>
-        <a href={'/profile/'} className='resetted-link'>
+        <Link to='/profile/' className='resetted-link'>
           <HeadButton text='Личный кабинет'>
             <ProfileIcon type='secondary' />
           </HeadButton>
-        </a>
+        </Link>
       </nav>
     </header>
   )

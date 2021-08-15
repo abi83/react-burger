@@ -6,7 +6,7 @@ import {refreshAccessToken} from "../../services/actions/auth";
 import {
   Button,
   Input,
-  PasswordInput
+  PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
 
@@ -61,7 +61,7 @@ export function ProfilePage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.menu}>
-        <h1 className={`text text_type_main mt-10 mb-5`}>Регистрация</h1>
+        <h1 className={`text text_type_main mt-10 mb-5`}>Профайл</h1>
         <p className={'text text_color_inactive mt-2'}>
           В этом разделе вы можете сменить свои персональные данные
         </p>
@@ -69,25 +69,30 @@ export function ProfilePage() {
       <div className={styles.form}>
         <form className={styles.form}>
           <Input placeholder="Имя"
+                 icon="EditIcon"
                  type={'text'}
                  value={form.name}
                  name="name"
                  className={styles.input}
                  onChange={onChange} />
           <Input placeholder="Логин"
-             type={'email'}
-             value={form.email}
-             name="email"
-             className={styles.input}
-             onChange={onChange} />
+                 icon="EditIcon"
+                 type={'email'}
+                 value={form.email}
+                 name="email"
+                 className={styles.input}
+                 onChange={onChange} />
           <PasswordInput
             placeholder="Пароль"
             value={form.password}
             name="password"
             onChange={onChange}
           />
-          <Button onClick={updateProfile} primary={true}>
-            Зарегистрироваться
+          <Button onClick={updateProfile} type={'secondary'}>
+            Отменить
+          </Button>
+          <Button onClick={updateProfile} type={'primary'}>
+            Обновить
           </Button>
         </form>
       </div>

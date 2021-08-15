@@ -75,9 +75,9 @@ export default function App() {
   return (
     <>
       <div className={styles.app}>
+        <Router>
         <AppHeader/>
           <main>
-          <Router>
             <Switch>
               <Route path="/" exact={true}>
                   {ingredientsRequest || ingredientsFailed
@@ -107,8 +107,8 @@ export default function App() {
                 <ProfilePage />
               </Route>
             </Switch>
-          </Router>
           </main>
+        </Router>
       </div>
       {
         modal.isOpened &&

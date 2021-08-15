@@ -75,6 +75,7 @@ export const fetchRegister = async (userData) => {
 
 export const fetchRefreshAccessToken = async (refreshToken) =>{
   const apiEndpoint = 'https://norma.nomoreparties.space/api/auth/token'
+  console.log('DEBUG3', window.localStorage.getItem('refreshToken'));
   return await
     fetch(apiEndpoint, {
       method:'POST',
@@ -86,7 +87,9 @@ export const fetchRefreshAccessToken = async (refreshToken) =>{
         }
         return res})
     .then(res=>{
-        return res.json()})
+        const a = res.json()
+        console.log('DEBUG4', a)
+        return a})
     .catch(e => {
       console.error('Fetching refreshAccessToken Error', e)
       throw new Error(`Error while Fetching refreshAccessToken: ${e}`)
