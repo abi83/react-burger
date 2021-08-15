@@ -45,19 +45,16 @@ export const fetchCallPasswordReset = async (email) => {
         if (!res.ok) {
           throw new Error(`Something is wrong with response: ${res}`)
         }
-        console.log(res)
         return res})
     .then(res=>res.json())
     .catch(e => {
       console.error('Fetching ResettingPassword Error', e)
       throw new Error(`Error while Fetching New Password Call: ${e}`)
     })
-
 }
 
 export const fetchRegister = async (userData) => {
   const apiEndpoint = 'https://norma.nomoreparties.space/api/auth/register'
-    console.log('UserData',userData)
   return await
     fetch(apiEndpoint, {
       method:'POST',
@@ -69,11 +66,29 @@ export const fetchRegister = async (userData) => {
         }
         return res})
     .then(res=>{
-        console.log(res)
         return res.json()})
     .catch(e => {
       console.error('Fetching NewUser Error', e)
       throw new Error(`Error while Fetching new user: ${e}`)
     })
+}
 
+export const fetchRefreshAccessToken = async (refreshToken) =>{
+  const apiEndpoint = 'https://norma.nomoreparties.space/api/auth/token'
+  return await
+    fetch(apiEndpoint, {
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({token: refreshToken})})
+    .then(res => {
+        if (!res.ok) {
+          throw new Error(`Something is wrong with response: ${res}`)
+        }
+        return res})
+    .then(res=>{
+        return res.json()})
+    .catch(e => {
+      console.error('Fetching refreshAccessToken Error', e)
+      throw new Error(`Error while Fetching refreshAccessToken: ${e}`)
+    })
 }

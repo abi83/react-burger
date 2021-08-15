@@ -2,27 +2,28 @@ import React, { useState } from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import styles from './login.module.css';
 import {fetchRegister} from "../../services/api";
+import {registerAction} from "../../services/actions/auth";
 // import { useAuth } from '../services/auth';
 import {
   Button,
-    Input,
-    PasswordInput
+  Input,
+  PasswordInput
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import {useDispatch} from "react-redux";
 
 
 export function RegisterPage() {
   // let auth = useAuth();
   const [form, setValue] = useState({ name: '', email: '', password: '' });
+  const dispatch = useDispatch();
 
   const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
   const register = async event =>{
     event.preventDefault();
-    console.log('Register', form)
-    const user = await fetchRegister(form)
-    console.log(user)
-    return (<Redirect to={{pathname: '/login/'}} />)
+    dispatch(registerAction(form));
+    return (<Redirect to='/login/' />)
   }
 
   // if (auth.user) {
@@ -34,6 +35,13 @@ export function RegisterPage() {
   //     />
   //   );
   // }
+
+
+// accessToken: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMThiYjk4OWQ5NTJmMDAxYjgyNGFlMCIsImlhdCI6MTYyOTAxMDg0MCwiZXhwIjoxNjI5MDEyMDQwfQ.zYs56X4lRNCYoYsSEWeDr2j8FBY_S9NVhVZfA6o7944"
+// refreshToken: "dcec369bed581f2268fff5614dedb98f489253ce7f0280b4061fab235882b33cee34c078a86c6811"
+// success: true
+// user: {email: "vladimir.kromm@yandex.ru", name: "Vladimir"}
+
 
   return (
     <div className={styles.wrapper}>
