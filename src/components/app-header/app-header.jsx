@@ -23,9 +23,11 @@ export default function AppHeader () {
         <Logo />
       </div>
       <nav className={`${styles.menu} ${styles.menuRight}`}>
-        <HeadButton text='Личный кабинет'>
-          <ProfileIcon type='secondary' />
-        </HeadButton>
+        <a href={'/profile/'} className='resetted-link'>
+          <HeadButton text='Личный кабинет'>
+            <ProfileIcon type='secondary' />
+          </HeadButton>
+        </a>
       </nav>
     </header>
   )

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import styles from './profile.module.css';
+import {refreshAccessToken} from "../../services/actions/auth";
 // import {registerAction} from "../../services/actions/auth";
 import {
   Button,
@@ -11,9 +12,35 @@ import {useDispatch, useSelector} from "react-redux";
 
 
 export function ProfilePage() {
+  const [form, setValue] = useState({ name: '', email: '', password: '*****' });
   const auth = useSelector(store => store.authReducer)
-  const [form, setValue] = useState({ name: auth.user.name, email: auth.user.email, password: '*****' });
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    console.log('Auth inside effect', auth)
+    if (auth.user){
+      setValue(prevState => {
+        return {...prevState, name:auth.user.name, email: auth.user.email}
+      })
+    }
+  }, [auth])
+
+  useEffect(()=> {
+    console.log('Dispatching effect', refreshToken)
+    dispatch(refreshAccessToken(refreshToken))
+  }, [dispatch])
+
+  const refreshToken = window.localStorage.getItem('refreshToken')
+  console.log('RefreshToken', refreshToken)
+  if (!refreshToken && !auth.user){
+    console.log('No token, no user')
+    return (<Redirect to='/login/' />);
+  }
+
+  // if (!auth.user) {
+  //   console.log('Yes token, no user')
+  //   dispatch(refreshAccessToken(refreshToken))
+  // }
 
   const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
@@ -25,11 +52,6 @@ export function ProfilePage() {
     // return (<Redirect to='/login/' />)
   }
 
-  if (!auth.user) {
-    return (<Redirect to='/login/' />);
-  }
-
-
 // accessToken: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMThiYjk4OWQ5NTJmMDAxYjgyNGFlMCIsImlhdCI6MTYyOTAxMDg0MCwiZXhwIjoxNjI5MDEyMDQwfQ.zYs56X4lRNCYoYsSEWeDr2j8FBY_S9NVhVZfA6o7944"
 // refreshToken: "dcec369bed581f2268fff5614dedb98f489253ce7f0280b4061fab235882b33cee34c078a86c6811"
 // success: true
@@ -37,7 +59,6 @@ export function ProfilePage() {
 
 
   return (
-    // <div className={styles.wrapper}>
     <div className={styles.wrapper}>
       <div className={styles.menu}>
         <h1 className={`text text_type_main mt-10 mb-5`}>Регистрация</h1>
@@ -71,6 +92,5 @@ export function ProfilePage() {
         </form>
       </div>
     </div>
-    // </div>
   );
 }
