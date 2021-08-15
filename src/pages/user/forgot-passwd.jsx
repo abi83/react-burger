@@ -47,7 +47,7 @@ export function ForgotPassword() {
         </form>
         <p className={'text text_color_inactive mt-2'}>
           Вспомнили пароль?
-          <Link to='/login/' className={`${styles.link} pl-3`}>
+          <Link to='/login/' className={`text text_color_accent pl-3`}>
             Войти
           </Link>
         </p>

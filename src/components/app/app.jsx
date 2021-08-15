@@ -25,6 +25,7 @@ import {
 } from '../../services/actions/ingredient-detail';
 import {getIngredients} from '../../services/actions/burger-ingredients';
 import {placeOrder} from '../../services/actions/order';
+import {ProfilePage} from "../../pages/user/profile";
 
 export default function App() {
   
@@ -101,6 +102,9 @@ export default function App() {
               </Route>
               <Route path="/reset-password/">
                 <ResetPassword />
+              </Route>
+              <Route path="/profile">
+                <ProfilePage />
               </Route>
             </Switch>
           </Router>

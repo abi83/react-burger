@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import styles from './login.module.css';
-import {registerAction} from "../../services/actions/auth";
+import styles from './profile.module.css';
+// import {registerAction} from "../../services/actions/auth";
 import {
   Button,
   Input,
@@ -10,23 +10,23 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 
 
-export function RegisterPage() {
+export function ProfilePage() {
   const auth = useSelector(store => store.authReducer)
-  const [form, setValue] = useState({ name: '', email: '', password: '' });
+  const [form, setValue] = useState({ name: auth.user.name, email: auth.user.email, password: '*****' });
   const dispatch = useDispatch();
 
   const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
-  const register = async event =>{
+  const updateProfile = async event =>{
     event.preventDefault();
-    dispatch(registerAction(form));
+    console.log('updateProfile')
+    // dispatch(registerAction(form));
     // return (<Redirect to='/login/' />)
   }
 
-  if (auth.user) {
-    console.log('auth', auth)
-    return (<Redirect to='/' />);
+  if (!auth.user) {
+    return (<Redirect to='/login/' />);
   }
 
 
@@ -37,10 +37,15 @@ export function RegisterPage() {
 
 
   return (
+    // <div className={styles.wrapper}>
     <div className={styles.wrapper}>
-      <div className={styles.container}>
+      <div className={styles.menu}>
         <h1 className={`text text_type_main mt-10 mb-5`}>Регистрация</h1>
-
+        <p className={'text text_color_inactive mt-2'}>
+          В этом разделе вы можете сменить свои персональные данные
+        </p>
+      </div>
+      <div className={styles.form}>
         <form className={styles.form}>
           <Input placeholder="Имя"
                  type={'text'}
@@ -48,29 +53,24 @@ export function RegisterPage() {
                  name="name"
                  className={styles.input}
                  onChange={onChange} />
-          <Input placeholder="E-mail"
+          <Input placeholder="Логин"
              type={'email'}
              value={form.email}
              name="email"
              className={styles.input}
              onChange={onChange} />
           <PasswordInput
-            placeholder="Password"
+            placeholder="Пароль"
             value={form.password}
             name="password"
             onChange={onChange}
           />
-          <Button onClick={register} primary={true}>
+          <Button onClick={updateProfile} primary={true}>
             Зарегистрироваться
           </Button>
         </form>
-        <p className={'text text_color_inactive mt-2'}>
-          Уже зарегистрированы?
-          <Link to='/login/' className={`text text_color_accent pl-3`}>
-            Войти
-          </Link>
-        </p>
       </div>
     </div>
+    // </div>
   );
 }

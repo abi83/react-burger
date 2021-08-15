@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   accessToken: null,
-  user: {},
+  user: null,
   pendingRequest: false,
   requestFailed: false
 };

@@ -8,10 +8,6 @@
     flex: 0 10 100%;
     margin: 12px auto;
 }
-.link{
-    color: #4c4cff;
-    text-decoration: none!important;
-}
 .container{
     margin: auto;
     min-width: 360px;

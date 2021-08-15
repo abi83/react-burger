@@ -92,3 +92,24 @@ export const fetchRefreshAccessToken = async (refreshToken) =>{
       throw new Error(`Error while Fetching refreshAccessToken: ${e}`)
     })
 }
+
+export const fetchLogin = async (formData) =>{
+  const apiEndpoint = 'https://norma.nomoreparties.space/api/auth/login'
+  return await
+    fetch(apiEndpoint, {
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(formData)})
+    .then(res => {
+        if (!res.ok) {
+          throw new Error(`Something is wrong with response: ${res}`)
+        }
+        return res})
+    .then(res=>{
+        return res.json()})
+    .catch(e => {
+      console.error('Fetching login Error', e)
+      throw new Error(`Error while fetching login: ${e}`)
+    })
+
+}
