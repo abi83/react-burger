@@ -43,6 +43,10 @@ export function ProfilePage() {
   //   dispatch(refreshAccessToken(refreshToken))
   // }
 
+  if (auth.user) {
+    return (<Redirect to='/' />);
+  }
+
   const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
@@ -52,12 +56,6 @@ export function ProfilePage() {
     // dispatch(registerAction(form));
     // return (<Redirect to='/login/' />)
   }
-
-// accessToken: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMThiYjk4OWQ5NTJmMDAxYjgyNGFlMCIsImlhdCI6MTYyOTAxMDg0MCwiZXhwIjoxNjI5MDEyMDQwfQ.zYs56X4lRNCYoYsSEWeDr2j8FBY_S9NVhVZfA6o7944"
-// refreshToken: "dcec369bed581f2268fff5614dedb98f489253ce7f0280b4061fab235882b33cee34c078a86c6811"
-// success: true
-// user: {email: "vladimir.kromm@yandex.ru", name: "Vladimir"}
-
 
   return (
     <div className={styles.wrapper}>

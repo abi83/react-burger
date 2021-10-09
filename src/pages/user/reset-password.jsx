@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import styles from './login.module.css';
 import {
   Button,
@@ -7,30 +7,24 @@ import {
   PasswordInput
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {fetchPasswordReset} from "../../services/api";
+import {useSelector} from "react-redux";
 
 export function ResetPassword() {
-  // let auth = useAuth();
+  const auth = useSelector(store => store.authReducer)
   const [form, setValue] = useState({ password: '', code: '' });
 
   const onChange = e => {
-    console.log("onchange", e.target.name, e.target.value)
     setValue({ ...form, [e.target.name]: e.target.value });
   };
   const reset = async event =>{
     event.preventDefault()
-    console.log('Reset', form)
-    fetchPasswordReset(form.password, form.code)
+    const data = await fetchPasswordReset(form.password, form.code)
+    console.log("Password reset answer", data)
   }
 
-  // if (auth.user) {
-  //   return (
-  //     <Redirect
-  //       to={{
-  //         pathname: '/'
-  //       }}
-  //     />
-  //   );
-  // }
+  if (auth.user) {
+    return (<Redirect to='/' />);
+  }
 
   return (
     <div className={styles.wrapper}>

@@ -59,7 +59,7 @@ export const fetchPasswordReset = async (password, code) => {
     fetch(apiEndpoint, {
       method:'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({email: password, code: code})})
+      body: JSON.stringify({email: password, token: code})})
     .then(res => {
       if (!res.ok) {
         throw new Error(`Something is wrong with response: ${res}`)

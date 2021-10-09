@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import styles from './login.module.css';
-import {
-  Button,
-  Input,
-} from '@ya.praktikum/react-developer-burger-ui-components';
-import {fetchCallPasswordReset} from "../../services/api";
+import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { fetchCallPasswordReset } from "../../services/api";
+import { useSelector } from "react-redux";
 
 export function ForgotPassword() {
   const history = useHistory()
-  // let auth = useAuth();
+  const auth = useSelector(store => store.authReducer)
   const [form, setValue] = useState({ email: '' });
 
   const onChange = e => {
@@ -21,15 +19,9 @@ export function ForgotPassword() {
     history.push('/reset-password/')
   }
 
-  // if (auth.user) {
-  //   return (
-  //     <Redirect
-  //       to={{
-  //         pathname: '/'
-  //       }}
-  //     />
-  //   );
-  // }
+  if (auth.user) {
+    return (<Redirect to='/' />);
+  }
 
   return (
     <div className={styles.wrapper}>
