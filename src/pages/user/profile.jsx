@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import styles from './profile.module.css';
 import {refreshAccessToken} from "../../services/actions/auth";
 // import {registerAction} from "../../services/actions/auth";
@@ -9,32 +9,27 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useDispatch, useSelector} from "react-redux";
-import {authReducer} from '../../services/reducers/auth';
 
 
 export function ProfilePage() {
-  const [form, setValue] = useState({ name: '', email: ''});
+  const [form, setValue] = useState({ name: '', email: '', password: ''});
   const auth = useSelector(store => store.authReducer)
   const dispatch = useDispatch();
+  const refreshToken = window.localStorage.getItem('refreshToken') || ""
 
   useEffect(()=>{
-    console.log('Auth inside effect', auth)
     if (auth.user){
-      setValue(prevState => {
+      setValue(() => {
         return {name:auth.user.name, email: auth.user.email}
       })
     }
   }, [auth])
 
   useEffect(()=> {
-    console.log('Dispatching effect', refreshToken)
     dispatch(refreshAccessToken(refreshToken))
-  }, [dispatch])
+  }, [dispatch, refreshToken])
 
-  const refreshToken = window.localStorage.getItem('refreshToken')
-  console.log('RefreshToken', refreshToken)
   if (!refreshToken && !auth.user){
-    console.log('No token, no user')
     return (<Redirect to='/login/' />);
   }
 
@@ -52,7 +47,7 @@ export function ProfilePage() {
   };
   const updateProfile = async event =>{
     event.preventDefault();
-    console.log('updateProfile')
+    // console.log('updateProfile')
     // dispatch(registerAction(form));
     // return (<Redirect to='/login/' />)
   }

@@ -94,7 +94,7 @@ export const fetchRegister = async (userData) => {
 
 export const fetchRefreshAccessToken = async (refreshToken) =>{
   const apiEndpoint = 'https://norma.nomoreparties.space/api/auth/token'
-  console.log('DEBUG3', window.localStorage.getItem('refreshToken'));
+  // console.log('DEBUG3', window.localStorage.getItem('refreshToken'));
   return await
     fetch(apiEndpoint, {
       method:'POST',
