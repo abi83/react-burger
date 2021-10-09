@@ -18,7 +18,8 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         accessToken: action.accessToken,
-        pendingRequest: false
+        pendingRequest: false,
+        requestFailed: false
       };
     }
     case UPDATE_USER: {
@@ -26,7 +27,8 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.user,
-        pendingRequest: false
+        pendingRequest: false,
+        requestFailed: false
       }
     }
     case USER_CHECKOUT_REQUEST: {

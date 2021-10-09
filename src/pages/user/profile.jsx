@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {Redirect} from 'react-router-dom';
 import styles from './profile.module.css';
 import {refreshAccessToken} from "../../services/actions/auth";
-// import {registerAction} from "../../services/actions/auth";
+import {registerAction} from "../../services/actions/auth";
 import {
   Button,
   Input,
@@ -26,20 +26,20 @@ export function ProfilePage() {
   }, [auth])
 
   useEffect(()=> {
-    dispatch(refreshAccessToken(refreshToken))
-  }, [dispatch, refreshToken])
+    if (!auth.accessToken && !auth.pendingRequest){
+      dispatch(refreshAccessToken(refreshToken))
+    }
+  }, [dispatch, refreshToken, auth])
 
-  if (!refreshToken && !auth.user){
+  // useEffect(()=>{
+  //   if (!auth.user && auth.accessToken){
+  //     dispatch()
+  //   }
+  // }, [auth])
+
+  if ((!refreshToken && !auth.user) || auth.requestFailed) {
+    console.log("No token, no user. And no failed request")
     return (<Redirect to='/login/' />);
-  }
-
-  // if (!auth.user) {
-  //   console.log('Yes token, no user')
-  //   dispatch(refreshAccessToken(refreshToken))
-  // }
-
-  if (auth.user) {
-    return (<Redirect to='/' />);
   }
 
   const onChange = e => {
@@ -47,11 +47,8 @@ export function ProfilePage() {
   };
   const updateProfile = async event =>{
     event.preventDefault();
-    // console.log('updateProfile')
-    // dispatch(registerAction(form));
-    // return (<Redirect to='/login/' />)
+    console.log('PATCH!!!', form)
   }
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.menu}>

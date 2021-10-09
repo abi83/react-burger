@@ -7,17 +7,18 @@ export const USER_REQUEST_FAILED = 'USER_REQUEST_FAILED';
 
 
 export const refreshAccessToken = (refreshToken) => {
-  // console.log('DEBUG', refreshToken)
   return function(dispatch) {
-    // console.log('fetchRefreshAccessToken - 1', refreshToken)
     dispatch({type: USER_CHECKOUT_REQUEST});
     fetchRefreshAccessToken(refreshToken)
     .then(res => {
-      // console.log('fetchRefreshAccessToken - 2', res)
-      // window.localStorage.setItem('refreshToken', res.refreshToken)
-      // dispatch({type:UPDATE_USER, user: res.user})
+      console.log('fetchRefreshAccessToken - 2', res)
+      window.localStorage.setItem('refreshToken', res.refreshToken)
+      dispatch({type:UPDATE_USER, user: res.user})
       dispatch({type:REFRESH_ACCESS_TOKEN, accessToken: res.accessToken})})
-    .catch(()=>dispatch({type: USER_REQUEST_FAILED}))
+    .catch(()=>{
+      dispatch({type: USER_REQUEST_FAILED})
+      window.localStorage.removeItem('refreshToken')
+    })
   };
 }
 

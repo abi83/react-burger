@@ -105,10 +105,7 @@ export const fetchRefreshAccessToken = async (refreshToken) =>{
           throw new Error(`Something is wrong with response: ${res}`)
         }
         return res})
-    .then(res=>{
-        const a = res.json()
-        console.log('DEBUG4', a)
-        return a})
+    .then(res=>res.json())
     .catch(e => {
       console.error('Fetching refreshAccessToken Error', e)
       throw new Error(`Error while Fetching refreshAccessToken: ${e}`)
