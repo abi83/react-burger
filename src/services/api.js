@@ -48,6 +48,25 @@ export const fetchCallPasswordReset = async (email) => {
         return res})
     .then(res=>res.json())
     .catch(e => {
+      console.error('Fetching CallResettingPassword Error', e)
+      throw new Error(`Error while Fetching New Password Call: ${e}`)
+    })
+}
+
+export const fetchPasswordReset = async (password, code) => {
+  const apiEndpoint = 'https://norma.nomoreparties.space/api/password-reset/reset'
+  return await
+    fetch(apiEndpoint, {
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: password, code: code})})
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`Something is wrong with response: ${res}`)
+      }
+      return res})
+    .then(res=>res.json())
+    .catch(e => {
       console.error('Fetching ResettingPassword Error', e)
       throw new Error(`Error while Fetching New Password Call: ${e}`)
     })

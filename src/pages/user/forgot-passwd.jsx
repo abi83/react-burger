@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import styles from './login.module.css';
 import {
   Button,
@@ -8,16 +8,17 @@ import {
 import {fetchCallPasswordReset} from "../../services/api";
 
 export function ForgotPassword() {
+  const history = useHistory()
   // let auth = useAuth();
   const [form, setValue] = useState({ email: '' });
 
   const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
-  const reset = async event =>{
+  const reset = async (event) =>{
     event.preventDefault();
     await fetchCallPasswordReset(form.email)
-    return (<Redirect to={{pathname: '/reset-password/'}} />)
+    history.push('/reset-password/')
   }
 
   // if (auth.user) {
@@ -41,7 +42,7 @@ export function ForgotPassword() {
            name="email"
            className={styles.input}
            onChange={onChange} />
-          <Button onClick={reset} primary={true}>
+          <Button onClick={reset} type={"primary"}>
             Восстановить
           </Button>
         </form>

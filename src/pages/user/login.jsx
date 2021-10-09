@@ -1,44 +1,28 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import styles from './login.module.css';
 import {loginAction} from "../../services/actions/auth";
-// import { useAuth } from '../services/auth';
 import {
   Button,
     Input,
     PasswordInput
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import {fetchLogin} from "../../services/api";
 import {useDispatch, useSelector} from "react-redux";
-// import { Input } from '../components/input';
-// import { PasswordInput } from '../components/password-input';
 
 export function LoginPage() {
-  // let auth = useAuth();
   const auth = useSelector(store => store.authReducer)
   const [form, setValue] = useState({ email: '', password: '' });
   const dispatch = useDispatch();
 
-
   const onChange = e => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
-  // const register = event =>{
-  //   event.preventDefault();
-  //
-  // }
   const login = async event => {
       event.preventDefault();
-      // auth.signIn(form);
-      // console.log('Login', form)
       dispatch(loginAction(form))
-      // fetchLogin(form)
     }
-    // [auth, form]
 
   if (auth.user) {
-    console.log('auth', auth)
     return (<Redirect to='/' />);
   }
 
@@ -46,7 +30,6 @@ export function LoginPage() {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <h1 className={`text text_type_main mt-10 mb-5`}>Вход</h1>
-
         <form className={styles.form}>
           <Input placeholder="E-mail"
                  type={'email'}
@@ -61,7 +44,7 @@ export function LoginPage() {
             name="password"
             onChange={onChange}
           />
-          <Button onClick={login} primary={true}>
+          <Button onClick={login} type={"primary"}>
             Войти
           </Button>
         </form>

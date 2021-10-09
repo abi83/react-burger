@@ -6,17 +6,20 @@ import {
   Input,
   PasswordInput
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import {fetchPasswordReset} from "../../services/api";
 
 export function ResetPassword() {
   // let auth = useAuth();
   const [form, setValue] = useState({ password: '', code: '' });
 
   const onChange = e => {
+    console.log("onchange", e.target.name, e.target.value)
     setValue({ ...form, [e.target.name]: e.target.value });
   };
-  const reset = event =>{
-    event.preventDefault();
+  const reset = async event =>{
+    event.preventDefault()
     console.log('Reset', form)
+    fetchPasswordReset(form.password, form.code)
   }
 
   // if (auth.user) {
@@ -44,10 +47,10 @@ export function ResetPassword() {
           <Input placeholder="Введите код из письма"
            type={'text'}
            value={form.code}
-           name="name"
+           name="code"
            className={styles.input}
            onChange={onChange} />
-          <Button onClick={reset} primary={true}>
+          <Button onClick={reset} type={"primary"}>
             Восстановить
           </Button>
         </form>
