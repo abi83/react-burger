@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.2.1",
@@ -33,17 +32,40 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "ignorePatterns": ["reportWebVitals.ts", "/build/*"],
     "rules": {
       "no-unused-vars": "warn",
       "no-extra-semi": "warn",
       "block-spacing": "warn",
-      "max-len": [1, 80, 4, {"ignoreUrls": true}]
+      "semi": [
+        "warn",
+        "never"
+      ],
+      "max-len": [
+        "warn",
+        88,
+        4,
+        {
+          "ignoreUrls": true
+        }
+      ]
     },
     "extends": [
       "eslint:recommended",
       "react-app",
       "react-app/jest"
     ]
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true
   },
   "browserslist": {
     "production": [
@@ -56,5 +78,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
+    "prettier": "^2.4.1"
   }
 }
