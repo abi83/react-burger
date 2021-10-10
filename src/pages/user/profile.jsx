@@ -6,7 +6,6 @@ import {
   getUserInfoAction,
   refreshAccessToken,
 } from '../../services/actions/auth'
-// import {registerAction} from "../../services/actions/auth";
 import {
   Button,
   Input,
@@ -15,18 +14,26 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 
 export function ProfilePage() {
-  const [form, setValue] = useState({ name: '', email: '', password: '' })
+  const [form, setValue] = useState({
+    name: '',
+    email: '',
+    password: '',
+  })
+  const [changed, setChanged] = useState(false)
+  const [currentTab, setCurrentTab] = useState('profile')
   const { user, accessToken, pendingRequest, requestFailed } = useSelector(
     (store) => store.authReducer
   )
   const dispatch = useDispatch()
   const refreshToken = window.localStorage.getItem('refreshToken') || ''
+
   useEffect(() => {
     if (user) {
       setValue(() => {
-        return { name: user.name, email: user.email, password: '' }
+        return { ...form, name: user.name, email: user.email }
       })
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   useEffect(() => {
@@ -46,11 +53,20 @@ export function ProfilePage() {
   }
 
   const onChange = (e) => {
+    if (
+      //state changes inside function have no effect inside function
+      user[e.target.name] !== e.target.value ||
+      form.password !== '' ||
+      ( form.name !== user.name && form.email !== user.email ))
+    {
+      setChanged(true)
+    } else {
+      setChanged(false)
+    }
     setValue({ ...form, [e.target.name]: e.target.value })
   }
   const updateProfile = async (event) => {
     event.preventDefault()
-    console.log('PATCH!!!', form)
   }
   const exit = () => {
     dispatch(exitUserAction(accessToken))
@@ -67,36 +83,46 @@ export function ProfilePage() {
           В этом разделе вы можете сменить свои персональные данные
         </p>
       </div>
-      <form className={styles.form}>
-        <Input
-          placeholder="Имя"
-          icon="EditIcon"
-          type={'text'}
-          value={form.name}
-          name="name"
-          onChange={onChange}
-        />
-        <Input
-          placeholder="Логин"
-          icon="EditIcon"
-          type={'email'}
-          value={form.email}
-          name="email"
-          onChange={onChange}
-        />
-        <PasswordInput
-          placeholder="Пароль"
-          value={form.password}
-          name="password"
-          onChange={onChange}
-        />
-        <Button onClick={updateProfile} type={'secondary'}>
-          Отменить
-        </Button>
-        <Button onClick={updateProfile} type={'primary'}>
-          Обновить
-        </Button>
-      </form>
+      {
+        currentTab === 'profile'
+          ?
+          <form className={styles.form}>
+            <Input
+              placeholder="Имя"
+              icon="EditIcon"
+              type={'text'}
+              value={form.name}
+              name="name"
+              onChange={onChange}
+            />
+            <Input
+              placeholder="Логин"
+              icon="EditIcon"
+              type={'email'}
+              value={form.email}
+              name="email"
+              onChange={onChange}
+            />
+            <PasswordInput
+              placeholder="Пароль"
+              value={form.password}
+              name="password"
+              onChange={onChange}
+            />
+            {
+              changed &&
+              <>
+                <Button onClick={updateProfile} type={'secondary'}>
+                  Отменить
+                </Button>
+                <Button onClick={updateProfile} type={'primary'}>
+                  Обновить
+                </Button>
+              </>
+            }
+          </form>
+          : <h3>Orders!</h3>
+      }
     </div>
   )
 }

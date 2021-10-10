@@ -4,7 +4,6 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import React from 'react'
-// import {useSelector} from 'react-redux';
 
 import { useDrag } from 'react-dnd'
 
@@ -13,7 +12,6 @@ import PropTypes from 'prop-types'
 
 const IngredientCard = React.memo(
   ({ ingredient, onClick }) => {
-    console.log('Ingredient.Card', ingredient._id)
     const onCartClick = (e) => {
       onClick(ingredient)
       e.stopPropagation()

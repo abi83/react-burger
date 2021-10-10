@@ -20,11 +20,9 @@ export function RegisterPage() {
   const register = async (event) => {
     event.preventDefault()
     dispatch(registerAction(form))
-    // return (<Redirect to='/login/' />)
   }
 
   if (auth.user) {
-    console.log('auth', auth)
     return <Redirect to="/" />
   }
 
