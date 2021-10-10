@@ -39,6 +39,7 @@
     },
     "ignorePatterns": ["reportWebVitals.ts", "/build/*"],
     "rules": {
+      "quotes": ["warn", "single"],
       "no-unused-vars": "warn",
       "no-extra-semi": "warn",
       "block-spacing": "warn",

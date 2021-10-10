@@ -12,6 +12,7 @@ import {
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDispatch, useSelector } from 'react-redux'
+import { fetchUpdateUser } from '../../services/api'
 
 export function ProfilePage() {
   const [form, setValue] = useState({
@@ -58,8 +59,13 @@ export function ProfilePage() {
     }
     setValue({ ...form, [e.target.name]: e.target.value })
   }
-  const updateProfile = async (event) => {
-    event.preventDefault()
+  const updateProfile = async () => {
+    console.log('update profile', form)
+    await fetchUpdateUser(form, accessToken)
+  }
+  const cancelUpdate = () =>{
+    setValue({ ...form, name: user.name, email: user.email, password: '' })
+    setChanged(false)
   }
   const exit = () => {
     dispatch(exitUserAction(refreshToken))
@@ -80,33 +86,35 @@ export function ProfilePage() {
       {
         currentTab === 'profile'
           ?
-          <form className={styles.form}>
-            <Input
-              placeholder="Имя"
-              icon="EditIcon"
-              type={'text'}
-              value={form.name}
-              name="name"
-              onChange={onChange}
-            />
-            <Input
-              placeholder="Логин"
-              icon="EditIcon"
-              type={'email'}
-              value={form.email}
-              name="email"
-              onChange={onChange}
-            />
-            <PasswordInput
-              placeholder="Пароль"
-              value={form.password}
-              name="password"
-              onChange={onChange}
-            />
+          <div className={styles.form}>
+            <form>
+              <Input
+                placeholder="Имя"
+                icon="EditIcon"
+                type={'text'}
+                value={form.name}
+                name="name"
+                onChange={onChange}
+              />
+              <Input
+                placeholder="Логин"
+                icon="EditIcon"
+                type={'email'}
+                value={form.email}
+                name="email"
+                onChange={onChange}
+              />
+              <PasswordInput
+                placeholder="Пароль"
+                value={form.password}
+                name="password"
+                onChange={onChange}
+              />
+            </form>
             {
               changed &&
               <>
-                <Button onClick={updateProfile} type={'secondary'}>
+                <Button onClick={cancelUpdate} type={'secondary'}>
                   Отменить
                 </Button>
                 <Button onClick={updateProfile} type={'primary'}>
@@ -114,7 +122,7 @@ export function ProfilePage() {
                 </Button>
               </>
             }
-          </form>
+          </div>
           : <h3>Orders!</h3>
       }
     </div>
