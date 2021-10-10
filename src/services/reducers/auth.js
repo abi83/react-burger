@@ -23,7 +23,6 @@ export const authReducer = (state = initialState, action) => {
       };
     }
     case UPDATE_USER: {
-      console.log('UPDATE_USER', action);
       return {
         ...state,
         user: action.user,

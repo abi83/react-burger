@@ -22,7 +22,7 @@ export function LoginPage() {
       dispatch(loginAction(form))
     }
 
-  if (auth.user) {
+  if (!auth.requestFailed && auth.user) {
     return (<Redirect to='/' />);
   }
 

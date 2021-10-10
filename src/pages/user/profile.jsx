@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {Redirect} from 'react-router-dom';
 import styles from './profile.module.css';
-import {refreshAccessToken} from "../../services/actions/auth";
-import {registerAction} from "../../services/actions/auth";
+import {getUserInfoAction, refreshAccessToken} from "../../services/actions/auth";
+// import {registerAction} from "../../services/actions/auth";
 import {
   Button,
   Input,
@@ -13,32 +13,30 @@ import {useDispatch, useSelector} from "react-redux";
 
 export function ProfilePage() {
   const [form, setValue] = useState({ name: '', email: '', password: ''});
-  const auth = useSelector(store => store.authReducer)
+  const {user, accessToken, pendingRequest, requestFailed} = useSelector(store => store.authReducer)
   const dispatch = useDispatch();
   const refreshToken = window.localStorage.getItem('refreshToken') || ""
-
   useEffect(()=>{
-    if (auth.user){
+    if (user){
       setValue(() => {
-        return {name:auth.user.name, email: auth.user.email}
+        return {name:user.name, email: user.email, password: ''}
       })
     }
-  }, [auth])
+  }, [user])
 
   useEffect(()=> {
-    if (!auth.accessToken && !auth.pendingRequest){
+    if (!accessToken && !pendingRequest && refreshToken){
       dispatch(refreshAccessToken(refreshToken))
     }
-  }, [dispatch, refreshToken, auth])
+  }, [accessToken, pendingRequest, refreshToken, dispatch])
 
-  // useEffect(()=>{
-  //   if (!auth.user && auth.accessToken){
-  //     dispatch()
-  //   }
-  // }, [auth])
+  useEffect(()=>{
+    if (!user && accessToken){
+      dispatch(getUserInfoAction(accessToken))
+    }
+  }, [user, accessToken, dispatch])
 
-  if ((!refreshToken && !auth.user) || auth.requestFailed) {
-    console.log("No token, no user. And no failed request")
+  if ((!refreshToken && !user) || requestFailed) {
     return (<Redirect to='/login/' />);
   }
 
@@ -64,14 +62,14 @@ export function ProfilePage() {
                  type={'text'}
                  value={form.name}
                  name="name"
-                 className={styles.input}
+                 // className={styles.input}
                  onChange={onChange} />
           <Input placeholder="Логин"
                  icon="EditIcon"
                  type={'email'}
                  value={form.email}
                  name="email"
-                 className={styles.input}
+                 // className={styles.input}
                  onChange={onChange} />
           <PasswordInput
             placeholder="Пароль"

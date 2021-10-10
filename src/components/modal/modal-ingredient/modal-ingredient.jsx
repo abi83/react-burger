@@ -1,9 +1,8 @@
 import styles from './modal-ingredient.module.css';
 import React from 'react';
-import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 import {useSelector} from 'react-redux';
 
-export default function ModalIngredient ({ingredient}) {
+export default function ModalIngredient () {
   const {ingredientDetail} = useSelector(store=>{return store.ingredientDetailReducer})
 
   return (
@@ -35,7 +34,3 @@ export default function ModalIngredient ({ingredient}) {
     </div>
   )
 };
-
-ModalIngredient.propTypes = {
-  ingredient: ingredientPropTypes.isRequired
-}

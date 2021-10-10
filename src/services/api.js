@@ -131,3 +131,24 @@ export const fetchLogin = async (formData) =>{
       throw new Error(`Error while fetching login: ${e}`)
     })
 }
+
+export const fetchUserInfo = async (token) =>{
+  const apiEndpoint = 'https://norma.nomoreparties.space/api/auth/user'
+  return await
+    fetch(apiEndpoint, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token
+      }})
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`Something is wrong with response: ${res}`)
+      }
+      return res})
+    .then(res=>{
+      return res.json()})
+    .catch(e => {
+      console.error('Fetching login Error', e)
+      throw new Error(`Error while fetching login: ${e}`)
+    })
+}
