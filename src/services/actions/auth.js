@@ -46,6 +46,7 @@ export const exitUserAction = (refreshToken) => {
     fetchExit(refreshToken)
       .then(() => {
         dispatch({ type: UPDATE_USER, user: null })
+        dispatch({ type: REFRESH_ACCESS_TOKEN, accessToken: null })
         window.localStorage.removeItem('refreshToken')
       })
       .catch(() => {
@@ -54,10 +55,10 @@ export const exitUserAction = (refreshToken) => {
   }
 }
 
-export const registerAction = (userData) => {
+export const registerAction = ({ name, email, password }) => {
   return function (dispatch) {
     dispatch({ type: USER_CHECKOUT_REQUEST })
-    fetchRegister(userData)
+    fetchRegister(name, email, password)
       .then((res) => {
         window.localStorage.setItem('refreshToken', res.refreshToken)
         dispatch({ type: UPDATE_USER, user: res.user })
@@ -67,10 +68,10 @@ export const registerAction = (userData) => {
   }
 }
 
-export const loginAction = (formData) => {
+export const loginAction = (email, password) => {
   return function (dispatch) {
     dispatch({ type: USER_CHECKOUT_REQUEST })
-    fetchLogin(formData)
+    fetchLogin(email, password)
       .then((res) => {
         window.localStorage.setItem('refreshToken', res.refreshToken)
         dispatch({ type: UPDATE_USER, user: res.user })

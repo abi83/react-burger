@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Redirect, Link } from 'react-router-dom'
 import styles from './login.module.css'
-import {
-  loginAction,
-  getUserInfoAction,
-  refreshAccessToken,
-} from '../../services/actions/auth'
+import { loginAction } from '../../services/actions/auth'
 import {
   Button,
   Input,
@@ -14,34 +10,19 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 
 export function LoginPage() {
-  const { user, accessToken, pendingRequest, requestFailed } = useSelector(
-    (store) => store.authReducer
-  )
+  const { user } = useSelector((store) => store.authReducer)
   const [form, setValue] = useState({ email: '', password: '' })
   const dispatch = useDispatch()
-  const refreshToken = window.localStorage.getItem('refreshToken') || ''
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value })
   }
   const login = async (event) => {
     event.preventDefault()
-    dispatch(loginAction(form))
+    dispatch(loginAction(form.email, form.password))
   }
 
-  useEffect(() => {
-    if (!accessToken && !pendingRequest && refreshToken) {
-      dispatch(refreshAccessToken(refreshToken))
-    }
-  }, [accessToken, pendingRequest, refreshToken, dispatch])
-
-  useEffect(() => {
-    if (!user && accessToken) {
-      dispatch(getUserInfoAction(accessToken))
-    }
-  }, [user, accessToken, dispatch])
-
-  if (!requestFailed && user) {
+  if (user) {
     return <Redirect to="/" />
   }
 

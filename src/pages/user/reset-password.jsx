@@ -21,7 +21,7 @@ export function ResetPassword() {
   const reset = async (event) => {
     event.preventDefault()
     await fetchPasswordReset(form.password, form.code)
-    history.push('/reset-password/')
+    history.push('/login/')
   }
 
   if (auth.user) {

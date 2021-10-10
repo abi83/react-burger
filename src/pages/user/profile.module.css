@@ -8,19 +8,16 @@
 .menu{
     flex-basis: 33%;
     margin: 200px auto 0 auto;
-    /*flex-grow: 1;*/
-    /*width: 33%;*/
-    /*height: 100px;*/
 }
 .form{
     flex-basis: 67%;
     margin: 200px auto;
-    /*flex-grow: 2;*/
-    /*width: 33%;*/
-    /*height: 100px;*/
 }
 .form div {
     width: 100%;
     flex: 0 10 100%;
     margin: 12px auto;
+}
+.tab{
+    cursor: pointer;
 }

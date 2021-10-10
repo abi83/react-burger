@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import styles from './profile.module.css'
 import {
   exitUserAction,
@@ -21,32 +21,25 @@ export function ProfilePage() {
   })
   const [changed, setChanged] = useState(false)
   const [currentTab, setCurrentTab] = useState('profile')
-  const { user, accessToken, pendingRequest, requestFailed } = useSelector(
+  const { user, accessToken, requestFailed } = useSelector(
     (store) => store.authReducer
   )
   const dispatch = useDispatch()
   const refreshToken = window.localStorage.getItem('refreshToken') || ''
+  const history = useHistory()
 
   useEffect(() => {
-    if (user) {
-      setValue(() => {
-        return { ...form, name: user.name, email: user.email }
-      })
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
-
-  useEffect(() => {
-    if (!accessToken && !pendingRequest && refreshToken) {
+    if (!accessToken && refreshToken) {
       dispatch(refreshAccessToken(refreshToken))
     }
-  }, [accessToken, pendingRequest, refreshToken, dispatch])
-
-  useEffect(() => {
     if (!user && accessToken) {
       dispatch(getUserInfoAction(accessToken))
     }
-  }, [user, accessToken, dispatch])
+    if (user) {
+      setValue({ ...form, name: user.name, email: user.email })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refreshToken, accessToken, dispatch, user])
 
   if ((!refreshToken && !user) || requestFailed) {
     return <Redirect to="/login/" />
@@ -69,14 +62,15 @@ export function ProfilePage() {
     event.preventDefault()
   }
   const exit = () => {
-    dispatch(exitUserAction(accessToken))
+    dispatch(exitUserAction(refreshToken))
+    history.push('/login/')
   }
   return (
     <div className={styles.wrapper}>
       <div className={styles.menu}>
-        <h2 className={`text text_type_main mt-10 mb-5`}>Профайл</h2>
-        <h2 className={`text text_type_main mt-10 mb-5`}>Orders</h2>
-        <h2 className={`text text_type_main mt-10 mb-5`} onClick={exit}>
+        <h2 className={`text text_type_main mt-10 mb-5 ${styles.tab}`}>Профайл</h2>
+        <h2 className={`text text_type_main mt-10 mb-5 ${styles.tab}`}>Orders</h2>
+        <h2 className={`text text_type_main mt-10 mb-5 ${styles.tab}`} onClick={exit}>
           Exit
         </h2>
         <p className={'text text_color_inactive mt-2'}>

@@ -26,106 +26,43 @@ const normaApi = async (
 }
 
 export const fetchIngredients = async () => {
-  const ingredientsEndpoint =
-    "https://norma.nomoreparties.space/api/ingredients"
+  const ingredientsEndpoint = normaURL + "ingredients"
   const serverData = await normaApi(ingredientsEndpoint)
   return serverData.data
 }
 
 export const fetchOrder = async (ingredients) => {
-  const orderEndpoint = "https://norma.nomoreparties.space/api/orders"
+  const orderEndpoint = normaURL + "orders"
   return await normaApi(orderEndpoint, "POST", { ingredients })
 }
 
 export const fetchCallPasswordReset = async (email) => {
-  const passwordResetEndpoint =
-    "https://norma.nomoreparties.space/api/password-reset"
-  return normaApi(passwordResetEndpoint, "POST", { email })
+  const callPasswordResetEndpoint = normaURL + "password-reset"
+  return normaApi(callPasswordResetEndpoint, "POST", { email })
 }
 
 export const fetchPasswordReset = async (password, code) => {
-  const apiEndpoint =
-    "https://norma.nomoreparties.space/api/password-reset/reset"
-  return await fetch(apiEndpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ password, token: code }),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(`Something is wrong with response: ${res}`)
-      }
-      return res
-    })
-    .then((res) => res.json())
-    .catch((e) => {
-      console.error("Fetching ResettingPassword Error", e)
-      throw new Error(`Error while Fetching New Password Call: ${e}`)
-    })
+  const passwordResetEndpoint = normaURL + "password-reset/reset"
+  const body = { password, token: code }
+  return await normaApi(passwordResetEndpoint, 'POST', body)
 }
 
-export const fetchRegister = async (userData) => {
-  const apiEndpoint = "https://norma.nomoreparties.space/api/auth/register"
-  return await fetch(apiEndpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(`Something is wrong with response: ${res}`)
-      }
-      return res
-    })
-    .then((res) => {
-      return res.json()
-    })
-    .catch((e) => {
-      console.error("Fetching NewUser Error", e)
-      throw new Error(`Error while Fetching new user: ${e}`)
-    })
+export const fetchRegister = async (name, email, password) => {
+  const registerEndpoint = normaURL + "auth/register"
+  const body = {name, email, password}
+  return await normaApi(registerEndpoint, 'POST', body)
 }
 
 export const fetchRefreshAccessToken = async (refreshToken) => {
-  const apiEndpoint = "https://norma.nomoreparties.space/api/auth/token"
-  return await fetch(apiEndpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ token: refreshToken }),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(`Something is wrong with response: ${res}`)
-      }
-      return res
-    })
-    .then((res) => res.json())
-    .catch((e) => {
-      console.error("Fetching refreshAccessToken Error", e)
-      throw new Error(`Error while Fetching refreshAccessToken: ${e}`)
-    })
+  const refreshTokenEndpoint = normaURL + 'auth/token'
+  const body = { token: refreshToken }
+  return await normaApi(refreshTokenEndpoint, 'POST', body)
 }
 
-export const fetchLogin = async (formData) => {
-  const apiEndpoint = "https://norma.nomoreparties.space/api/auth/login"
-  return await fetch(apiEndpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(`Something is wrong with response: ${res}`)
-      }
-      return res
-    })
-    .then((res) => {
-      return res.json()
-    })
-    .catch((e) => {
-      console.error("Fetching login Error", e)
-      throw new Error(`Error while fetching login: ${e}`)
-    })
+export const fetchLogin = async (email, password) => {
+  const loginEndpoint = normaURL + "auth/login"
+  const body = {email, password}
+  return normaApi(loginEndpoint, 'POST', body)
 }
 
 export const fetchUserInfo = async (accessToken) => {
@@ -136,6 +73,6 @@ export const fetchUserInfo = async (accessToken) => {
 
 export const fetchExit = async (refreshToken) => {
   const exitEndpoint = normaURL + "auth/logout"
-  const headers = { ...defaultHeaders, Authorization: refreshToken }
-  return await normaApi(exitEndpoint, "POST", null, headers)
+  const body = {token: refreshToken}
+  return await normaApi(exitEndpoint, "POST", body)
 }
