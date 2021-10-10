@@ -2,11 +2,12 @@ import {useRef, useState} from 'react';
 import style from './burger-ingredients.module.css';
 import Tabs from './tabs/tabs';
 import PropTypes from 'prop-types';
-import {ingredientPropTypes} from '../../utils/dataPropTypes';
 import Section from './section/section';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
+import {useSelector} from 'react-redux';
 
-export default function BurgerIngredients ({ingredients, onClick}) {
+export default function BurgerIngredients ({onClick}) {
+  const {ingredients} = useSelector(store=>store.ingredientsReducer)
+
   const [state, setState] = useState({
       activeTab: 'bun',
       tabs: [
@@ -15,6 +16,8 @@ export default function BurgerIngredients ({ingredients, onClick}) {
         {id: 'sauce', name: 'Соусы', sectionRef: useRef(null)},
       ]
     })
+  const tabsRef = useRef(null);
+
   const onTabClick = (tabName) => {
     state.tabs
       .find(tab => tab.id === tabName)
@@ -22,11 +25,25 @@ export default function BurgerIngredients ({ingredients, onClick}) {
       .scrollIntoView({ behavior: 'smooth' })
     setState({...state, activeTab: tabName})
   }
+
+  const handleScroll = () =>{
+    const scrollContainerPosition = tabsRef.current.getBoundingClientRect().top;
+    const tabsPositions = state.tabs.map(el => {
+      return {
+        id: el.id,
+        position: el.sectionRef.current.getBoundingClientRect().top - scrollContainerPosition}
+    })
+    let closesTab = tabsPositions.reduce((prev,current) =>
+        Math.abs(prev.position) < Math.abs(current.position)
+            ? prev
+            : current)
+    setState({...state, activeTab: closesTab.id})
+  }
   return (
     <section className='column'>
       <h2 className={`${style.header} text text_type_main-large mt-10 mb-5`}>Соберите бургер</h2>
       <Tabs tabs={state.tabs} activeTabId={state.activeTab} onClick={onTabClick} />
-      <div className="container">
+      <div className="container" onScroll={handleScroll} ref={tabsRef}>
         {state.tabs
           .map( (tab) => {
             return <Section title={tab.name}
@@ -40,6 +57,5 @@ export default function BurgerIngredients ({ingredients, onClick}) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
   onClick: PropTypes.func.isRequired
 }
