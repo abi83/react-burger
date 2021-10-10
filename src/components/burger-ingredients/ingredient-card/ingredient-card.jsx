@@ -4,27 +4,19 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
-import {useSelector} from 'react-redux';
+// import {useSelector} from 'react-redux';
 
 import {useDrag} from 'react-dnd';
 
 import {ingredientPropTypes} from '../../../utils/dataPropTypes';
 import PropTypes from 'prop-types';
 
-export default function IngredientCard({ingredient, onClick}) {
+const IngredientCard = React.memo(({ingredient, onClick}) => {
+  console.log("Ingredient.Card", ingredient._id)
   const onCartClick = (e) => {
     onClick(ingredient);
     e.stopPropagation();
   };
-  const {inner, bun} = useSelector(store => {
-    return store.selectedIngredientsReducer;
-  });
-  const count = [...inner, bun].reduce(
-      (acc, item) => {
-        return item && item._id === ingredient._id
-            ? acc + 1
-            : acc;
-      }, 0);
   const [{opacity}, ref] = useDrag({
     type: 'ingredient',
     item: ingredient,
@@ -36,7 +28,7 @@ export default function IngredientCard({ingredient, onClick}) {
   return (
       <li className={styles.card} onClick={onCartClick} ref={ref}
           style={{opacity}}>
-        <Counter count={count} size='default'/>
+        <Counter count={ingredient.count} size='default'/>
         <img className={`${styles.mainImage} ml-4 mr-4`}
              src={ingredient.image_large} alt={ingredient.name}/>
         <div className={`${styles.price} mt-1 mb-1`}>
@@ -50,9 +42,13 @@ export default function IngredientCard({ingredient, onClick}) {
         </p>
       </li>
   );
-};
+}, (prevProps, nextProps) => {
+  return prevProps.ingredient._id === nextProps.ingredient._id && prevProps.ingredient.count === nextProps.ingredient.count
+});
 
 IngredientCard.propTypes = {
   ingredient: ingredientPropTypes.isRequired,
   onClick: PropTypes.func.isRequired,
 };
+
+export {IngredientCard}

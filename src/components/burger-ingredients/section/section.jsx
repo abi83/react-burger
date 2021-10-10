@@ -1,4 +1,4 @@
-import IngredientCard from '../ingredient-card/ingredient-card';
+import {IngredientCard} from '../ingredient-card/ingredient-card';
 import style from './section.module.css';
 import React from 'react';
 import PropTypes from 'prop-types';

@@ -3,6 +3,8 @@ import {
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_SUCCESS
 } from '../actions/burger-ingredients';
+import {ADD_INGREDIENT, REMOVE_INGREDIENT} from "../actions/burger-constructor";
+import {stat} from "fs";
 
 const initialState = {
   ingredients: [],
@@ -20,7 +22,7 @@ export const ingredientsReducer = (state = initialState, action) => {
     }
     case GET_INGREDIENTS_SUCCESS: {
       return {
-        ingredients: action.items,
+        ingredients: action.items.map(item => { return {...item, count: 0} }),
         ingredientsRequest: false,
         ingredientsFailed: false
       };
@@ -31,6 +33,37 @@ export const ingredientsReducer = (state = initialState, action) => {
         ingredientsRequest: false,
         ingredientsFailed: true
       };
+    }
+    case ADD_INGREDIENT: {
+      // increase ingredient.count by one
+
+      // const addedIndex = state.ingredients.findIndex(ingredient =>
+      //   ingredient._id === action.item._id
+      // )
+      // const newIngredients = [...state.ingredients]
+      // newIngredients[addedIndex].count += 1
+
+      return {
+        ...state,
+        ingredients: state.ingredients.map(ingredient => {
+          if (ingredient._id === action.item._id) {
+            return {...ingredient, count: ingredient.count + 1}
+          }
+          return ingredient
+        })
+      }
+    }
+    case REMOVE_INGREDIENT: {
+      // decrease ingredient.count by one
+      return {
+        ...state,
+        ingredients: state.ingredients.map(ingredient => {
+          if (ingredient._id === action.item._id) {
+            return {...ingredient, count: ingredient.count + 1}
+          }
+          return ingredient
+        })
+      }
     }
     default: {
       return state;
