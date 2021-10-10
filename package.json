@@ -33,7 +33,14 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "rules": {
+      "no-unused-vars": "warn",
+      "no-extra-semi": "warn",
+      "block-spacing": "warn",
+      "max-len": [1, 80, 4, {"ignoreUrls": true}]
+    },
     "extends": [
+      "eslint:recommended",
       "react-app",
       "react-app/jest"
     ]
