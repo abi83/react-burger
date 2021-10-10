@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 export default function HeaderButton({text, children, link}) {
     return (
       <Link className='resetted-link' to={link}>
-        <div className={`${styles.button} pt-4 pb-4 pl-5 pr-5 mb-4 mt-4`}>
+        <div className={`${styles.button} pt-4 pb-4 pl-5 pr-5`}>
           {children}
           <span className='pl-2'>{text}</span>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Redirect} from 'react-router-dom';
 import styles from './profile.module.css';
-import {getUserInfoAction, refreshAccessToken} from "../../services/actions/auth";
+import {exitUserAction, getUserInfoAction, refreshAccessToken} from "../../services/actions/auth";
 // import {registerAction} from "../../services/actions/auth";
 import {
   Button,
@@ -47,29 +47,31 @@ export function ProfilePage() {
     event.preventDefault();
     console.log('PATCH!!!', form)
   }
+  const exit = () =>{
+    dispatch(exitUserAction(accessToken))
+  }
   return (
     <div className={styles.wrapper}>
       <div className={styles.menu}>
-        <h1 className={`text text_type_main mt-10 mb-5`}>Профайл</h1>
+        <h2 className={`text text_type_main mt-10 mb-5`}>Профайл</h2>
+        <h2 className={`text text_type_main mt-10 mb-5`}>Orders</h2>
+        <h2 className={`text text_type_main mt-10 mb-5`} onClick={exit}>Exit</h2>
         <p className={'text text_color_inactive mt-2'}>
           В этом разделе вы можете сменить свои персональные данные
         </p>
       </div>
-      <div className={styles.form}>
-        <form className={styles.form}>
+      <form className={styles.form}>
           <Input placeholder="Имя"
                  icon="EditIcon"
                  type={'text'}
                  value={form.name}
                  name="name"
-                 // className={styles.input}
                  onChange={onChange} />
           <Input placeholder="Логин"
                  icon="EditIcon"
                  type={'email'}
                  value={form.email}
                  name="email"
-                 // className={styles.input}
                  onChange={onChange} />
           <PasswordInput
             placeholder="Пароль"
@@ -84,7 +86,6 @@ export function ProfilePage() {
             Обновить
           </Button>
         </form>
-      </div>
     </div>
   );
 }

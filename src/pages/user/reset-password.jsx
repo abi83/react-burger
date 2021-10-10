@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, useHistory} from 'react-router-dom';
 import styles from './login.module.css';
 import {
   Button,
@@ -10,6 +10,8 @@ import {fetchPasswordReset} from "../../services/api";
 import {useSelector} from "react-redux";
 
 export function ResetPassword() {
+  const history = useHistory()
+
   const auth = useSelector(store => store.authReducer)
   const [form, setValue] = useState({ password: '', code: '' });
 
@@ -18,8 +20,8 @@ export function ResetPassword() {
   };
   const reset = async event =>{
     event.preventDefault()
-    const data = await fetchPasswordReset(form.password, form.code)
-    console.log("Password reset answer", data)
+    await fetchPasswordReset(form.password, form.code)
+    history.push('/reset-password/')
   }
 
   if (auth.user) {
