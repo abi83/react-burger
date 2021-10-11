@@ -61,7 +61,13 @@ export function ProfilePage() {
   }
   const updateProfile = async () => {
     console.log('update profile', form)
-    await fetchUpdateUser(form, accessToken)
+    const userData = {}
+    for (const field in form) {
+      if ( form[field] && form[field] !== user[field] ) {
+        userData[field] = form[field]
+      }
+    }
+    await fetchUpdateUser({...userData}, accessToken)
   }
   const cancelUpdate = () =>{
     setValue({ ...form, name: user.name, email: user.email, password: '' })
@@ -103,6 +109,7 @@ export function ProfilePage() {
                 value={form.email}
                 name="email"
                 onChange={onChange}
+                disabled={true}
               />
               <PasswordInput
                 placeholder="Пароль"

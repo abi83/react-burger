@@ -71,10 +71,10 @@ export const fetchUserInfo = async (accessToken) => {
   return await normaApi(getUserEndpoint, 'GET', null, headers)
 }
 
-export const fetchUpdateUser = async (userData, accessToken) => {
+export const fetchUpdateUser = async ({ name, email, password }, accessToken) => {
   const userUpdateEndpoint = normaURL + 'auth/user'
   const headers = { ...defaultHeaders, Authorization: accessToken }
-  const body = { userData }
+  const body = { name, email, password }
   return await normaApi(userUpdateEndpoint, 'PATCH', body, headers)
 }
 
