@@ -25,6 +25,7 @@ import { getIngredients } from '../../services/actions/burger-ingredients'
 import { placeOrder } from '../../services/actions/order'
 import { ProfilePage } from '../../pages/user/profile'
 import { ProtectedRoute } from '../protected-route'
+import { IngredientCard } from '../burger-ingredients/ingredient-card/ingredient-card'
 
 export default function App() {
   const dispatch = useDispatch()
@@ -108,6 +109,12 @@ export default function App() {
               <Route path="/reset-password/">
                 <ResetPassword />
               </Route>
+              <Route
+                path="/ingredients/:id"
+                render={(props) => <ModalIngredient {...props} />}
+              />
+              {/*  <ModalIngredient />*/}
+              {/*</Route>*/}
               <ProtectedRoute path="/profile">
                 <ProfilePage />
               </ProtectedRoute>

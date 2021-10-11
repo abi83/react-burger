@@ -40,6 +40,21 @@ export const ingredientsReducer = (state = initialState, action) => {
     }
     case ADD_INGREDIENT: {
       // increase ingredient.count by one
+      if (action.item.type === 'bun') {
+        console.log(state.ingredients)
+        return {
+          ...state,
+          ingredients: state.ingredients.map(ingredient => {
+            if (ingredient.type !== 'bun') {
+              return ingredient
+            }
+            if (ingredient._id === action.item._id) {
+              return { ...ingredient, count: 1 }
+            }
+            return { ...ingredient, count: 0 }
+          })
+        }
+      }
       return {
         ...state,
         ingredients: state.ingredients.map((ingredient) => {
@@ -56,7 +71,7 @@ export const ingredientsReducer = (state = initialState, action) => {
         ...state,
         ingredients: state.ingredients.map((ingredient) => {
           if (ingredient._id === action.item._id) {
-            return { ...ingredient, count: ingredient.count + 1 }
+            return { ...ingredient, count: ingredient.count - 1 }
           }
           return ingredient
         }),
