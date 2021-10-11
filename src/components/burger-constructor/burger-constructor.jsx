@@ -13,6 +13,7 @@ import { useDrop } from 'react-dnd'
 import { ADD_INGREDIENT } from '../../services/actions/burger-constructor'
 
 export default function BurgerConstructor({ onClick, onDeleteClick }) {
+  const { user } = useSelector((store) => store.authReducer)
   const { inner, bun } = useSelector((store) => {
     return store.selectedIngredientsReducer
   })
@@ -41,9 +42,12 @@ export default function BurgerConstructor({ onClick, onDeleteClick }) {
       <div className={`${styles.price} pt-4 pb-4`}>
         <span className="text text_type_digits-medium">{totalPrice}</span>
         <CurrencyIcon type="primary" />
-        <Button type="primary" size="large" onClick={onClick}>
-          Оформить заказ
-        </Button>
+        {
+          user &&
+          <Button type="primary" size="large" onClick={onClick}>
+            Оформить заказ
+          </Button>
+        }
       </div>
     </section>
   )

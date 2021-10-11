@@ -10,7 +10,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 
 export function RegisterPage() {
-  const auth = useSelector((store) => store.authReducer)
+  const { user } = useSelector((store) => store.authReducer)
   const [form, setValue] = useState({ name: '', email: '', password: '' })
   const dispatch = useDispatch()
 
@@ -22,7 +22,7 @@ export function RegisterPage() {
     dispatch(registerAction(form))
   }
 
-  if (auth.user) {
+  if (user) {
     return <Redirect to="/" />
   }
 

@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 
 export function ForgotPassword() {
   const history = useHistory()
-  const auth = useSelector((store) => store.authReducer)
+  const { user } = useSelector((store) => store.authReducer)
   const [form, setValue] = useState({ email: '' })
 
   const onChange = (e) => {
@@ -22,7 +22,7 @@ export function ForgotPassword() {
     history.push('/reset-password/')
   }
 
-  if (auth.user) {
+  if (user) {
     return <Redirect to="/" />
   }
 
