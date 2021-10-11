@@ -29,7 +29,7 @@ export function RegisterPage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <h1 className={`text text_type_main mt-10 mb-5`}>Регистрация</h1>
+        <h1 className={'text text_type_main mt-10 mb-5'}>Регистрация</h1>
 
         <form className={styles.form}>
           <Input
@@ -37,7 +37,6 @@ export function RegisterPage() {
             type={'text'}
             value={form.name}
             name="name"
-            className={styles.input}
             onChange={onChange}
           />
           <Input
@@ -45,7 +44,6 @@ export function RegisterPage() {
             type={'email'}
             value={form.email}
             name="email"
-            className={styles.input}
             onChange={onChange}
           />
           <PasswordInput
@@ -54,13 +52,13 @@ export function RegisterPage() {
             name="password"
             onChange={onChange}
           />
-          <Button onClick={register} primary={true}>
+          <Button onClick={register} type={'primary'}>
             Зарегистрироваться
           </Button>
         </form>
         <p className={'text text_color_inactive mt-2'}>
           Уже зарегистрированы?
-          <Link to="/login/" className={`text text_color_accent pl-3`}>
+          <Link to="/login/" className={'text text_color_accent pl-3'}>
             Войти
           </Link>
         </p>

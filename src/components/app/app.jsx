@@ -24,6 +24,7 @@ import {
 import { getIngredients } from '../../services/actions/burger-ingredients'
 import { placeOrder } from '../../services/actions/order'
 import { ProfilePage } from '../../pages/user/profile'
+import { ProtectedRoute } from '../protected-route'
 
 export default function App() {
   const dispatch = useDispatch()
@@ -107,9 +108,9 @@ export default function App() {
               <Route path="/reset-password/">
                 <ResetPassword />
               </Route>
-              <Route path="/profile">
+              <ProtectedRoute path="/profile">
                 <ProfilePage />
-              </Route>
+              </ProtectedRoute>
             </Switch>
           </main>
         </Router>

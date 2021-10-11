@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styles from './profile.module.css'
-import {
-  exitUserAction,
-  getUserInfoAction,
-  refreshAccessToken,
-} from '../../services/actions/auth'
+import { exitUserAction } from '../../services/actions/auth'
 import {
   Button,
   Input,
@@ -22,7 +18,7 @@ export function ProfilePage() {
   })
   const [changed, setChanged] = useState(false)
   const [currentTab, setCurrentTab] = useState('profile')
-  const { user, accessToken, requestFailed } = useSelector(
+  const { user, accessToken } = useSelector(
     (store) => store.authReducer
   )
   const dispatch = useDispatch()
@@ -30,21 +26,11 @@ export function ProfilePage() {
   const history = useHistory()
 
   useEffect(() => {
-    if (!accessToken && refreshToken) {
-      dispatch(refreshAccessToken(refreshToken))
-    }
-    if (!user && accessToken) {
-      dispatch(getUserInfoAction(accessToken))
-    }
     if (user) {
       setValue({ ...form, name: user.name, email: user.email })
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refreshToken, accessToken, dispatch, user])
-
-  if ((!refreshToken && !user) || requestFailed) {
-    return <Redirect to="/login/" />
-  }
+  }, [user])
 
   const onChange = (e) => {
     if (
