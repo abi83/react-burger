@@ -5,24 +5,24 @@ const normaApi = async (
   endpoint,
   method = 'GET',
   body = null,
-  headers = defaultHeaders
+  headers = defaultHeaders,
 ) => {
   return fetch(endpoint, {
     method,
     headers,
     body: body ? JSON.stringify(body) : null,
   })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Something is wrong with response: ${response}`)
-      }
-      return response
-    })
-    .then((response) => response.json())
-    .catch((e) => {
-      console.error('Fetching ResettingPassword Error', e)
-      throw new Error(`Error while Fetching ${endpoint}: ${e}`)
-    })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`Something is wrong with response: ${response}`)
+    }
+    return response
+  })
+  .then((response) => response.json())
+  .catch((e) => {
+    console.error(`Fetching ${endpoint} Error`, e)
+    throw new Error(`Error while Fetching ${endpoint}: ${e}`)
+  })
 }
 
 export const fetchIngredients = async () => {

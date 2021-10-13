@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Redirect, Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import styles from './login.module.css'
 import { loginAction } from '../../services/actions/auth'
 import {
@@ -23,7 +23,7 @@ export function LoginPage() {
   }
 
   if (user) {
-    return <Redirect to="/" />
+    return <Redirect to='/' />
   }
   return (
     <div className={styles.wrapper}>
@@ -39,9 +39,9 @@ export function LoginPage() {
             onChange={onChange}
           />
           <PasswordInput
-            placeholder="Password"
+            placeholder='Password'
             value={form.password}
-            name="password"
+            name='password'
             onChange={onChange}
             error={requestFailed}
           />
@@ -51,14 +51,14 @@ export function LoginPage() {
         </form>
         <p className={'text text_color_inactive mt-2'}>
           Вы - новый пользователь?
-          <Link to="/register/" className={'text text_color_accent pl-3'}>
+          <Link to='/register/' className={'text text_color_accent pl-3'}>
             Зарегистрироваться
           </Link>
         </p>
         <p className={'text text_color_inactive mt-2'}>
           Забыли пароль
           <Link
-            to="/forgot-password/"
+            to='/forgot-password/'
             className={'text text_color_accent pl-3'}
           >
             Восстановить пароль

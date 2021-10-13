@@ -20,8 +20,8 @@ export default function BurgerIngredients({ onClick }) {
 
   const onTabClick = (tabName) => {
     state.tabs
-      .find((tab) => tab.id === tabName)
-      .sectionRef.current.scrollIntoView({ behavior: 'smooth' })
+    .find((tab) => tab.id === tabName)
+    .sectionRef.current.scrollIntoView({ behavior: 'smooth' })
     setState({ ...state, activeTab: tabName })
   }
 
@@ -36,12 +36,12 @@ export default function BurgerIngredients({ onClick }) {
       }
     })
     let closesTab = tabsPositions.reduce((prev, current) =>
-      Math.abs(prev.position) < Math.abs(current.position) ? prev : current
+      Math.abs(prev.position) < Math.abs(current.position) ? prev : current,
     )
     setState({ ...state, activeTab: closesTab.id })
   }
   return (
-    <section className="column">
+    <section className='column'>
       <h2 className={`${style.header} text text_type_main-large mt-10 mb-5`}>
         Соберите бургер
       </h2>
@@ -50,7 +50,7 @@ export default function BurgerIngredients({ onClick }) {
         activeTabId={state.activeTab}
         onClick={onTabClick}
       />
-      <div className="container" onScroll={handleScroll} ref={tabsRef}>
+      <div className='container' onScroll={handleScroll} ref={tabsRef}>
         {state.tabs.map((tab) => {
           return (
             <Section

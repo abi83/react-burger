@@ -40,11 +40,11 @@ export default function BurgerConstructor({ onClick, onDeleteClick }) {
         <InnerIngredients items={inner} onDeleteClick={onDeleteClick} />
       </BunWrapper>
       <div className={`${styles.price} pt-4 pb-4`}>
-        <span className="text text_type_digits-medium">{totalPrice}</span>
-        <CurrencyIcon type="primary" />
+        <span className='text text_type_digits-medium'>{totalPrice}</span>
+        <CurrencyIcon type='primary' />
         {
           user &&
-          <Button type="primary" size="large" onClick={onClick}>
+          <Button type='primary' size='large' onClick={onClick}>
             Оформить заказ
           </Button>
         }

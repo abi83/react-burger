@@ -31,17 +31,17 @@ const IngredientCard = React.memo(
         ref={ref}
         style={{ opacity }}
       >
-        <Counter count={ingredient.count} size="default" />
+        <Counter count={ingredient.count} size='default' />
         <img
           className={`${styles.mainImage} ml-4 mr-4`}
           src={ingredient.image_large}
           alt={ingredient.name}
         />
         <div className={`${styles.price} mt-1 mb-1`}>
-          <span className="pr-3 text text_type_digits-default">
+          <span className='pr-3 text text_type_digits-default'>
             {ingredient.price}
           </span>
-          <CurrencyIcon type="primary" />
+          <CurrencyIcon type='primary' />
         </div>
         <p
           className={`${styles.name} pt-3 pr-4 pb-6 pl-4 text text_type_main-default`}
@@ -56,7 +56,7 @@ const IngredientCard = React.memo(
       prevProps.ingredient._id === nextProps.ingredient._id &&
       prevProps.ingredient.count === nextProps.ingredient.count
     )
-  }
+  },
 )
 
 IngredientCard.propTypes = {

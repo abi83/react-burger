@@ -63,7 +63,7 @@ main{
   background-color: rgba(0,0,0,0.6);
   display: flex;
 }
-.resetted-link{
+.link{
   text-decoration: none;
   color: inherit;
 }

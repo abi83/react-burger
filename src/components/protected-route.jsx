@@ -7,7 +7,7 @@ export function ProtectedRoute({ children, ...rest }) {
   const refreshToken = window.localStorage.getItem('refreshToken') || ''
 
   if (!user && !refreshToken) {
-    return <Redirect to="/login/" />
+    return <Redirect to='/login/' />
   }
   return <Route {...rest} render={() => children} />
 }

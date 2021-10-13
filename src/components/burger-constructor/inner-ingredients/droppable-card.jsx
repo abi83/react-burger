@@ -8,11 +8,11 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 export default function DroppableCard({
-  moveCard,
-  findCard,
-  ingredient,
-  onDeleteClick,
-}) {
+                                        moveCard,
+                                        findCard,
+                                        ingredient,
+                                        onDeleteClick,
+                                      }) {
   const originalIndex = findCard(ingredient.id).index
   const [{ isDragging }, drag] = useDrag(
     () => ({
@@ -29,7 +29,7 @@ export default function DroppableCard({
         }
       },
     }),
-    [ingredient, originalIndex, moveCard]
+    [ingredient, originalIndex, moveCard],
   )
   const [, drop] = useDrop(
     () => ({
@@ -42,7 +42,7 @@ export default function DroppableCard({
         }
       },
     }),
-    [findCard, moveCard]
+    [findCard, moveCard],
   )
   const opacity = isDragging ? 0 : 1
 
@@ -52,7 +52,7 @@ export default function DroppableCard({
       ref={(node) => drag(drop(node))}
       style={{ opacity }}
     >
-      <DragIcon type="primary" />
+      <DragIcon type='primary' />
       <ConstructorElement
         isLocked={false}
         text={ingredient.name}

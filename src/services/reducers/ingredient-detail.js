@@ -1,6 +1,6 @@
 import {
-  OPEN_DETAIL_INGREDIENT,
   CLOSE_DETAIL_INGREDIENT,
+  OPEN_DETAIL_INGREDIENT,
 } from '../actions/ingredient-detail'
 
 const initialState = {

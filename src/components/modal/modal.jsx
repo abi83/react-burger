@@ -27,7 +27,7 @@ export default function Modal({ close, children }) {
           src={closeIcon}
           className={styles.close}
           onClick={close}
-          alt="Закрыть"
+          alt='Закрыть'
         />
         {children}
       </div>

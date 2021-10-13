@@ -25,7 +25,7 @@ export function ResetPassword() {
   }
 
   if (user) {
-    return <Redirect to="/" />
+    return <Redirect to='/' />
   }
 
   return (
@@ -37,16 +37,16 @@ export function ResetPassword() {
 
         <form className={styles.form}>
           <PasswordInput
-            placeholder="Введите новый пароль"
+            placeholder='Введите новый пароль'
             value={form.password}
-            name="password"
+            name='password'
             onChange={onChange}
           />
           <Input
-            placeholder="Введите код из письма"
+            placeholder='Введите код из письма'
             type={'text'}
             value={form.code}
-            name="code"
+            name='code'
             className={styles.input}
             onChange={onChange}
           />
@@ -56,7 +56,7 @@ export function ResetPassword() {
         </form>
         <p className={'text text_color_inactive mt-2'}>
           Вспомнили пароль?
-          <Link to="/login/" className={'text text_color_accent pl-3'}>
+          <Link to='/login/' className={'text text_color_accent pl-3'}>
             Войти
           </Link>
         </p>

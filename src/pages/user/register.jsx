@@ -23,7 +23,7 @@ export function RegisterPage() {
   }
 
   if (user) {
-    return <Redirect to="/" />
+    return <Redirect to='/' />
   }
 
   return (
@@ -33,23 +33,23 @@ export function RegisterPage() {
 
         <form className={styles.form}>
           <Input
-            placeholder="Имя"
+            placeholder='Имя'
             type={'text'}
             value={form.name}
-            name="name"
+            name='name'
             onChange={onChange}
           />
           <Input
-            placeholder="E-mail"
+            placeholder='E-mail'
             type={'email'}
             value={form.email}
-            name="email"
+            name='email'
             onChange={onChange}
           />
           <PasswordInput
-            placeholder="Password"
+            placeholder='Password'
             value={form.password}
-            name="password"
+            name='password'
             onChange={onChange}
           />
           <Button onClick={register} type={'primary'}>
@@ -58,7 +58,7 @@ export function RegisterPage() {
         </form>
         <p className={'text text_color_inactive mt-2'}>
           Уже зарегистрированы?
-          <Link to="/login/" className={'text text_color_accent pl-3'}>
+          <Link to='/login/' className={'text text_color_accent pl-3'}>
             Войти
           </Link>
         </p>

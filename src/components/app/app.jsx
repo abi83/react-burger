@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
@@ -31,7 +31,7 @@ export default function App() {
   const dispatch = useDispatch()
 
   const { ingredientsRequest, ingredientsFailed } = useSelector(
-    (store) => store.ingredientsReducer
+    (store) => store.ingredientsReducer,
   )
   const { inner, bun } = useSelector((store) => {
     return store.selectedIngredientsReducer
@@ -42,7 +42,7 @@ export default function App() {
     content: null,
   })
   const { user, accessToken } = useSelector(
-    (store) => store.authReducer
+    (store) => store.authReducer,
   )
   const refreshToken = window.localStorage.getItem('refreshToken') || ''
   useEffect(() => {
@@ -93,12 +93,12 @@ export default function App() {
           <AppHeader />
           <main>
             <Switch>
-              <Route path="/" exact={true}>
+              <Route path='/' exact={true}>
                 {ingredientsRequest || ingredientsFailed ? (
                   ingredientsRequest ? (
-                    <div className="message">Данные загружаются</div>
+                    <div className='message'>Данные загружаются</div>
                   ) : (
-                    <div className="message">Ошибка сервера</div>
+                    <div className='message'>Ошибка сервера</div>
                   )
                 ) : (
                   <DndProvider backend={HTML5Backend}>
@@ -110,13 +110,13 @@ export default function App() {
                   </DndProvider>
                 )}
               </Route>
-              <Route path="/login/">
+              <Route path='/login/'>
                 <LoginPage />
               </Route>
-              <Route path="/register/">
+              <Route path='/register/'>
                 <RegisterPage />
               </Route>
-              <Route path="/forgot-password/">
+              <Route path='/forgot-password/'>
                 <ForgotPassword />
               </Route>
               <Route path='/reset-password/'>

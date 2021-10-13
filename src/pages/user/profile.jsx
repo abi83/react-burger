@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './profile.module.css'
 import { exitUserAction, getUserInfoAction } from '../../services/actions/auth'
@@ -18,7 +18,7 @@ export function ProfilePage() {
   })
   const [changed, setChanged] = useState(false)
   const { user, accessToken } = useSelector(
-    (store) => store.authReducer
+    (store) => store.authReducer,
   )
   const dispatch = useDispatch()
   const refreshToken = window.localStorage.getItem('refreshToken') || ''
@@ -28,7 +28,7 @@ export function ProfilePage() {
     if (user) {
       setValue({ ...form, name: user.name, email: user.email })
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   const onChange = (e) => {
@@ -36,8 +36,7 @@ export function ProfilePage() {
       //state changes inside function have no effect inside function
       user[e.target.name] !== e.target.value ||
       form.password !== '' ||
-      ( form.name !== user.name && form.email !== user.email ))
-    {
+      (form.name !== user.name && form.email !== user.email)) {
       setChanged(true)
     } else {
       setChanged(false)
@@ -47,14 +46,14 @@ export function ProfilePage() {
   const updateProfile = async () => {
     const userData = {}
     for (const field in form) {
-      if ( form[field] && form[field] !== user[field] ) {
+      if (form[field] && form[field] !== user[field]) {
         userData[field] = form[field]
       }
     }
-    await fetchUpdateUser({...userData}, accessToken)
+    await fetchUpdateUser({ ...userData }, accessToken)
     dispatch(getUserInfoAction(accessToken))
   }
-  const cancelUpdate = () =>{
+  const cancelUpdate = () => {
     setValue({ ...form, name: user.name, email: user.email, password: '' })
     setChanged(false)
   }
@@ -78,26 +77,26 @@ export function ProfilePage() {
       <div className={styles.form}>
         <form>
           <Input
-            placeholder="Имя"
-            icon="EditIcon"
+            placeholder='Имя'
+            icon='EditIcon'
             type={'text'}
             value={form.name}
-            name="name"
+            name='name'
             onChange={onChange}
           />
           <Input
-            placeholder="Логин"
-            icon="EditIcon"
+            placeholder='Логин'
+            icon='EditIcon'
             type={'email'}
             value={form.email}
-            name="email"
+            name='email'
             onChange={onChange}
             disabled={true}
           />
           <PasswordInput
-            placeholder="Пароль"
+            placeholder='Пароль'
             value={form.password}
-            name="password"
+            name='password'
             onChange={onChange}
           />
         </form>

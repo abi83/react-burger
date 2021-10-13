@@ -1,12 +1,9 @@
 import {
-  GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
 } from '../actions/burger-ingredients'
-import {
-  ADD_INGREDIENT,
-  REMOVE_INGREDIENT,
-} from '../actions/burger-constructor'
+import { ADD_INGREDIENT, REMOVE_INGREDIENT } from '../actions/burger-constructor'
 
 const initialState = {
   ingredients: [],
@@ -51,7 +48,7 @@ export const ingredientsReducer = (state = initialState, action) => {
               return { ...ingredient, count: 1 }
             }
             return { ...ingredient, count: 0 }
-          })
+          }),
         }
       }
       return {

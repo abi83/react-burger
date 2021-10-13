@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 import { Link, Redirect, useHistory } from 'react-router-dom'
 import styles from './login.module.css'
-import {
-  Button,
-  Input,
-} from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components'
 import { fetchCallPasswordReset } from '../../services/api'
 import { useSelector } from 'react-redux'
 
@@ -23,7 +20,7 @@ export function ForgotPassword() {
   }
 
   if (user) {
-    return <Redirect to="/" />
+    return <Redirect to='/' />
   }
 
   return (
@@ -34,10 +31,10 @@ export function ForgotPassword() {
         </h1>
         <form className={styles.form}>
           <Input
-            placeholder="Укажите email"
+            placeholder='Укажите email'
             type={'email'}
             value={form.email}
-            name="email"
+            name='email'
             className={styles.input}
             onChange={onChange}
           />
@@ -47,7 +44,7 @@ export function ForgotPassword() {
         </form>
         <p className={'text text_color_inactive mt-2'}>
           Вспомнили пароль?
-          <Link to="/login/" className={'text text_color_accent pl-3'}>
+          <Link to='/login/' className={'text text_color_accent pl-3'}>
             Войти
           </Link>
         </p>
