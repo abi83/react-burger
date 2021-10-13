@@ -10,7 +10,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 
 export function LoginPage() {
-  const { user } = useSelector((store) => store.authReducer)
+  const { user, requestFailed } = useSelector((store) => store.authReducer)
   const [form, setValue] = useState({ email: '', password: '' })
   const dispatch = useDispatch()
 
@@ -25,7 +25,6 @@ export function LoginPage() {
   if (user) {
     return <Redirect to="/" />
   }
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -39,12 +38,12 @@ export function LoginPage() {
             className={styles.input}
             onChange={onChange}
           />
-
           <PasswordInput
             placeholder="Password"
             value={form.password}
             name="password"
             onChange={onChange}
+            error={requestFailed}
           />
           <Button onClick={login} type={'primary'}>
             Войти

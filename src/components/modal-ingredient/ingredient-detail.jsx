@@ -1,10 +1,9 @@
-import styles from './modal-ingredient.module.css'
+import styles from './ingredient-detail.module.css'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { OPEN_DETAIL_INGREDIENT } from '../../../services/actions/ingredient-detail'
-// TODO: rename component
+import { OPEN_DETAIL_INGREDIENT } from '../../services/actions/ingredient-detail'
 
-export default function ModalIngredient(props) {
+export default function IngredientDetail(props) {
   const { ingredientDetail: ingredient } = useSelector(store =>
     store.ingredientDetailReducer)
   const { ingredients } = useSelector(store =>
@@ -25,8 +24,8 @@ export default function ModalIngredient(props) {
   return (
     <>
       {
-        ingredient ?
-        <div className={styles.card}>
+        ingredient
+        ? <div className={styles.card}>
           <h3 className="text text_type_main-large">Детали ингредиента</h3>
           <img
             className={`${styles.mainImage} ml-4 mr-4`}
@@ -71,7 +70,9 @@ export default function ModalIngredient(props) {
             </li>
           </ul>
         </div>
-        : <p>HELLO WORLD</p>
+        : <div className={styles.card}>
+            Ingredient is loading...
+          </div>
       }
     </>
   )

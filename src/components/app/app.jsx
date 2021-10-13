@@ -10,7 +10,7 @@ import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
 import Modal from '../modal/modal'
-import ModalIngredient from '../modal/modal-ingredient/modal-ingredient'
+import IngredientDetail from '../modal-ingredient/ingredient-detail'
 import ModalOrderInfo from '../modal/modal-order-info/modal-order-info'
 import { LoginPage } from '../../pages/user/login'
 import { RegisterPage } from '../../pages/user/register'
@@ -41,7 +41,7 @@ export default function App() {
     isOpened: false,
     content: null,
   })
-  const { user, accessToken, requestFailed } = useSelector(
+  const { user, accessToken } = useSelector(
     (store) => store.authReducer
   )
   const refreshToken = window.localStorage.getItem('refreshToken') || ''
@@ -64,7 +64,7 @@ export default function App() {
     dispatch({ type: OPEN_DETAIL_INGREDIENT, item: ingredient })
     manageModal({
       isOpened: true,
-      content: <ModalIngredient />,
+      content: <IngredientDetail />,
     })
   }
 
@@ -124,7 +124,7 @@ export default function App() {
               </Route>
               <Route
                 path='/ingredients/:id'
-                render={(props) => <ModalIngredient {...props} />}
+                render={(props) => <IngredientDetail {...props} />}
               />
               <ProtectedRoute path='/profile'>
                 <ProfilePage />

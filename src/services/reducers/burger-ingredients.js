@@ -41,7 +41,6 @@ export const ingredientsReducer = (state = initialState, action) => {
     case ADD_INGREDIENT: {
       // increase ingredient.count by one
       if (action.item.type === 'bun') {
-        console.log(state.ingredients)
         return {
           ...state,
           ingredients: state.ingredients.map(ingredient => {
