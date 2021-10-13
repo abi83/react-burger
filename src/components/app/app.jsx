@@ -25,7 +25,7 @@ import { getIngredients } from '../../services/actions/burger-ingredients'
 import { placeOrder } from '../../services/actions/order'
 import { ProfilePage } from '../../pages/user/profile'
 import { ProtectedRoute } from '../protected-route'
-import { IngredientCard } from '../burger-ingredients/ingredient-card/ingredient-card'
+import { getUserInfoAction, refreshAccessToken } from '../../services/actions/auth'
 
 export default function App() {
   const dispatch = useDispatch()
@@ -41,6 +41,19 @@ export default function App() {
     isOpened: false,
     content: null,
   })
+  const { user, accessToken, requestFailed } = useSelector(
+    (store) => store.authReducer
+  )
+  const refreshToken = window.localStorage.getItem('refreshToken') || ''
+  useEffect(() => {
+    if (!accessToken && refreshToken) {
+      dispatch(refreshAccessToken(refreshToken))
+    }
+    if (!user && accessToken) {
+      dispatch(getUserInfoAction(accessToken))
+    }
+  }, [refreshToken, accessToken, dispatch, user])
+
 
   const handleModalClose = () => {
     manageModal({ ...modal, isOpened: false })
@@ -106,16 +119,14 @@ export default function App() {
               <Route path="/forgot-password/">
                 <ForgotPassword />
               </Route>
-              <Route path="/reset-password/">
+              <Route path='/reset-password/'>
                 <ResetPassword />
               </Route>
               <Route
-                path="/ingredients/:id"
+                path='/ingredients/:id'
                 render={(props) => <ModalIngredient {...props} />}
               />
-              {/*  <ModalIngredient />*/}
-              {/*</Route>*/}
-              <ProtectedRoute path="/profile">
+              <ProtectedRoute path='/profile'>
                 <ProfilePage />
               </ProtectedRoute>
             </Switch>

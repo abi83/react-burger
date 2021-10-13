@@ -11,7 +11,7 @@ export const InnerIngredients = memo(function InnerIngredients({
 }) {
   items.forEach((el) => {
     if (el.type === 'bun') {
-      throw new Error("No 'buns' in InnerIngredients allowed!")
+      throw new Error('No \'buns\' in InnerIngredients allowed!')
     }
   })
   const [cards, setCards] = useState(items)

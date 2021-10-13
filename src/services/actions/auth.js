@@ -26,10 +26,10 @@ export const refreshAccessToken = (refreshToken) => {
   }
 }
 
-export const getUserInfoAction = (refreshToken) => {
+export const getUserInfoAction = (accessToken) => {
   return function (dispatch) {
     dispatch({ type: USER_CHECKOUT_REQUEST })
-    fetchUserInfo(refreshToken)
+    fetchUserInfo(accessToken)
       .then((res) => {
         dispatch({ type: UPDATE_USER, user: res.user })
       })
@@ -45,9 +45,8 @@ export const exitUserAction = (refreshToken) => {
     dispatch({ type: USER_CHECKOUT_REQUEST })
     fetchExit(refreshToken)
       .then(() => {
-        dispatch({ type: UPDATE_USER, user: null })
         dispatch({ type: REFRESH_ACCESS_TOKEN, accessToken: null })
-        window.localStorage.removeItem('refreshToken')
+        dispatch({ type: UPDATE_USER, user: null })
       })
       .catch(() => {
         dispatch({ type: USER_REQUEST_FAILED })

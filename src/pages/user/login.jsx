@@ -29,13 +29,13 @@ export function LoginPage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <h1 className={`text text_type_main mt-10 mb-5`}>Вход</h1>
+        <h1 className={'text text_type_main mt-10 mb-5'}>Вход</h1>
         <form className={styles.form}>
           <Input
-            placeholder="E-mail"
+            placeholder='E-mail'
             type={'email'}
             value={form.email}
-            name="email"
+            name='email'
             className={styles.input}
             onChange={onChange}
           />
@@ -52,7 +52,7 @@ export function LoginPage() {
         </form>
         <p className={'text text_color_inactive mt-2'}>
           Вы - новый пользователь?
-          <Link to="/register/" className={`text text_color_accent pl-3`}>
+          <Link to="/register/" className={'text text_color_accent pl-3'}>
             Зарегистрироваться
           </Link>
         </p>
@@ -60,7 +60,7 @@ export function LoginPage() {
           Забыли пароль
           <Link
             to="/forgot-password/"
-            className={`text text_color_accent pl-3`}
+            className={'text text_color_accent pl-3'}
           >
             Восстановить пароль
           </Link>

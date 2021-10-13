@@ -31,7 +31,7 @@ export function ResetPassword() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <h1 className={`text text_type_main mt-10 mb-5`}>
+        <h1 className={'text text_type_main mt-10 mb-5'}>
           Восстановление пароля
         </h1>
 
@@ -56,7 +56,7 @@ export function ResetPassword() {
         </form>
         <p className={'text text_color_inactive mt-2'}>
           Вспомнили пароль?
-          <Link to="/login/" className={`text text_color_accent pl-3`}>
+          <Link to="/login/" className={'text text_color_accent pl-3'}>
             Войти
           </Link>
         </p>

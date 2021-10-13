@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './profile.module.css'
-import { exitUserAction } from '../../services/actions/auth'
+import { exitUserAction, getUserInfoAction } from '../../services/actions/auth'
 import {
   Button,
   Input,
@@ -17,7 +17,6 @@ export function ProfilePage() {
     password: '',
   })
   const [changed, setChanged] = useState(false)
-  const [currentTab, setCurrentTab] = useState('profile')
   const { user, accessToken } = useSelector(
     (store) => store.authReducer
   )
@@ -46,7 +45,6 @@ export function ProfilePage() {
     setValue({ ...form, [e.target.name]: e.target.value })
   }
   const updateProfile = async () => {
-    console.log('update profile', form)
     const userData = {}
     for (const field in form) {
       if ( form[field] && form[field] !== user[field] ) {
@@ -54,12 +52,14 @@ export function ProfilePage() {
       }
     }
     await fetchUpdateUser({...userData}, accessToken)
+    dispatch(getUserInfoAction(accessToken))
   }
   const cancelUpdate = () =>{
     setValue({ ...form, name: user.name, email: user.email, password: '' })
     setChanged(false)
   }
   const exit = () => {
+    window.localStorage.removeItem('refreshToken')
     dispatch(exitUserAction(refreshToken))
     history.push('/login/')
   }
@@ -75,49 +75,44 @@ export function ProfilePage() {
           В этом разделе вы можете сменить свои персональные данные
         </p>
       </div>
-      {
-        currentTab === 'profile'
-          ?
-          <div className={styles.form}>
-            <form>
-              <Input
-                placeholder="Имя"
-                icon="EditIcon"
-                type={'text'}
-                value={form.name}
-                name="name"
-                onChange={onChange}
-              />
-              <Input
-                placeholder="Логин"
-                icon="EditIcon"
-                type={'email'}
-                value={form.email}
-                name="email"
-                onChange={onChange}
-                disabled={true}
-              />
-              <PasswordInput
-                placeholder="Пароль"
-                value={form.password}
-                name="password"
-                onChange={onChange}
-              />
-            </form>
-            {
-              changed &&
-              <>
-                <Button onClick={cancelUpdate} type={'secondary'}>
-                  Отменить
-                </Button>
-                <Button onClick={updateProfile} type={'primary'}>
-                  Обновить
-                </Button>
-              </>
-            }
-          </div>
-          : <h3>Orders!</h3>
-      }
+      <div className={styles.form}>
+        <form>
+          <Input
+            placeholder="Имя"
+            icon="EditIcon"
+            type={'text'}
+            value={form.name}
+            name="name"
+            onChange={onChange}
+          />
+          <Input
+            placeholder="Логин"
+            icon="EditIcon"
+            type={'email'}
+            value={form.email}
+            name="email"
+            onChange={onChange}
+            disabled={true}
+          />
+          <PasswordInput
+            placeholder="Пароль"
+            value={form.password}
+            name="password"
+            onChange={onChange}
+          />
+        </form>
+        {
+          changed &&
+          <>
+            <Button onClick={cancelUpdate} type={'secondary'}>
+              Отменить
+            </Button>
+            <Button onClick={updateProfile} type={'primary'}>
+              Обновить
+            </Button>
+          </>
+        }
+      </div>
     </div>
   )
 }
