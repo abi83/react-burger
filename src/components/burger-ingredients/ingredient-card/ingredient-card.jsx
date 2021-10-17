@@ -3,14 +3,14 @@ import {
   Counter,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import React from 'react'
+import { memo } from 'react'
 
 import { useDrag } from 'react-dnd'
 
 import { ingredientPropTypes } from '../../../utils/dataPropTypes'
 import PropTypes from 'prop-types'
 
-const IngredientCard = React.memo(
+const IngredientCard = memo(
   ({ ingredient, onClick }) => {
     const onCartClick = (e) => {
       onClick(ingredient)

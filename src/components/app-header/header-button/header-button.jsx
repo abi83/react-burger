@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './header-button.module.css'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'

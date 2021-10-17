@@ -1,11 +1,11 @@
 import { IngredientCard } from '../ingredient-card/ingredient-card'
 import style from './section.module.css'
-import React from 'react'
+import { forwardRef} from 'react'
 import PropTypes from 'prop-types'
 
 import { ingredientPropTypes } from '../../../utils/dataPropTypes'
 
-const Section = React.forwardRef(({ title, items, onClick }, ref) => {
+const Section = forwardRef(({ title, items, onClick }, ref) => {
   return (
     <>
       <h3

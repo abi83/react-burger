@@ -1,5 +1,4 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/tab'
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import style from './tabs.module.css'

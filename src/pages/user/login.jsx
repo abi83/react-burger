@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import styles from './login.module.css'
 import { loginAction } from '../../services/actions/auth'

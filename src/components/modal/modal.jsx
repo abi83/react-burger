@@ -1,5 +1,5 @@
 import styles from './modal.module.css'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import closeIcon from '../../images/close-icon.png'
 import ModalOverlay from './modal-overlay/modal-overlay'
 

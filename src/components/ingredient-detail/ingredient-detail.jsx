@@ -1,5 +1,5 @@
 import styles from './ingredient-detail.module.css'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { OPEN_DETAIL_INGREDIENT } from '../../services/actions/ingredient-detail'
 

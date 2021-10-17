@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import update from 'immutability-helper'
 import { useDrop } from 'react-dnd'

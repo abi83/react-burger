@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -37,7 +37,7 @@ export default function App() {
     return store.selectedIngredientsReducer
   })
 
-  const [modal, manageModal] = React.useState({
+  const [modal, manageModal] = useState({
     isOpened: false,
     content: null,
   })

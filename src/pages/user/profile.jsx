@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './profile.module.css'
 import { exitUserAction, getUserInfoAction } from '../../services/actions/auth'
