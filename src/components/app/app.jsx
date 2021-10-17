@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
@@ -19,8 +19,17 @@ import { getIngredients } from '../../services/actions/burger-ingredients'
 import { ProfilePage } from '../../pages/user/profile'
 import { ProtectedRoute } from '../protected-route'
 import { getUserInfoAction, refreshAccessToken } from '../../services/actions/auth'
+import IngredientModal from '../modal/ingredient-modal'
 
-export default function App() {
+export default function App(){
+  return(
+    <Router>
+      <Main />
+    </Router>
+  )
+}
+
+function Main() {
   const dispatch = useDispatch()
 
   const { ingredientsRequest, ingredientsFailed } = useSelector(
@@ -47,6 +56,10 @@ export default function App() {
   useEffect(() => {
     dispatch(getIngredients())
   }, [dispatch])
+  let location = useLocation()
+  console.log('location', location)
+  let background = location.state && location.state.background
+  console.log('background', background)
 
   return (
     <>
@@ -54,8 +67,8 @@ export default function App() {
         <Router>
           <AppHeader />
           <main>
-            <Switch>
-              <Route path='/' exact={true}>
+            <Switch location={background || location}>
+              <Route exact path='/'>
                 {ingredientsRequest || ingredientsFailed ? (
                   ingredientsRequest ? (
                     <div className='message'>Данные загружаются</div>
@@ -81,20 +94,22 @@ export default function App() {
               <Route path='/reset-password/'>
                 <ResetPassword />
               </Route>
-              <Route
-                path='/ingredients/:id'
-                render={(props) => <IngredientDetail {...props} />}
-              />
+              <Route path='/ingredients/:id' >
+                <IngredientDetail />
+              </Route>
               <ProtectedRoute path='/profile'>
                 <ProfilePage />
               </ProtectedRoute>
             </Switch>
+            {background &&
+              <Route path="/ingredients/:id">
+                <IngredientModal />
+              </Route>
+            }
           </main>
         </Router>
       </div>
-      {content && (
-        <Modal>{content}</Modal>
-      )}
+      {content && <Modal>{content}</Modal>}
     </>
   )
 }

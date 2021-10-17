@@ -8,19 +8,11 @@ import { memo } from 'react'
 import { useDrag } from 'react-dnd'
 
 import { ingredientPropTypes } from '../../../utils/dataPropTypes'
-import { useDispatch } from 'react-redux'
-import { OPEN_MODAL } from '../../../services/actions/modal'
-import IngredientDetail from '../../ingredient-detail/ingredient-detail'
+import { Link, useLocation } from 'react-router-dom'
 
 const IngredientCard = memo(
   ({ ingredient }) => {
-    const dispatch = useDispatch()
-    const onCardClick = () => {
-      dispatch({
-        type: OPEN_MODAL,
-        content: <IngredientDetail ingredient={ingredient}/>
-      })
-    }
+    let location = useLocation()
     const [{ opacity }, ref] = useDrag({
       type: 'ingredient',
       item: ingredient,
@@ -32,27 +24,34 @@ const IngredientCard = memo(
     return (
       <li
         className={styles.card}
-        onClick={onCardClick}
         ref={ref}
         style={{ opacity }}
       >
-        <Counter count={ingredient.count} size='default' />
-        <img
-          className={`${styles.mainImage} ml-4 mr-4`}
-          src={ingredient.image_large}
-          alt={ingredient.name}
-        />
-        <div className={`${styles.price} mt-1 mb-1`}>
-          <span className='pr-3 text text_type_digits-default'>
-            {ingredient.price}
-          </span>
-          <CurrencyIcon type='primary' />
-        </div>
-        <p
-          className={`${styles.name} pt-3 pr-4 pb-6 pl-4 text text_type_main-default`}
+        <Link
+          to={{
+            pathname: `/ingredients/${ingredient._id}`,
+            state: { background: location }}
+          }
+          className='link'
         >
-          {ingredient.name}
-        </p>
+          <Counter count={ingredient.count} size='default' />
+          <img
+            className={`${styles.mainImage} ml-4 mr-4`}
+            src={ingredient.image_large}
+            alt={ingredient.name}
+          />
+          <div className={`${styles.price} mt-1 mb-1`}>
+            <span className='pr-3 text text_type_digits-default'>
+              {ingredient.price}
+            </span>
+            <CurrencyIcon type='primary' />
+          </div>
+          <p
+            className={`${styles.name} pt-3 pr-4 pb-6 pl-4 text text_type_main-default`}
+          >
+            {ingredient.name}
+          </p>
+        </Link>
       </li>
     )
   },
@@ -68,4 +67,4 @@ IngredientCard.propTypes = {
   ingredient: ingredientPropTypes.isRequired,
 }
 
-export { IngredientCard }
+export default IngredientCard

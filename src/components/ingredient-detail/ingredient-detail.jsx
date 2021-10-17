@@ -1,6 +1,14 @@
 import styles from './ingredient-detail.module.css'
+import { useHistory, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-export default function IngredientDetail({ ingredient }) {
+export default function IngredientDetail( ) {
+  let { id } = useParams()
+  const { ingredients } = useSelector((store) => store.ingredientsReducer)
+  const ingredient = ingredients.find(item => {
+    return item._id === id
+  })
+  console.log('IngredientDetail', ingredient)
   return (
     <>
       {
