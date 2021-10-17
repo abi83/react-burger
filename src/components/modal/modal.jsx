@@ -2,8 +2,16 @@ import styles from './modal.module.css'
 import { useEffect } from 'react'
 import closeIcon from '../../images/close-icon.png'
 import ModalOverlay from './modal-overlay/modal-overlay'
+import { useDispatch } from 'react-redux'
+import { CLOSE_MODAL } from '../../services/actions/modal'
 
-export default function Modal({ close, children }) {
+export default function Modal({ children }) {
+  const dispatch = useDispatch()
+
+  const close = () =>{
+    dispatch({ type: CLOSE_MODAL })
+  }
+
   const closeOnEscape = (e) => {
     if (e.keyCode === 27) {
       close()

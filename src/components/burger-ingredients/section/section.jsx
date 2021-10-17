@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { ingredientPropTypes } from '../../../utils/dataPropTypes'
 
-const Section = forwardRef(({ title, items, onClick }, ref) => {
+const Section = forwardRef(({ title, items }, ref) => {
   return (
     <>
       <h3
@@ -16,13 +16,11 @@ const Section = forwardRef(({ title, items, onClick }, ref) => {
       </h3>
       <ul
         className={`${style.ingredientsContainer} pl-4 pr-4`}
-        onClick={onClick}
       >
         {items.map((ingredient) => (
           <IngredientCard
             key={ingredient._id}
             ingredient={ingredient}
-            onClick={onClick}
           />
         ))}
       </ul>

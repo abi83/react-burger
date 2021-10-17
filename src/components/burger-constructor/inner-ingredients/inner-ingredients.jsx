@@ -4,14 +4,20 @@ import update from 'immutability-helper'
 import { useDrop } from 'react-dnd'
 import DroppableCard from './droppable-card'
 import { ingredientPropTypes } from '../../../utils/dataPropTypes'
+import { REMOVE_INGREDIENT } from '../../../services/actions/burger-constructor'
+import { useDispatch } from 'react-redux'
 
 export const InnerIngredients = memo(
-  function InnerIngredients({ items, onDeleteClick}) {
+  function InnerIngredients({ items}) {
   items.forEach((el) => {
     if (el.type === 'bun') {
       throw new Error('No \'buns\' in InnerIngredients allowed!')
     }
   })
+  const dispatch = useDispatch()
+  const handleDeleteClick = (ingredient) => {
+    dispatch({ type: REMOVE_INGREDIENT, item: ingredient })
+  }
   const [cards, setCards] = useState(items)
   useEffect(() => {
     setCards(items)
@@ -48,7 +54,7 @@ export const InnerIngredients = memo(
         <DroppableCard
           key={`${el._id}_${index}`}
           ingredient={el}
-          onDeleteClick={onDeleteClick}
+          onDeleteClick={handleDeleteClick}
           moveCard={moveCard}
           findCard={findCard}
         />

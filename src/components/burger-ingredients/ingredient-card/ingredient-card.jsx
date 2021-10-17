@@ -8,13 +8,18 @@ import { memo } from 'react'
 import { useDrag } from 'react-dnd'
 
 import { ingredientPropTypes } from '../../../utils/dataPropTypes'
-import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { OPEN_MODAL } from '../../../services/actions/modal'
+import IngredientDetail from '../../ingredient-detail/ingredient-detail'
 
 const IngredientCard = memo(
-  ({ ingredient, onClick }) => {
-    const onCartClick = (e) => {
-      onClick(ingredient)
-      e.stopPropagation()
+  ({ ingredient }) => {
+    const dispatch = useDispatch()
+    const onCardClick = () => {
+      dispatch({
+        type: OPEN_MODAL,
+        content: <IngredientDetail ingredient={ingredient}/>
+      })
     }
     const [{ opacity }, ref] = useDrag({
       type: 'ingredient',
@@ -27,7 +32,7 @@ const IngredientCard = memo(
     return (
       <li
         className={styles.card}
-        onClick={onCartClick}
+        onClick={onCardClick}
         ref={ref}
         style={{ opacity }}
       >
@@ -61,7 +66,6 @@ const IngredientCard = memo(
 
 IngredientCard.propTypes = {
   ingredient: ingredientPropTypes.isRequired,
-  onClick: PropTypes.func.isRequired,
 }
 
 export { IngredientCard }

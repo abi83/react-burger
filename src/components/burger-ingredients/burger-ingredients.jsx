@@ -1,11 +1,10 @@
 import { useRef, useState } from 'react'
 import style from './burger-ingredients.module.css'
 import Tabs from './tabs/tabs'
-import PropTypes from 'prop-types'
 import Section from './section/section'
 import { useSelector } from 'react-redux'
 
-export default function BurgerIngredients({ onClick }) {
+export default function BurgerIngredients() {
   const { ingredients } = useSelector((store) => store.ingredientsReducer)
 
   const [state, setState] = useState({
@@ -58,15 +57,10 @@ export default function BurgerIngredients({ onClick }) {
               items={ingredients.filter((ing) => ing.type === tab.id)}
               key={tab.id}
               ref={tab.sectionRef}
-              onClick={onClick}
             />
           )
         })}
       </div>
     </section>
   )
-}
-
-BurgerIngredients.propTypes = {
-  onClick: PropTypes.func.isRequired,
 }

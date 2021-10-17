@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types'
-
 import {
   Button,
   CurrencyIcon,
@@ -10,8 +8,12 @@ import styles from './burger-constructor.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useDrop } from 'react-dnd'
 import { ADD_INGREDIENT } from '../../services/actions/burger-constructor'
+import { OPEN_MODAL } from '../../services/actions/modal'
+import ModalOrderInfo from '../modal/modal-order-info/modal-order-info'
+import { placeOrder } from '../../services/actions/order'
 
-export default function BurgerConstructor({ onClick, onDeleteClick }) {
+
+export default function BurgerConstructor() {
   const { user } = useSelector((store) => store.authReducer)
   const { inner, bun } = useSelector((store) => {
     return store.selectedIngredientsReducer
@@ -19,6 +21,16 @@ export default function BurgerConstructor({ onClick, onDeleteClick }) {
   let totalPrice = inner.reduce((acc, el) => acc + el.price, 0)
   if (bun) {
     totalPrice += 2 * bun.price
+  }
+
+  const handleOrderClick = () => {
+    if (!bun) {
+      dispatch({ type: OPEN_MODAL, content: 'Добавьте хотя бы одну булку!' })
+      return
+    }
+    const ingredients = [...inner.map((ing) => ing._id), bun._id]
+    dispatch(placeOrder(ingredients))
+    dispatch({ type: OPEN_MODAL, content: <ModalOrderInfo /> })
   }
 
   const dispatch = useDispatch()
@@ -36,23 +48,18 @@ export default function BurgerConstructor({ onClick, onDeleteClick }) {
   return (
     <section className={className} ref={dropTarget}>
       <BunWrapper bun={bun}>
-        <InnerIngredients items={inner} onDeleteClick={onDeleteClick} />
+        <InnerIngredients items={inner} />
       </BunWrapper>
       <div className={`${styles.price} pt-4 pb-4`}>
         <span className='text text_type_digits-medium'>{totalPrice}</span>
         <CurrencyIcon type='primary' />
         {
           user &&
-          <Button type='primary' size='large' onClick={onClick}>
+          <Button type='primary' size='large' onClick={handleOrderClick}>
             Оформить заказ
           </Button>
         }
       </div>
     </section>
   )
-}
-
-BurgerConstructor.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  onDeleteClick: PropTypes.func.isRequired
 }

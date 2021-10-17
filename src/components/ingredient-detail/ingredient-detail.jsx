@@ -1,26 +1,6 @@
 import styles from './ingredient-detail.module.css'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { OPEN_DETAIL_INGREDIENT } from '../../services/actions/ingredient-detail'
 
-export default function IngredientDetail(props) {
-  const { ingredientDetail: ingredient } = useSelector(store =>
-    store.ingredientDetailReducer)
-  const { ingredients } = useSelector(store =>
-    store.ingredientsReducer)
-  const id = props?.match?.params || null
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (!ingredient && ingredients) {
-      const ingredientById = ingredients.find(item => {
-        return item._id === id.id
-      })
-      dispatch({ type: OPEN_DETAIL_INGREDIENT, item: ingredientById })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ingredients])
-
+export default function IngredientDetail({ ingredient }) {
   return (
     <>
       {
