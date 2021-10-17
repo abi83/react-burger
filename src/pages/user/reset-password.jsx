@@ -35,7 +35,7 @@ export function ResetPassword() {
           Восстановление пароля
         </h1>
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={reset}>
           <PasswordInput
             placeholder='Введите новый пароль'
             value={form.password}
@@ -50,7 +50,7 @@ export function ResetPassword() {
             className={styles.input}
             onChange={onChange}
           />
-          <Button onClick={reset} type={'primary'}>
+          <Button type={'primary'}>
             Восстановить
           </Button>
         </form>

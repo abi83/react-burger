@@ -14,7 +14,7 @@ export default function BunWrapper({ bun, children }) {
         <ConstructorElement
           type='top'
           isLocked={true}
-          text={bun.name}
+          text={bun.name + ' (верх)'}
           thumbnail={bun.image}
           price={bun.price}
         />
@@ -24,7 +24,7 @@ export default function BunWrapper({ bun, children }) {
         <ConstructorElement
           type='bottom'
           isLocked={true}
-          text={bun.name}
+          text={bun.name + ' (низ)'}
           thumbnail={bun.image}
           price={bun.price}
         />

@@ -29,7 +29,7 @@ export function LoginPage() {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <h1 className={'text text_type_main mt-10 mb-5'}>Вход</h1>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={login}>
           <Input
             placeholder='E-mail'
             type={'email'}
@@ -45,7 +45,7 @@ export function LoginPage() {
             onChange={onChange}
             error={requestFailed}
           />
-          <Button onClick={login} type={'primary'}>
+          <Button type={'primary'}>
             Войти
           </Button>
         </form>

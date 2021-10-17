@@ -31,7 +31,7 @@ export function RegisterPage() {
       <div className={styles.container}>
         <h1 className={'text text_type_main mt-10 mb-5'}>Регистрация</h1>
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={register}>
           <Input
             placeholder='Имя'
             type={'text'}
@@ -52,7 +52,7 @@ export function RegisterPage() {
             name='password'
             onChange={onChange}
           />
-          <Button onClick={register} type={'primary'}>
+          <Button type={'primary'}>
             Зарегистрироваться
           </Button>
         </form>

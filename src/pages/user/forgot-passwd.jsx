@@ -29,7 +29,7 @@ export function ForgotPassword() {
         <h1 className={'text text_type_main mt-10 mb-5'}>
           Восстановление пароля
         </h1>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={reset}>
           <Input
             placeholder='Укажите email'
             type={'email'}
@@ -38,7 +38,7 @@ export function ForgotPassword() {
             className={styles.input}
             onChange={onChange}
           />
-          <Button onClick={reset} type={'primary'}>
+          <Button type={'primary'}>
             Восстановить
           </Button>
         </form>

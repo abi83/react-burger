@@ -55,4 +55,5 @@ export default function BurgerConstructor({ onClick, onDeleteClick }) {
 
 BurgerConstructor.propTypes = {
   onClick: PropTypes.func.isRequired,
+  onDeleteClick: PropTypes.func.isRequired
 }
