@@ -5,7 +5,7 @@ import {
   Switch,
   useHistory,
   useLocation,
-} from 'react-router-dom';
+} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
@@ -64,7 +64,9 @@ function Main() {
     dispatch(getIngredients())
   }, [dispatch])
 
-  let background = history.action === 'PUSH' && location.state && location.state.background
+  let background = history.action === 'PUSH' &&
+      location.state
+      && location.state.background
 
   return (
     <>

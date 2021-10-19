@@ -16,7 +16,7 @@ export function ForgotPassword() {
   const reset = async (event) => {
     event.preventDefault()
     await fetchCallPasswordReset(form.email)
-    history.push('/reset-password/')
+    history.push('/reset-password/', 'reset requested')
   }
 
   if (user) {

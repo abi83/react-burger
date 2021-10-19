@@ -24,6 +24,10 @@ export function ResetPassword() {
     history.push('/login/')
   }
 
+  if (history.location.state !== 'reset requested'){
+    return <Redirect to='/forgot-password' />
+  }
+  
   if (user) {
     return <Redirect to='/' />
   }

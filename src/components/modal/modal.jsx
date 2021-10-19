@@ -4,7 +4,7 @@ import closeIcon from '../../images/close-icon.png'
 import ModalOverlay from './modal-overlay/modal-overlay'
 import { useDispatch } from 'react-redux'
 import { CLOSE_MODAL } from '../../services/actions/modal'
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
 
 export default function Modal({ children }) {
   const dispatch = useDispatch()

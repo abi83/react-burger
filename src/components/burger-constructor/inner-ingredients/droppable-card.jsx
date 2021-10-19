@@ -5,6 +5,8 @@ import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import PropTypes from 'prop-types'
+import {ingredientPropTypes} from '../../../utils/dataPropTypes'
 
 export default function DroppableCard({
                                         moveCard,
@@ -64,4 +66,11 @@ export default function DroppableCard({
       />
     </div>
   )
+}
+
+DroppableCard.propTypes = {
+  moveCard: PropTypes.func.isRequired,
+  findCard: PropTypes.func.isRequired,
+  ingredient: PropTypes.objectOf(ingredientPropTypes),
+  onDeleteClick: PropTypes.func.isRequired
 }

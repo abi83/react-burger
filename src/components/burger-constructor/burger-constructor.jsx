@@ -11,9 +11,11 @@ import { ADD_INGREDIENT } from '../../services/actions/burger-constructor'
 import { OPEN_MODAL } from '../../services/actions/modal'
 import ModalOrderInfo from '../modal/modal-order-info/modal-order-info'
 import { placeOrder } from '../../services/actions/order'
+import {useHistory} from 'react-router-dom'
 
 
 export default function BurgerConstructor() {
+  const history = useHistory()
   const { user } = useSelector((store) => store.authReducer)
   const { inner, bun } = useSelector((store) => {
     return store.selectedIngredientsReducer
@@ -24,6 +26,10 @@ export default function BurgerConstructor() {
   }
 
   const handleOrderClick = () => {
+    if (!user){
+      history.push('/login/')
+      return
+    }
     if (!bun) {
       dispatch({ type: OPEN_MODAL, content: 'Добавьте хотя бы одну булку!' })
       return
@@ -53,12 +59,9 @@ export default function BurgerConstructor() {
       <div className={`${styles.price} pt-4 pb-4`}>
         <span className='text text_type_digits-medium'>{totalPrice}</span>
         <CurrencyIcon type='primary' />
-        {
-          user &&
-          <Button type='primary' size='large' onClick={handleOrderClick}>
-            Оформить заказ
-          </Button>
-        }
+        <Button type='primary' size='large' onClick={handleOrderClick}>
+          Оформить заказ
+        </Button>
       </div>
     </section>
   )

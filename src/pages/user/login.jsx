@@ -21,7 +21,6 @@ export function LoginPage() {
     event.preventDefault()
     dispatch(loginAction(form.email, form.password))
   }
-
   if (user) {
     return <Redirect to='/' />
   }
