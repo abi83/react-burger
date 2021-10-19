@@ -45,7 +45,7 @@ export const ingredientsReducer = (state = initialState, action) => {
               return ingredient
             }
             if (ingredient._id === action.item._id) {
-              return { ...ingredient, count: 1 }
+              return { ...ingredient, count: 2 }
             }
             return { ...ingredient, count: 0 }
           }),
