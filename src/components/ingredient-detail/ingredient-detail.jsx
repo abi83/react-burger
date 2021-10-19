@@ -1,5 +1,5 @@
 import styles from './ingredient-detail.module.css'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 export default function IngredientDetail( ) {
@@ -8,7 +8,6 @@ export default function IngredientDetail( ) {
   const ingredient = ingredients.find(item => {
     return item._id === id
   })
-  console.log('IngredientDetail', ingredient)
   return (
     <>
       {

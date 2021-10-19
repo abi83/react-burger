@@ -4,12 +4,15 @@ import closeIcon from '../../images/close-icon.png'
 import ModalOverlay from './modal-overlay/modal-overlay'
 import { useDispatch } from 'react-redux'
 import { CLOSE_MODAL } from '../../services/actions/modal'
+import { useHistory } from 'react-router-dom';
 
 export default function Modal({ children }) {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const close = () =>{
     dispatch({ type: CLOSE_MODAL })
+    history.push('/')
   }
 
   const closeOnEscape = (e) => {
