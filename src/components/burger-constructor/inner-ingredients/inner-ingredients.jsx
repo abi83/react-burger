@@ -8,7 +8,7 @@ import { REMOVE_INGREDIENT } from '../../../services/actions/burger-constructor'
 import { useDispatch } from 'react-redux'
 
 export const InnerIngredients = memo(
-  function InnerIngredients({ items}) {
+  function InnerIngredients({ items }) {
   items.forEach((el) => {
     if (el.type === 'bun') {
       throw new Error('No \'buns\' in InnerIngredients allowed!')
@@ -46,8 +46,7 @@ export const InnerIngredients = memo(
     },
     [findCard, cards, setCards],
   )
-  const [, drop] = useDrop(() => ({ accept: 'dropable-card' }))
-
+  const [, drop] = useDrop(() => ({ accept: 'droppable-card' }))
   return (
     <div className='container' ref={drop}>
       {cards.map((el, index) => (

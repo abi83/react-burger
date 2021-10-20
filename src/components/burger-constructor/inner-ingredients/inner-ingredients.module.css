@@ -5,4 +5,14 @@
 }
 .row > div {
   width: 100%;
+  margin: 2px 0;
+}
+.row:first-child{
+  margin: 4px 0 2px 0;
+}
+.row:last-child{
+  margin: 2px 0 4px 0;
+}
+.row:only-child{
+  margin: 4px 0;
 }

@@ -17,13 +17,13 @@ export default function DroppableCard({
   const originalIndex = findCard(ingredient.id).index
   const [{ isDragging }, drag] = useDrag(
     () => ({
-      type: 'dropable-card',
+      type: 'droppable-card',
       item: { id: ingredient.id, originalIndex },
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
       }),
       end: (item, monitor) => {
-        const { id: droppedId, originalIndex } = item
+        const { _id: droppedId, originalIndex } = item
         const didDrop = monitor.didDrop()
         if (!didDrop) {
           moveCard(droppedId, originalIndex)
@@ -34,7 +34,7 @@ export default function DroppableCard({
   )
   const [, drop] = useDrop(
     () => ({
-      accept: 'dropable-card',
+      accept: 'droppable-card',
       canDrop: () => false,
       hover({ id: draggedId }) {
         if (draggedId !== ingredient.id) {
