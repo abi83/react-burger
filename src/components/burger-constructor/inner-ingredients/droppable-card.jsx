@@ -71,6 +71,6 @@ export default function DroppableCard({
 DroppableCard.propTypes = {
   moveCard: PropTypes.func.isRequired,
   findCard: PropTypes.func.isRequired,
-  ingredient: PropTypes.objectOf(ingredientPropTypes),
+  ingredient: ingredientPropTypes,
   onDeleteClick: PropTypes.func.isRequired
 }
