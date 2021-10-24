@@ -1,39 +1,39 @@
 import {
   ORDER_CHECKOUT_FAILED,
   ORDER_CHECKOUT_REQUEST,
-  ORDER_CHECKOUT_SUCCESS
-} from '../actions/order';
+  ORDER_CHECKOUT_SUCCESS,
+} from '../actions/order'
 
 const initialState = {
-  order: {number: '???'},
+  order: { number: '???' },
   orderRequest: false,
-  orderFailed: false
-};
+  orderFailed: false,
+}
 
 export const orderReducer = (state = initialState, action) => {
   switch (action.type) {
     case ORDER_CHECKOUT_REQUEST: {
       return {
         ...state,
-        orderRequest: true
-      };
+        orderRequest: true,
+      }
     }
     case ORDER_CHECKOUT_SUCCESS: {
       return {
         order: action.order,
         orderRequest: false,
-        orderFailed: false
-      };
+        orderFailed: false,
+      }
     }
     case ORDER_CHECKOUT_FAILED: {
       return {
         ...state,
         orderRequest: false,
-        orderFailed: true
-      };
+        orderFailed: true,
+      }
     }
     default: {
-      return state;
+      return state
     }
   }
-};
+}

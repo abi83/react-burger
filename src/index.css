@@ -12,6 +12,7 @@ main{
   flex-direction: row;
   flex-wrap: wrap;
   gap: 40px;
+  min-height: 80vh;
 }
 
 .column{
@@ -61,4 +62,8 @@ main{
   overflow: auto;
   background-color: rgba(0,0,0,0.6);
   display: flex;
+}
+.link{
+  text-decoration: none;
+  color: inherit;
 }

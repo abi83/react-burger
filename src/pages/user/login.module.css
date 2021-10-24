@@ -1,0 +1,14 @@
+.wrapper{
+    display: flex;
+    min-height: 80vh;
+    margin: auto;
+}
+.form div {
+    width: 100%;
+    flex: 0 10 100%;
+    margin: 12px auto;
+}
+.container{
+    margin: auto;
+    min-width: 360px;
+}
